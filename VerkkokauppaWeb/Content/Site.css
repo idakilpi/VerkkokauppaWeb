@@ -18,3 +18,27 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*Logon keskitys*/
+.navLogo {
+    display: flex;
+    margin: 0 auto;
+}
+
+/*Haku oikeaan reunaan*/
+.toSide {
+    justify-content: flex-end;
+}
+
+.carouselCont {
+    width: 50%;
+    margin: 0 auto;
+}
+
+/*Tekstin taustalle vaalennusta*/
+.crslBg {
+    background-image: radial-gradient( #ffffff94, #fff0);
+    padding: 10px;
+    width: fit-content;
+    margin: 0 auto;
+}
