@@ -1,0 +1,66 @@
+﻿@model VerkkokauppaWeb.Models.Tuotteet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tuotteet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nimi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nimi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hinta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hinta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Varastomaara)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Varastomaara)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kuvaus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kuvaus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kuva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kuva)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategoriat.Nimi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategoriat.Nimi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TuoteID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<VerkkokauppaWeb.Models.Tuotteet>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container-fluid">
+    <h2>Tuotevalikoima</h2>
+
+    <p>
+        @Html.ActionLink("Luo uusi", "Create")
+    </p>
+    <div class="row">
+        @foreach (VerkkokauppaWeb.Models.Tuotteet tuot in Model)
+        {
+            <div class="col-lg-3">
+                <div class="card mb-3">
+                    <h3 class="card-header">@tuot.Nimi</h3>
+                    <img style="height:200px; width:100%; display:block;" src="@tuot.Kuva" alt="@tuot.Kuva">
+                    <div class="card-body">
+                        <p class="card-text">@tuot.Hinta</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">@tuot.Kuvaus</li>
+                        <li class="list-group-item">Varastomäärä: @tuot.Varastomaara</li>
+                        <li class="list-group-item">Kategoria: @tuot.Kategoriat.Nimi</li>
+                        <li class="btn btn-primary">Lisää tuote ostoskoriin<img src="~/Icons/cart.svg"></li>
+                    </ul>
+                    <div class="card-footer text-muted">
+                            @Html.ActionLink("Muokkaa", "Edit", new { id = tuot.TuoteID }) |
+                            @Html.ActionLink("Lisätiedot", "Details", new { id = tuot.TuoteID }) |
+                            @Html.ActionLink("Poista", "Delete", new { id = tuot.TuoteID })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
