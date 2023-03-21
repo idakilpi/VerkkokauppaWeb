@@ -19,26 +19,81 @@ textarea {
     max-width: 280px;
 }
 
-/*Logon keskitys*/
 .navLogo {
-    display: flex;
-    margin: 0 auto;
+    width: 100%;
 }
+.navEdit {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background: linear-gradient(160deg, #30742f, #4c9b32);
+    color: rgb(255 255 255 / 68%);
+}
+
 
 /*Haku oikeaan reunaan*/
 .toSide {
     justify-content: flex-end;
+}
+/*Searchbar*/
+.container-input {
+    position: relative;
+}
+
+.input {
+    width: 150px;
+    padding: 10px 0px 10px 40px;
+    border-radius: 9999px;
+    border: solid 1px #333;
+    transition: all .2s ease-in-out;
+    outline: none;
+    opacity: 0.8;
+}
+
+.container-input svg {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translate(0, -50%);
+}
+
+.input:focus {
+    opacity: 1;
+    width: 250px;
 }
 
 .carouselCont {
     width: 50%;
     margin: 0 auto;
 }
-
 /*Tekstin taustalle vaalennusta*/
 .crslBg {
     background-image: radial-gradient( #ffffff94, #fff0);
     padding: 10px;
     width: fit-content;
     margin: 0 auto;
+}
+
+
+footer {
+    width: 100%;
+    /*    background-color: #003a49;
+*/ background: linear-gradient(150deg, #004353, #003a49, #002f3b);
+    /*background: linear-gradient(130deg, white, #002f3b);*/
+    color: #dee2e6;
+}
+.footerNav {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+footer a {
+    text-decoration: none;
+}
+ul {
+    list-style-type: none;
+}
+
+footer li {
+    margin: 10px;
+    font-size: 14px;
 }

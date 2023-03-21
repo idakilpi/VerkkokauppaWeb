@@ -9,24 +9,30 @@
 </head>
 <body>
     <div class="logoNavbar">
-        <img class="navLogo" src="~/Images/Jetiside2.png" />
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark" style="background-color: #598640 ">
+        <img class="navLogo" src="~/Images/JetisideLogoValm3.png" />
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark navEdit" >
             <div class="container">
-                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>*@
+                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li>@Html.ActionLink("Etusivu", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Meistä", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Tuotteet", "Index", "Tuotteet", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li class="nav-link">Kirjaudu</li>
-                        <li class="nav-link">Ostoskori</li>
+                        <li>@Html.ActionLink("Tuotteet", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Kirjaudu", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Ostoskori", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     </ul>
                     <ul class="navbar-nav flex-grow-1 toSide">
-                        <input type="text" placeholder="Etsi..">
+                        <div class="container-input">
+                            <input type="text" placeholder="Etsi" name="text" class="input">
+                            <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+
                     </ul>
                 </div>
             </div>
@@ -35,10 +41,41 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
+    <footer>
+        <div class="row footerNav">
+            <div class="col-md-3 footerNavCol">
+                <ul>
+                    <li><a href="#">Etusivu</a></li>
+                    <li><a href="#">Tuotteet</a></li>
+                    <li><a href="#">Kirjaudu</a></li>
+                    <li><a href="#">ym</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 footerNavCol">
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Tiktok</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 footerNavCol" >
+                <ul>
+                    <li><a href="#">Jokuosoite</a></li>
+                    <li><a href="#">12345</a></li>
+                    <li><a href="#">Jetilä</a></li>
+                    <li><a href="#">Puh. 0501234567</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <p>&copy; @DateTime.Now.Year - Jetitime</p>
+            </div>
+        </div>
+        
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
