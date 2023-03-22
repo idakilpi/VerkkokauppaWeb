@@ -16,7 +16,19 @@
             <div class="col-lg-3">
                 <div class="card mb-3">
                     <h3 class="card-header">@tuot.Nimi</h3>
-                    <img style="height:200px; width:100%; display:block;" src="@tuot.Kuva" alt="@tuot.Kuva">
+
+                    @if (tuot.Kuva != null)
+                    {
+                        var base64 = Convert.ToBase64String(tuot.Kuva);
+                        var imgscr = string.Format("data:image/jpg;base64,{0}", base64);
+                        <img style="height:200px; width:100%; display:block;" src="@imgscr" alt="Kuva tuotteesta">
+                    }
+                    else
+                    {
+                        <img src="~/Icons/cart.svg" style="height:200px; width:100%; display:block;" />
+                    }
+
+
                     <div class="card-body">
                         <p class="card-text">@tuot.Hinta</p>
                     </div>
@@ -27,9 +39,9 @@
                         <li class="btn btn-primary">Lisää tuote ostoskoriin<img src="~/Icons/cart.svg"></li>
                     </ul>
                     <div class="card-footer text-muted">
-                            @Html.ActionLink("Muokkaa", "Edit", new { id = tuot.TuoteID }) |
-                            @Html.ActionLink("Lisätiedot", "Details", new { id = tuot.TuoteID }) |
-                            @Html.ActionLink("Poista", "Delete", new { id = tuot.TuoteID })
+                        @Html.ActionLink("Muokkaa", "Edit", new { id = tuot.TuoteID }) |
+                        @Html.ActionLink("Lisätiedot", "Details", new { id = tuot.TuoteID }) |
+                        @Html.ActionLink("Poista", "Delete", new { id = tuot.TuoteID })
                     </div>
                 </div>
             </div>

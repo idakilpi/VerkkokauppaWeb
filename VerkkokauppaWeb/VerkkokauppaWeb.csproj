@@ -128,6 +128,51 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Asiakkaat.cs">
+      <DependentUpon>VerkkokauppaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\database_firewall_rules.cs">
+      <DependentUpon>VerkkokauppaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Kategoriat.cs">
+      <DependentUpon>VerkkokauppaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Logins.cs">
+      <DependentUpon>VerkkokauppaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>VerkkokauppaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>VerkkokauppaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>VerkkokauppaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tilaukset.cs">
+      <DependentUpon>VerkkokauppaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tilausrivit.cs">
+      <DependentUpon>VerkkokauppaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tuotteet.cs">
+      <DependentUpon>VerkkokauppaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VerkkokauppaModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VerkkokauppaModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VerkkokauppaModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VerkkokauppaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VerkkokauppaModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VerkkokauppaModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -151,12 +196,29 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Icons\cart.svg" />
+    <Content Include="Models\VerkkokauppaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VerkkokauppaModel.edmx</DependentUpon>
+      <LastGenOutput>VerkkokauppaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\VerkkokauppaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VerkkokauppaModel.edmx</DependentUpon>
+      <LastGenOutput>VerkkokauppaModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\VerkkokauppaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>VerkkokauppaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\VerkkokauppaModel.edmx.diagram">
+      <DependentUpon>VerkkokauppaModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.6.3.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.3.js" />
     <Content Include="Scripts\jquery-3.6.3.min.js" />
@@ -191,7 +253,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
