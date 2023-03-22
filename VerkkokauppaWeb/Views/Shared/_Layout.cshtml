@@ -19,11 +19,12 @@
                     </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li>@Html.ActionLink("Etusivu", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Meistä", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Tuotteet", "Index", "Tuotteet", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Kirjaudu", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Ostoskori", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li class="btn"><a class="nav-link" href="~/home/Index">Etusivu</a></li>
+                        <li class="btn"><a class="nav-link" href="~/home/About">About</a></li>
+                        <li class="btn"><a class="nav-link" href="~/tuotteet/index">Tuotteet</a></li>
+                        <li class="btn"><a class="nav-link" href="~/home/Index">Ostoskori</a></li>
+                        <li class="btn"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#LoginRuutu">Kirjaudu</li>
+
                     </ul>
                     <ul class="navbar-nav flex-grow-1 toSide">
                         <div class="container-input">

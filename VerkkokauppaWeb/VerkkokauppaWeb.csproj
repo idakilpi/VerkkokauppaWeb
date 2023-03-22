@@ -249,6 +249,7 @@
     <Content Include="Views\Tuotteet\Details.cshtml" />
     <Content Include="Views\Tuotteet\Edit.cshtml" />
     <Content Include="Views\Tuotteet\Index.cshtml" />
+    <Content Include="Views\Home\_LoginModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
