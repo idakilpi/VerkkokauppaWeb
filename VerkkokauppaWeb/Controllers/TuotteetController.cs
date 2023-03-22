@@ -80,13 +80,22 @@ namespace VerkkokauppaWeb.Controllers
         // POST: Tuotteet/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TuoteID,KategoriaID,Nimi,Hinta,Varastomaara,Kuvaus,Kuva")] Tuotteet tuotteet)
+        public ActionResult Edit([Bind(Include = "TuoteID,KategoriaID,Nimi,Hinta,Varastomaara,Kuvaus,KuvaPolku,Kuva,kuvitus")] HttpPostedFileBase kuvitus, Tuotteet tuotteet)
         {
             if (ModelState.IsValid)
             {
+
+                int count = Request.Files.Count;
+                var file = Request.Files[0];
+                string fileName = file.FileName;
+                byte[] buffer =new byte[file.InputStream.Length];
+                file.InputStream.Read(buffer, 0, (int)file.InputStream.Length);
                 db.Entry(tuotteet).State = EntityState.Modified;
+                tuotteet.Kuva = buffer;
+                tuotteet.KuvaPolku = fileName;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

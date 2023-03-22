@@ -198,8 +198,8 @@
     <Content Include="Icons\cart.svg" />
     <Content Include="Models\VerkkokauppaModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>VerkkokauppaModel.Context.cs</LastGenOutput>
       <DependentUpon>VerkkokauppaModel.edmx</DependentUpon>
+      <LastGenOutput>VerkkokauppaModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\VerkkokauppaModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -73,7 +73,8 @@
           <Property Name="Hinta" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Varastomaara" Type="int" Nullable="false" />
           <Property Name="Kuvaus" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Kuva" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="KuvaPolku" Type="nvarchar(max)" />
+          <Property Name="Kuva" Type="image" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -93,18 +94,6 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
           <Property Name="create_date" Type="datetime" Nullable="false" />
           <Property Name="modify_date" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Kategoriat_Tuotteet">
-          <End Role="Kategoriat" Type="Self.Kategoriat" Multiplicity="1" />
-          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Kategoriat">
-              <PropertyRef Name="KategoriaID" />
-            </Principal>
-            <Dependent Role="Tuotteet">
-              <PropertyRef Name="KategoriaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Logins_Asiakkaat">
           <End Role="Asiakkaat" Type="Self.Asiakkaat" Multiplicity="1" />
           <End Role="Logins" Type="Self.Logins" Multiplicity="*" />
@@ -150,6 +139,18 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
             </Principal>
             <Dependent Role="Tilausrivit">
               <PropertyRef Name="TuoteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuotteet_Kategoriat">
+          <End Role="Kategoriat" Type="Self.Kategoriat" Multiplicity="1" />
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriat">
+              <PropertyRef Name="KategoriaID" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="KategoriaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -202,10 +203,6 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
     [database_firewall_rules].[modify_date] AS [modify_date]
     FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_Kategoriat_Tuotteet" Association="Self.FK_Kategoriat_Tuotteet">
-            <End Role="Kategoriat" EntitySet="Kategoriat" />
-            <End Role="Tuotteet" EntitySet="Tuotteet" />
-          </AssociationSet>
           <AssociationSet Name="FK_Logins_Asiakkaat" Association="Self.FK_Logins_Asiakkaat">
             <End Role="Asiakkaat" EntitySet="Asiakkaat" />
             <End Role="Logins" EntitySet="Logins" />
@@ -221,6 +218,10 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
           <AssociationSet Name="FK_Tilausrivit_Tuotteet" Association="Self.FK_Tilausrivit_Tuotteet">
             <End Role="Tuotteet" EntitySet="Tuotteet" />
             <End Role="Tilausrivit" EntitySet="Tilausrivit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tuotteet_Kategoriat" Association="Self.FK_Tuotteet_Kategoriat">
+            <End Role="Kategoriat" EntitySet="Kategoriat" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -249,7 +250,7 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
           <Property Name="KategoriaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Kuvaus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Tuotteet" Relationship="Self.FK_Kategoriat_Tuotteet" FromRole="Kategoriat" ToRole="Tuotteet" />
+          <NavigationProperty Name="Tuotteet" Relationship="Self.FK_Tuotteet_Kategoriat" FromRole="Kategoriat" ToRole="Tuotteet" />
         </EntityType>
         <EntityType Name="Logins">
           <Key>
@@ -304,8 +305,9 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
           <Property Name="Hinta" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Varastomaara" Type="Int32" Nullable="false" />
           <Property Name="Kuvaus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Kuva" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Kategoriat" Relationship="Self.FK_Kategoriat_Tuotteet" FromRole="Tuotteet" ToRole="Kategoriat" />
+          <Property Name="KuvaPolku" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Kuva" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Kategoriat" Relationship="Self.FK_Tuotteet_Kategoriat" FromRole="Tuotteet" ToRole="Kategoriat" />
           <NavigationProperty Name="Tilausrivit" Relationship="Self.FK_Tilausrivit_Tuotteet" FromRole="Tuotteet" ToRole="Tilausrivit" />
         </EntityType>
         <EntityType Name="database_firewall_rules">
@@ -348,7 +350,7 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Kategoriat_Tuotteet">
+        <Association Name="FK_Tuotteet_Kategoriat">
           <End Role="Kategoriat" Type="Self.Kategoriat" Multiplicity="1" />
           <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
           <ReferentialConstraint>
@@ -401,7 +403,7 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
             <End Role="Asiakkaat" EntitySet="Asiakkaat" />
             <End Role="Tilaukset" EntitySet="Tilaukset" />
           </AssociationSet>
-          <AssociationSet Name="FK_Kategoriat_Tuotteet" Association="Self.FK_Kategoriat_Tuotteet">
+          <AssociationSet Name="FK_Tuotteet_Kategoriat" Association="Self.FK_Tuotteet_Kategoriat">
             <End Role="Kategoriat" EntitySet="Kategoriat" />
             <End Role="Tuotteet" EntitySet="Tuotteet" />
           </AssociationSet>
@@ -534,6 +536,7 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
                 <ScalarProperty Name="Hinta" ColumnName="Hinta" />
                 <ScalarProperty Name="Varastomaara" ColumnName="Varastomaara" />
                 <ScalarProperty Name="Kuvaus" ColumnName="Kuvaus" />
+                <ScalarProperty Name="KuvaPolku" ColumnName="KuvaPolku" />
                 <ScalarProperty Name="Kuva" ColumnName="Kuva" />
               </MappingFragment>
             </EntityTypeMapping>

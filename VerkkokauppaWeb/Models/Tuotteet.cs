@@ -26,7 +26,8 @@ namespace VerkkokauppaWeb.Models
         public decimal Hinta { get; set; }
         public int Varastomaara { get; set; }
         public string Kuvaus { get; set; }
-        public string Kuva { get; set; }
+        public string KuvaPolku { get; set; }
+        public byte[] Kuva { get; set; }
     
         public virtual Kategoriat Kategoriat { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
