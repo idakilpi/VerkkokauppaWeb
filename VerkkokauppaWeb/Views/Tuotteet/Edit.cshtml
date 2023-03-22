@@ -4,9 +4,10 @@
     ViewBag.Title = "Edit";
 }
 
+
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Tuotteet", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
     
@@ -56,7 +57,7 @@
             </div>
         </div>
 
-        <input type="file" name="picture" />
+        <input type="file" name="kuvitus" />
 
         <div class="form-group">
             @Html.LabelFor(model => model.Kuva, htmlAttributes: new { @class = "control-label col-md-2" })
