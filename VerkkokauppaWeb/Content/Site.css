@@ -72,6 +72,13 @@ textarea {
     margin: 0 auto;
 }
 
+/*Tuotteet*/
+.prodImg {
+    width: 100%;
+    object-fit: cover;
+    height: 25vw;
+}
+
 
 footer {
     width: 100%;
@@ -96,4 +103,12 @@ ul {
 footer li {
     margin: 10px;
     font-size: 14px;
+}
+
+
+@media screen and (max-width: 990px) {
+    .prodImg {
+        height: 70vw;
+    }
+
 }
