@@ -6,16 +6,21 @@
 
 <div class="container-fluid">
     <h2>Tuotevalikoima</h2>
-
-    <p>
-        @Html.ActionLink("Luo uusi", "Create")
-    </p>
+    <br />
+    <br />
+    <div>
+        <button class="btn btn-success">
+            @Html.ActionLink("Luo uusi tuote", "Create")
+        </button>
+    </div>
+    <br />
+    <br />
     <div class="row">
         @foreach (VerkkokauppaWeb.Models.Tuotteet tuot in Model)
         {
             <div class="col-lg-3">
                 <div class="card mb-3">
-                    <h3 class="card-header">@tuot.Nimi</h3>
+                    <h3 class="card-header text-bg-success">@tuot.Nimi</h3>
 
                     @if (tuot.Kuva != null)
                     {
@@ -38,7 +43,7 @@
                         <li class="list-group-item">Kategoria: @tuot.Kategoriat.Nimi</li>
                         <li class="btn btn-primary">Lisää tuote ostoskoriin<img src="~/Icons/cart.svg"></li>
                     </ul>
-                    <div class="card-footer text-muted">
+                    <div class="card-footer text-bg-success">
                         @Html.ActionLink("Muokkaa", "Edit", new { id = tuot.TuoteID }) |
                         @Html.ActionLink("Lisätiedot", "Details", new { id = tuot.TuoteID }) |
                         @Html.ActionLink("Poista", "Delete", new { id = tuot.TuoteID })
