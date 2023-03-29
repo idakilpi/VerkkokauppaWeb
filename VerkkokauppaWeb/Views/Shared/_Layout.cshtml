@@ -18,15 +18,21 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1" style="display: flex;">
                         <li class="btn"><a class="nav-link" href="~/home/Index">Etusivu</a></li>
                         <li class="btn"><a class="nav-link" href="~/home/About">Meistä</a></li>
                         <li class="btn"><a class="nav-link" href="~/tuotteet/index">Tuotteet</a></li>
                         <li class="btn"><a class="nav-link" href="~/home/Index">Ostoskori</a></li>
+                        @if (Session["UserName"] == null) {
                         <li class="btn"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#LoginRuutu">Kirjaudu</a></li>
-
+                         }
+                         
                     </ul>
-                    <ul class="navbar-nav flex-grow-1 toSide">
+                    <div class="navbar-nav flex-grow-1 toSide">
+                        @if (Session["UserName"] != null)
+                        {
+                            <div class="btn"><a class="nav-link">@Session["UserName"]</a></div>
+                        }
                         <div class="container-input">
                             <input type="text" placeholder="Etsi" name="text" class="input">
                             <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +40,7 @@
                             </svg>
                         </div>
 
-                    </ul>
+                    </div>
                 </div>
             </div>
         </nav>
