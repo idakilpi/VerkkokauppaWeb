@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using VerkkokauppaWeb.Models;
 
 namespace VerkkokauppaWeb.Controllers
@@ -48,10 +49,13 @@ namespace VerkkokauppaWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TuoteID,KategoriaID,Nimi,Hinta,Varastomaara,Kuvaus,Kuva")] Tuotteet tuotteet)
+        public ActionResult Create([Bind(Include = "TuoteID,KategoriaID,Nimi,Hinta,Varastomaara,Kuvaus,Kuva")] Tuotteet tuotteet, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
+                byte[] tuotekuva = new byte[ImageFile.ContentLength];
+                ImageFile.InputStream.Read(tuotekuva, 0, tuotekuva.Length);
+                tuotteet.Kuva = tuotekuva;
                 db.Tuotteet.Add(tuotteet);
                 db.SaveChanges();
                 return RedirectToAction("Index");
