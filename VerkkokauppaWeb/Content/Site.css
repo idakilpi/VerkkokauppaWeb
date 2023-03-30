@@ -112,3 +112,20 @@ footer li {
     }
 
 }
+
+
+@media screen and (max-width: 768px) {
+
+    .toSide {
+        align-items: center;
+    }
+    /*Footerin tekstit keskelle?*/
+/*    .footerNavCol {
+        display: flex;
+        justify-content: center;
+    }
+    .footerMove {
+        position: relative;
+        left: 20px;
+    }*/
+}
