@@ -1,5 +1,5 @@
-﻿@model IEnumerable<VerkkokauppaWeb.Models.Tuotteet>
-@*@model IEnumerable<VerkkokauppaWeb.ViewModels.TuotteetAndLoginsViewModel>*@
+﻿@*@model IEnumerable<VerkkokauppaWeb.Models.Tuotteet>*@
+@*@model VerkkokauppaWeb.ViewModels.TuotteetAndLoginsViewModel*@
 
 @{
     ViewBag.Title = "Index";
@@ -17,7 +17,7 @@
     <br />
     <br />
     <div class="row">
-        @foreach (VerkkokauppaWeb.Models.Tuotteet tuot in Model)
+        @foreach (var tuot in Model.Tuotteet)
         {
             <div class="col-lg-4">
                 <div class="card md-3 h-100" >
@@ -54,5 +54,9 @@
         }
     </div>
 </div>
+
+@{
+    Html.RenderPartial("_LoginModal");
+}
 
 

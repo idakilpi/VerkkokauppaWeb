@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using VerkkokauppaWeb.Models;
+using VerkkokauppaWeb.ViewModels;
 
 namespace VerkkokauppaWeb.Controllers
 {
@@ -18,8 +19,17 @@ namespace VerkkokauppaWeb.Controllers
         // GET: Tuotteet
         public ActionResult Index()
         {
-            var tuotteet = db.Tuotteet.Include(t => t.Kategoriat);
-            return View(tuotteet.ToList());
+            var tuotteet = db.Tuotteet.Include(t => t.Kategoriat).ToList();
+            var login = new Logins();
+            var viewModel = new TuotteetAndLoginsViewModel
+            {
+                Tuotteet = tuotteet,
+                Logins = login
+            };
+            return View(viewModel);
+
+            //var tuotteet = db.Tuotteet.Include(t => t.Kategoriat);
+            //return View(tuotteet.ToList());
         }
 
         // GET: Tuotteet/Details/5
