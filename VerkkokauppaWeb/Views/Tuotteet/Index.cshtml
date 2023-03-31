@@ -10,9 +10,11 @@
     <br />
     <br />
     <div>
-        <button class="btn btn-success">
-            @Html.ActionLink("Luo uusi tuote", "Create")
-        </button>
+        @if (Session["UserName"] as string == "teppo") { 
+            <button class="btn btn-success">
+                @Html.ActionLink("Luo uusi tuote", "Create")
+            </button>
+        }
     </div>
     <br />
     <br />
@@ -20,7 +22,7 @@
         @foreach (var tuot in Model.Tuotteet)
         {
             <div class="col-lg-4">
-                <div class="card md-3 h-100" >
+                <div class="card md-3 h-100">
                     <h3 class="card-header text-bg-success">@tuot.Nimi</h3>
 
                     @if (tuot.Kuva != null)
@@ -44,12 +46,15 @@
                         <li class="list-group-item">Kategoria: @tuot.Kategoriat.Nimi</li>
                         <li class="btn btn-primary">Lisää tuote ostoskoriin<img src="~/Icons/cart.svg"></li>
                     </ul>
-                    <div class="card-footer text-bg-success">
-                        @Html.ActionLink("Muokkaa", "Edit", new { id = tuot.TuoteID }) |
-                        @Html.ActionLink("Lisätiedot", "Details", new { id = tuot.TuoteID }) |
-                        @Html.ActionLink("Poista", "Delete", new { id = tuot.TuoteID })
+                    @if (Session["UserName"] as string == "teppo")
+                    {
+                        <div class="card-footer text-bg-success">
+                            @Html.ActionLink("Muokkaa", "Edit", new { id = tuot.TuoteID }) |
+                            @Html.ActionLink("Lisätiedot", "Details", new { id = tuot.TuoteID }) |
+                            @Html.ActionLink("Poista", "Delete", new { id = tuot.TuoteID })
+                        </div>
+                    }
                     </div>
-                </div>
             </div>
         }
     </div>
