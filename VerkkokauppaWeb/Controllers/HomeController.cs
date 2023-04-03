@@ -16,7 +16,7 @@ namespace VerkkokauppaWeb.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Rakkaudesta luontoon ja seikkailuun.";
 
             return View();
         }
