@@ -12,7 +12,7 @@ namespace VerkkokauppaWeb.ViewModels
         public decimal Määrä { get; set; }
         public decimal Kappalehinta { get; set; }
         public decimal Summa { get; set; }
-         public string KuvaPolku { get; set; }
+        public string KuvaPolku { get; set; }
         public byte[] Kuva { get; set; }
     }
 }

@@ -72,6 +72,12 @@ namespace VerkkokauppaWeb.Controllers
             return Json(new {Success = true, Counter = listOfOstoskoriModels.Count}, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Ostoskori()
+        {
+            listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
+            return View(listOfOstoskoriModels);
+        }
+
         // GET: Tuotteet/Details/5
         public ActionResult Details(int? id)
         {

@@ -254,6 +254,7 @@
     <Content Include="Views\Home\_LoginModal.cshtml" />
     <Content Include="Views\Tuotteet\_LoginModal.cshtml" />
     <Content Include="Views\Shared\_Ostoskori.cshtml" />
+    <Content Include="Views\Tuotteet\Ostoskori.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
