@@ -1,0 +1,15 @@
+﻿<ul class="navbar-nav flex-grow-1" style="display: flex;">
+    <li>
+        @if (Session["OstoskoriCounter"] == null)
+        {
+            @Html.ActionLink("Ostoskori", "Index", "Tuotteet", new { id = "koriTuote" })
+
+        }
+        else
+        {
+            @Html.ActionLink("Ostoskori("+ Session["OstoskoriCounter"] +")", "Index", "Tuotteet", new { id = "koriTuote" })
+
+        }
+        @*<li class="btn"><a class="nav-link" href="~/home/Index">Ostoskori</a></li>*@
+    </li>
+</ul>

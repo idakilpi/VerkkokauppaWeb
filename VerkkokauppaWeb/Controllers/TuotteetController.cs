@@ -16,6 +16,14 @@ namespace VerkkokauppaWeb.Controllers
     {
         private VerkkokauppaDBEntities db = new VerkkokauppaDBEntities();
 
+        private VerkkokauppaDBEntities objVerkkokauppaDBEntities;
+            List<Ostoskori> listOfOstoskoriModels;
+        public TuotteetController() 
+        {
+            objVerkkokauppaDBEntities = new VerkkokauppaDBEntities();
+            listOfOstoskoriModels = new List<Ostoskori>();
+        }
+
         // GET: Tuotteet
         public ActionResult Index()
         {
@@ -30,6 +38,38 @@ namespace VerkkokauppaWeb.Controllers
 
             //var tuotteet = db.Tuotteet.Include(t => t.Kategoriat);
             //return View(tuotteet.ToList());
+        }
+        [HttpPost]
+        public JsonResult Index(string tuoteid) 
+        {
+            
+            Ostoskori objOstoskoriModel = new Ostoskori();
+            Tuotteet objtuote = objVerkkokauppaDBEntities.Tuotteet.Single(model => model.TuoteID.ToString() == tuoteid);
+            if (Session["OstoskoriCounter"] != null)
+            {
+                listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
+            }
+            if(listOfOstoskoriModels.Any(model => model.TuoteID == tuoteid))
+            {
+                objOstoskoriModel = listOfOstoskoriModels.Single(model => model.TuoteID == tuoteid);
+                objOstoskoriModel.Määrä = objOstoskoriModel.Määrä + 1;
+                objOstoskoriModel.Summa = objOstoskoriModel.Määrä * objOstoskoriModel.Kappalehinta;
+            }
+            else
+            {
+                objOstoskoriModel.TuoteID = tuoteid;
+                objOstoskoriModel.Kuva = objtuote.Kuva;
+                objOstoskoriModel.Nimi = objtuote.Nimi;
+                objOstoskoriModel.Määrä = 1;
+                objOstoskoriModel.Summa = objtuote.Hinta;
+                objOstoskoriModel.Kappalehinta = objtuote.Hinta;
+                listOfOstoskoriModels.Add(objOstoskoriModel);
+            }
+
+            Session["OstoskoriCounter"] = listOfOstoskoriModels.Count;
+            Session["OstoskoriTuote"] = listOfOstoskoriModels;
+
+            return Json(new {Success = true, Counter = listOfOstoskoriModels.Count}, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Tuotteet/Details/5

@@ -5,6 +5,31 @@
     ViewBag.Title = "Index";
 }
 
+<script type="text/javascript">
+    function LisaaKoriin(tuot) {
+        var tuoteid = $(tuot).attr("tuoteid");
+        var formData = new FormData();
+        formData.append("tuoteid", tuoteid);
+
+        $.ajax({
+            async: true,
+            type: "POST",
+            contentType: false,
+            processData: false,
+            data: formData,
+            url: "/Tuotteet/Index",
+            success: function (data) {
+                if (data.Success == true)
+                    $("#koriTuote").text("Ostoskori(" + data.Counter + ")");
+                alert("Tuote lisätty ostoskoriin");
+            },
+            error: function () {
+                alert("Tuotteen lisääminen ostoskoriin epäonnistui");
+            }
+        })
+    }
+</script>
+
 <div class="container-fluid">
     <h2>Tuotevalikoima</h2>
     <br />
@@ -44,7 +69,7 @@
                         <li class="list-group-item">@tuot.Kuvaus</li>
                         <li class="list-group-item">Varastomäärä: @tuot.Varastomaara</li>
                         <li class="list-group-item">Kategoria: @tuot.Kategoriat.Nimi</li>
-                        <li class="btn btn-primary">Lisää tuote ostoskoriin<img src="~/Icons/cart.svg"></li>
+                        <li class="btn btn-primary" name="LisaaKoriin" value="Lisaa Koriin" tuoteid="@tuot.TuoteID" id="btnLisaaKoriin" onclick="LisaaKoriin(this)">Lisää tuote ostoskoriin<img src="~/Icons/cart.svg"></li>
                     </ul>
                     @if (Session["UserName"] as string == "teppo")
                     {
