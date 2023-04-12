@@ -40,11 +40,11 @@ namespace VerkkokauppaWeb.Controllers
             //return View(tuotteet.ToList());
         }
         [HttpPost]
-        public JsonResult Index(string tuoteid) 
+        public JsonResult Index(int tuoteid) 
         {
             
             Ostoskori objOstoskoriModel = new Ostoskori();
-            Tuotteet objtuote = objVerkkokauppaDBEntities.Tuotteet.Single(model => model.TuoteID.ToString() == tuoteid);
+            Tuotteet objtuote = objVerkkokauppaDBEntities.Tuotteet.Single(model => model.TuoteID == tuoteid);
             if (Session["OstoskoriCounter"] != null)
             {
                 listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
@@ -53,7 +53,7 @@ namespace VerkkokauppaWeb.Controllers
             {
                 objOstoskoriModel = listOfOstoskoriModels.Single(model => model.TuoteID == tuoteid);
                 objOstoskoriModel.Määrä = objOstoskoriModel.Määrä + 1;
-                objOstoskoriModel.Summa = objOstoskoriModel.Määrä * objOstoskoriModel.Kappalehinta;
+                objOstoskoriModel.Summa = ((decimal)objOstoskoriModel.Määrä * objOstoskoriModel.Kappalehinta);
             }
             else
             {
@@ -76,6 +76,37 @@ namespace VerkkokauppaWeb.Controllers
         {
             listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
             return View(listOfOstoskoriModels);
+        }
+        [HttpPost]
+        public ActionResult LisaaTilaus()
+        {
+            int TilausID = 0;
+            listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
+            Tilaukset tilausObj = new Tilaukset()
+            {
+                AsiakasID = 1,
+                TilausPvm = DateTime.Now,
+                LahetysPvm = DateTime.Now.AddDays(7),
+
+            };
+
+            objVerkkokauppaDBEntities.Tilaukset.Add(tilausObj);
+            objVerkkokauppaDBEntities.SaveChanges();
+            TilausID = tilausObj.TilausID;
+
+            foreach(var tuot in listOfOstoskoriModels)
+            {
+                Tilausrivit tilausrivitObj = new Tilausrivit();
+                tilausrivitObj.Hinta = tuot.Kappalehinta;
+                tilausrivitObj.TuoteID = tuot.TuoteID;
+                tilausrivitObj.TilausID = TilausID;
+                tilausrivitObj.Maara = tuot.Määrä;
+                objVerkkokauppaDBEntities.Tilausrivit.Add(tilausrivitObj);
+                objVerkkokauppaDBEntities.SaveChanges();
+            }
+            Session["OstoskoriTuote"] = null;
+            Session["OstoskoriCounter"] = null;
+            return RedirectToAction("Index");
         }
 
         // GET: Tuotteet/Details/5

@@ -7,9 +7,9 @@ namespace VerkkokauppaWeb.ViewModels
 {
     public class Ostoskori
     {
-        public string TuoteID { get; set; }
+        public int TuoteID { get; set; }
         public string Nimi { get; set; }
-        public decimal Määrä { get; set; }
+        public Nullable<int> Määrä { get; set; }
         public decimal Kappalehinta { get; set; }
         public decimal Summa { get; set; }
         public string KuvaPolku { get; set; }

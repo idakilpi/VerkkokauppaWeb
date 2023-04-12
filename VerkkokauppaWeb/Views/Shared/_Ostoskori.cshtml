@@ -1,4 +1,33 @@
-﻿<ul class="navbar-nav flex-grow-1" style="display: flex;">
+﻿<ul class="navbar-nav" style="display: flex;">
+    <li>
+        @if (Session["OstoskoriCounter"] == null)
+        {
+            @*@Html.ActionLink("Ostoskori", "Ostoskori", "Tuotteet", new { id = "koriTuote" })*@
+
+
+
+
+            <a class="btn" href="@Url.Action("Index", "Tuotteet", new { id = "koriTuote" })"><i class="bi bi-bag"></i></a>
+
+
+
+        }
+        else
+        {
+            <a class="btn" href="@Url.Action("Ostoskori", "Tuotteet")">
+                <i class="bi bi-bag" style="color: #fff;"></i>
+                @Session["OstoskoriCounter"]
+            </a>
+        }
+
+
+
+    </li>
+</ul>
+
+
+
+<!--<ul class="navbar-nav flex-grow-1" style="display: flex;">
     <li>
         @if (Session["OstoskoriCounter"] == null)
         {
@@ -9,7 +38,7 @@
         {
             @Html.ActionLink("Ostoskori("+ Session["OstoskoriCounter"] +")", "Ostoskori", "Tuotteet")
 
-        }
+        }-->
         @*<li class="btn"><a class="nav-link" href="~/home/Index">Ostoskori</a></li>*@
-    </li>
-</ul>
+    <!--</li>
+</ul>-->

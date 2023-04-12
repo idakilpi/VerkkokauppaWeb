@@ -20,8 +20,10 @@
             url: "/Tuotteet/Index",
             success: function (data) {
                 if (data.Success == true)
-                    $("#koriTuote").text("Ostoskori(" + data.Counter + ")");
-                alert("Tuote lisätty ostoskoriin");
+                    $("#koriTuote").text(data.Counter);
+                window.location.reload();
+                //alert("Tuote lisätty ostoskoriin");
+                
             },
             error: function () {
                 alert("Tuotteen lisääminen ostoskoriin epäonnistui");

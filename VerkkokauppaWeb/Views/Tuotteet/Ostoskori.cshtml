@@ -7,39 +7,49 @@
 
 <h2>Ostoskori</h2>
 
-<table class="table-bordered">
-    @foreach(var tuot in Model)
-    {
-        summa+= tuot.Summa;
-        var base64 = Convert.ToBase64String(tuot.Kuva);
-        var imgscr = string.Format("data:image/jpg;base64,{0}", base64);
-                <tr>
-                    <td>
+@using (Html.BeginForm("LisaaTilaus", "Tuotteet", FormMethod.Post))
+            {
+                <table class="table-hover" style="width:100%">
+                    @foreach (var tuot in Model)
+                    {
+                        summa += tuot.Summa;
+                        var base64 = Convert.ToBase64String(tuot.Kuva);
+                        var imgscr = string.Format("data:image/jpg;base64,{0}", base64);
+                        <tr>
+                            <td>
 
-                        <img src="@imgscr" alt="Kuva tuotteesta" height="50px" width="50px" class="rounded">
-                    </td>
-                    <td>
-                        @tuot.Nimi
-                    </td>
-                    <td>
-                        @tuot.Määrä.ToString("#,##0")
-                    </td>
-                    <td>
-                        @tuot.Kappalehinta.ToString("#,##0.00")
-                    </td>
-                    <td>
-                        @tuot.Summa.ToString("#,##0.00")
-                    </td>
-                </tr>
+                                <img src="@imgscr" alt="Kuva tuotteesta" height="50px" width="50px" class="rounded">
+                            </td>
+                            <td style="text-align: right">
+                                @tuot.Nimi
+                            </td>
+                            <td style="text-align: right">
+                                @tuot.Määrä
+                            </td>
+                            <td style="text-align: right">
+                                @tuot.Kappalehinta.ToString("#,##0.00")
+                            </td>
+                            <td style="text-align: right">
+                                @tuot.Summa.ToString("#,##0.00")
+                            </td>
+                        </tr>
+                    }
+                    <tr style="border-top: 2px solid black">
+                        <td colspan="4" style="text-align: right">
+                            <h3>Yhteensä</h3>
+                        </td>
+                        <td style="text-align: right">
+                            <h3>@summa.ToString("#,##0.00")</h3>
+                        </td>
+                    </tr>
+                    <tr style="text-align: right">
+                        <td>
+                            <input type="submit" value="Save" name="Save" class="btn btn-primary" />
+                        </td>
+                    </tr>
+                </table>
             }
-            <tr>
-                <td colspan="4" style="text-align: right">
-                    <h3>Yhteensä</h3>
-                </td>
-                <td style="text-align: right">
-                    <h3>@summa.ToString("#,##0.00")</h3>
-                </td>
-            </tr>
-</table>
+
+
 
 
