@@ -199,6 +199,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Icons\box-arrow-right.svg" />
     <Content Include="Icons\cart.svg" />
     <Content Include="Models\VerkkokauppaModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

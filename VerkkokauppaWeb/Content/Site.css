@@ -36,14 +36,20 @@ textarea {
 
 /*Ulos -painike*/
 
-.out {
+/*.out {
     display: flex;
     align-self: center;
     height: 80%;
     margin-left: 10px;
+}*/
+.zoom {
+    transition: transform .2s;
 }
 
-#logOut {
+    .zoom:hover {
+        transform: scale(1.2);
+    }
+/*#logOut {
     font-family: inherit;
     font-size: 16px;
     background: #c75435;
@@ -84,7 +90,7 @@ textarea {
 
     #logOut:active {
         transform: scale(0.95);
-    }
+    }*/
 
 /*@keyframes fly-1 {
     from {
@@ -133,6 +139,8 @@ textarea {
     width: 50%;
     margin: 0 auto;
 }
+
+
 /*Tekstin taustalle vaalennusta*/
 .crslBg {
     background-image: radial-gradient( #ffffff94, #fff0);
@@ -140,6 +148,7 @@ textarea {
     width: fit-content;
     margin: 0 auto;
 }
+
 
 /*Tuotteet*/
 .prodImg {
