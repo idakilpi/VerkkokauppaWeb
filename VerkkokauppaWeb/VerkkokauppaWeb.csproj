@@ -123,6 +123,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AsiakkaatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TuotteetController.cs" />
     <Compile Include="Global.asax.cs">
@@ -174,6 +175,7 @@
       <DependentUpon>VerkkokauppaModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AsiakkaatAndLoginsViewModel.cs" />
     <Compile Include="ViewModels\Ostoskori.cs" />
     <Compile Include="ViewModels\TilausModel.cs" />
     <Compile Include="ViewModels\TilausrivitModel.cs" />
@@ -258,6 +260,11 @@
     <Content Include="Views\Tuotteet\_LoginModal.cshtml" />
     <Content Include="Views\Shared\_Ostoskori.cshtml" />
     <Content Include="Views\Tuotteet\Ostoskori.cshtml" />
+    <Content Include="Views\Asiakkaat\Create.cshtml" />
+    <Content Include="Views\Asiakkaat\Delete.cshtml" />
+    <Content Include="Views\Asiakkaat\Details.cshtml" />
+    <Content Include="Views\Asiakkaat\Edit.cshtml" />
+    <Content Include="Views\Asiakkaat\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
