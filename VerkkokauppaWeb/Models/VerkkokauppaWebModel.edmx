@@ -10,19 +10,16 @@
             <PropertyRef Name="AsiakasID" />
           </Key>
           <Property Name="AsiakasID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nimi" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Katuosoite" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Postinumero" Type="nchar" MaxLength="5" Nullable="false" />
-          <Property Name="Postitoimipaikka" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Etunimi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sukunimi" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Puhelinnumero" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Kategoriat">
           <Key>
             <PropertyRef Name="KategoriaID" />
           </Key>
           <Property Name="KategoriaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nimi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="KategoriaNimi" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Kuvaus" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Logins">
@@ -31,8 +28,15 @@
           </Key>
           <Property Name="LoginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AsiakasID" Type="int" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Kayttajatunnus" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Salasana" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Postitoimipaikat">
+          <Key>
+            <PropertyRef Name="Postinumero" />
+          </Key>
+          <Property Name="Postinumero" Type="nchar" MaxLength="5" Nullable="false" />
+          <Property Name="Postitoimipaikka" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -51,7 +55,9 @@
           <Property Name="TilausID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AsiakasID" Type="int" Nullable="false" />
           <Property Name="TilausPvm" Type="datetime" Nullable="false" />
-          <Property Name="LahetysPvm" Type="datetime" Nullable="false" />
+          <Property Name="LähetysPvm" Type="datetime" Nullable="false" />
+          <Property Name="ToimitusOsoite" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ToimitusPostinumero" Type="nchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="Tilausrivit">
           <Key>
@@ -60,8 +66,8 @@
           <Property Name="TilausriviID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TilausID" Type="int" Nullable="false" />
           <Property Name="TuoteID" Type="int" Nullable="false" />
-          <Property Name="Hinta" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Maara" Type="int" />
+          <Property Name="KappaleHinta" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Maara" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tuotteet">
           <Key>
@@ -69,30 +75,12 @@
           </Key>
           <Property Name="TuoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="KategoriaID" Type="int" Nullable="false" />
-          <Property Name="Nimi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TuoteNimi" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Hinta" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Varastomaara" Type="int" Nullable="false" />
           <Property Name="Kuvaus" Type="nvarchar(max)" Nullable="false" />
           <Property Name="KuvaPolku" Type="nvarchar(max)" />
           <Property Name="Kuva" Type="image" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="database_firewall_rules">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="start_ip_address" />
-            <PropertyRef Name="end_ip_address" />
-            <PropertyRef Name="create_date" />
-            <PropertyRef Name="modify_date" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="create_date" Type="datetime" Nullable="false" />
-          <Property Name="modify_date" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_Logins_Asiakkaat">
           <End Role="Asiakkaat" Type="Self.Asiakkaat" Multiplicity="1" />
@@ -115,6 +103,18 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
             </Principal>
             <Dependent Role="Tilaukset">
               <PropertyRef Name="AsiakasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tilaukset_Postitoimipaikat">
+          <End Role="Postitoimipaikat" Type="Self.Postitoimipaikat" Multiplicity="1" />
+          <End Role="Tilaukset" Type="Self.Tilaukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postitoimipaikat">
+              <PropertyRef Name="Postinumero" />
+            </Principal>
+            <Dependent Role="Tilaukset">
+              <PropertyRef Name="ToimitusPostinumero" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -154,61 +154,25 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="VerkkokauppaDBModelStoreContainer">
           <EntitySet Name="Asiakkaat" EntityType="Self.Asiakkaat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kategoriat" EntityType="Self.Kategoriat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logins" EntityType="Self.Logins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Postitoimipaikat" EntityType="Self.Postitoimipaikat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tilaukset" EntityType="Self.Tilaukset" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tilausrivit" EntityType="Self.Tilausrivit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tuotteet" EntityType="Self.Tuotteet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
-            <DefiningQuery>SELECT 
-    [database_firewall_rules].[id] AS [id], 
-    [database_firewall_rules].[name] AS [name], 
-    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
-    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
-    [database_firewall_rules].[create_date] AS [create_date], 
-    [database_firewall_rules].[modify_date] AS [modify_date]
-    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Logins_Asiakkaat" Association="Self.FK_Logins_Asiakkaat">
             <End Role="Asiakkaat" EntitySet="Asiakkaat" />
             <End Role="Logins" EntitySet="Logins" />
           </AssociationSet>
           <AssociationSet Name="FK_Tilaukset_Asiakkaat" Association="Self.FK_Tilaukset_Asiakkaat">
             <End Role="Asiakkaat" EntitySet="Asiakkaat" />
+            <End Role="Tilaukset" EntitySet="Tilaukset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tilaukset_Postitoimipaikat" Association="Self.FK_Tilaukset_Postitoimipaikat">
+            <End Role="Postitoimipaikat" EntitySet="Postitoimipaikat" />
             <End Role="Tilaukset" EntitySet="Tilaukset" />
           </AssociationSet>
           <AssociationSet Name="FK_Tilausrivit_Tilaukset" Association="Self.FK_Tilausrivit_Tilaukset">
@@ -234,12 +198,9 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
             <PropertyRef Name="AsiakasID" />
           </Key>
           <Property Name="AsiakasID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Katuosoite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Postinumero" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Postitoimipaikka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Etunimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sukunimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Puhelinnumero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Logins" Relationship="Self.FK_Logins_Asiakkaat" FromRole="Asiakkaat" ToRole="Logins" />
           <NavigationProperty Name="Tilaukset" Relationship="Self.FK_Tilaukset_Asiakkaat" FromRole="Asiakkaat" ToRole="Tilaukset" />
         </EntityType>
@@ -248,7 +209,7 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
             <PropertyRef Name="KategoriaID" />
           </Key>
           <Property Name="KategoriaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KategoriaNimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Kuvaus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Tuotteet" Relationship="Self.FK_Tuotteet_Kategoriat" FromRole="Kategoriat" ToRole="Tuotteet" />
         </EntityType>
@@ -258,9 +219,17 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
           </Key>
           <Property Name="LoginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AsiakasID" Type="Int32" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Kayttajatunnus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Salasana" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Asiakkaat" Relationship="Self.FK_Logins_Asiakkaat" FromRole="Logins" ToRole="Asiakkaat" />
+        </EntityType>
+        <EntityType Name="Postitoimipaikat">
+          <Key>
+            <PropertyRef Name="Postinumero" />
+          </Key>
+          <Property Name="Postinumero" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Postitoimipaikka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tilaukset" Relationship="Self.FK_Tilaukset_Postitoimipaikat" FromRole="Postitoimipaikat" ToRole="Tilaukset" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -279,8 +248,11 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
           <Property Name="TilausID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AsiakasID" Type="Int32" Nullable="false" />
           <Property Name="TilausPvm" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LahetysPvm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LähetysPvm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ToimitusOsoite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ToimitusPostinumero" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Asiakkaat" Relationship="Self.FK_Tilaukset_Asiakkaat" FromRole="Tilaukset" ToRole="Asiakkaat" />
+          <NavigationProperty Name="Postitoimipaikat" Relationship="Self.FK_Tilaukset_Postitoimipaikat" FromRole="Tilaukset" ToRole="Postitoimipaikat" />
           <NavigationProperty Name="Tilausrivit" Relationship="Self.FK_Tilausrivit_Tilaukset" FromRole="Tilaukset" ToRole="Tilausrivit" />
         </EntityType>
         <EntityType Name="Tilausrivit">
@@ -290,8 +262,8 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
           <Property Name="TilausriviID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TilausID" Type="Int32" Nullable="false" />
           <Property Name="TuoteID" Type="Int32" Nullable="false" />
-          <Property Name="Hinta" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Maara" Type="Int32" />
+          <Property Name="KappaleHinta" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Maara" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Tilaukset" Relationship="Self.FK_Tilausrivit_Tilaukset" FromRole="Tilausrivit" ToRole="Tilaukset" />
           <NavigationProperty Name="Tuotteet" Relationship="Self.FK_Tilausrivit_Tuotteet" FromRole="Tilausrivit" ToRole="Tuotteet" />
         </EntityType>
@@ -301,7 +273,7 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
           </Key>
           <Property Name="TuoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="KategoriaID" Type="Int32" Nullable="false" />
-          <Property Name="Nimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TuoteNimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Hinta" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Varastomaara" Type="Int32" Nullable="false" />
           <Property Name="Kuvaus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -309,22 +281,6 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
           <Property Name="Kuva" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Kategoriat" Relationship="Self.FK_Tuotteet_Kategoriat" FromRole="Tuotteet" ToRole="Kategoriat" />
           <NavigationProperty Name="Tilausrivit" Relationship="Self.FK_Tilausrivit_Tuotteet" FromRole="Tuotteet" ToRole="Tilausrivit" />
-        </EntityType>
-        <EntityType Name="database_firewall_rules">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="start_ip_address" />
-            <PropertyRef Name="end_ip_address" />
-            <PropertyRef Name="create_date" />
-            <PropertyRef Name="modify_date" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK_Logins_Asiakkaat">
           <End Role="Asiakkaat" Type="Self.Asiakkaat" Multiplicity="1" />
@@ -359,6 +315,18 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
             </Principal>
             <Dependent Role="Tuotteet">
               <PropertyRef Name="KategoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tilaukset_Postitoimipaikat">
+          <End Role="Postitoimipaikat" Type="Self.Postitoimipaikat" Multiplicity="1" />
+          <End Role="Tilaukset" Type="Self.Tilaukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postitoimipaikat">
+              <PropertyRef Name="Postinumero" />
+            </Principal>
+            <Dependent Role="Tilaukset">
+              <PropertyRef Name="ToimitusPostinumero" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -390,11 +358,11 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
           <EntitySet Name="Asiakkaat" EntityType="Self.Asiakkaat" />
           <EntitySet Name="Kategoriat" EntityType="Self.Kategoriat" />
           <EntitySet Name="Logins" EntityType="Self.Logins" />
+          <EntitySet Name="Postitoimipaikat" EntityType="Self.Postitoimipaikat" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tilaukset" EntityType="Self.Tilaukset" />
           <EntitySet Name="Tilausrivit" EntityType="Self.Tilausrivit" />
           <EntitySet Name="Tuotteet" EntityType="Self.Tuotteet" />
-          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
           <AssociationSet Name="FK_Logins_Asiakkaat" Association="Self.FK_Logins_Asiakkaat">
             <End Role="Asiakkaat" EntitySet="Asiakkaat" />
             <End Role="Logins" EntitySet="Logins" />
@@ -407,6 +375,10 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
             <End Role="Kategoriat" EntitySet="Kategoriat" />
             <End Role="Tuotteet" EntitySet="Tuotteet" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tilaukset_Postitoimipaikat" Association="Self.FK_Tilaukset_Postitoimipaikat">
+            <End Role="Postitoimipaikat" EntitySet="Postitoimipaikat" />
+            <End Role="Tilaukset" EntitySet="Tilaukset" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tilausrivit_Tilaukset" Association="Self.FK_Tilausrivit_Tilaukset">
             <End Role="Tilaukset" EntitySet="Tilaukset" />
             <End Role="Tilausrivit" EntitySet="Tilausrivit" />
@@ -415,48 +387,7 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
             <End Role="Tuotteet" EntitySet="Tuotteet" />
             <End Role="Tilausrivit" EntitySet="Tilausrivit" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(VerkkokauppaDBModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(VerkkokauppaDBModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -467,12 +398,9 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
             <EntityTypeMapping TypeName="VerkkokauppaDBModel.Asiakkaat">
               <MappingFragment StoreEntitySet="Asiakkaat">
                 <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
-                <ScalarProperty Name="Nimi" ColumnName="Nimi" />
-                <ScalarProperty Name="Katuosoite" ColumnName="Katuosoite" />
-                <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
-                <ScalarProperty Name="Postitoimipaikka" ColumnName="Postitoimipaikka" />
+                <ScalarProperty Name="Etunimi" ColumnName="Etunimi" />
+                <ScalarProperty Name="Sukunimi" ColumnName="Sukunimi" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Puhelinnumero" ColumnName="Puhelinnumero" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -480,7 +408,7 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
             <EntityTypeMapping TypeName="VerkkokauppaDBModel.Kategoriat">
               <MappingFragment StoreEntitySet="Kategoriat">
                 <ScalarProperty Name="KategoriaID" ColumnName="KategoriaID" />
-                <ScalarProperty Name="Nimi" ColumnName="Nimi" />
+                <ScalarProperty Name="KategoriaNimi" ColumnName="KategoriaNimi" />
                 <ScalarProperty Name="Kuvaus" ColumnName="Kuvaus" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -490,8 +418,16 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
               <MappingFragment StoreEntitySet="Logins">
                 <ScalarProperty Name="LoginID" ColumnName="LoginID" />
                 <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Kayttajatunnus" ColumnName="Kayttajatunnus" />
                 <ScalarProperty Name="Salasana" ColumnName="Salasana" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Postitoimipaikat">
+            <EntityTypeMapping TypeName="VerkkokauppaDBModel.Postitoimipaikat">
+              <MappingFragment StoreEntitySet="Postitoimipaikat">
+                <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
+                <ScalarProperty Name="Postitoimipaikka" ColumnName="Postitoimipaikka" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -512,7 +448,9 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
                 <ScalarProperty Name="TilausID" ColumnName="TilausID" />
                 <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
                 <ScalarProperty Name="TilausPvm" ColumnName="TilausPvm" />
-                <ScalarProperty Name="LahetysPvm" ColumnName="LahetysPvm" />
+                <ScalarProperty Name="LähetysPvm" ColumnName="LähetysPvm" />
+                <ScalarProperty Name="ToimitusOsoite" ColumnName="ToimitusOsoite" />
+                <ScalarProperty Name="ToimitusPostinumero" ColumnName="ToimitusPostinumero" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -522,7 +460,7 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
                 <ScalarProperty Name="TilausriviID" ColumnName="TilausriviID" />
                 <ScalarProperty Name="TilausID" ColumnName="TilausID" />
                 <ScalarProperty Name="TuoteID" ColumnName="TuoteID" />
-                <ScalarProperty Name="Hinta" ColumnName="Hinta" />
+                <ScalarProperty Name="KappaleHinta" ColumnName="KappaleHinta" />
                 <ScalarProperty Name="Maara" ColumnName="Maara" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -532,7 +470,7 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
               <MappingFragment StoreEntitySet="Tuotteet">
                 <ScalarProperty Name="TuoteID" ColumnName="TuoteID" />
                 <ScalarProperty Name="KategoriaID" ColumnName="KategoriaID" />
-                <ScalarProperty Name="Nimi" ColumnName="Nimi" />
+                <ScalarProperty Name="TuoteNimi" ColumnName="TuoteNimi" />
                 <ScalarProperty Name="Hinta" ColumnName="Hinta" />
                 <ScalarProperty Name="Varastomaara" ColumnName="Varastomaara" />
                 <ScalarProperty Name="Kuvaus" ColumnName="Kuvaus" />
@@ -541,42 +479,6 @@ warning 6002: The table/view 'VerkkokauppaDB.sys.database_firewall_rules' does n
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="database_firewall_rules">
-            <EntityTypeMapping TypeName="VerkkokauppaDBModel.database_firewall_rules">
-              <MappingFragment StoreEntitySet="database_firewall_rules">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
-                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="VerkkokauppaDBModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="VerkkokauppaDBModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="VerkkokauppaDBModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="VerkkokauppaDBModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="VerkkokauppaDBModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="VerkkokauppaDBModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="VerkkokauppaDBModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="VerkkokauppaDBModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="VerkkokauppaDBModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -22,12 +22,9 @@ namespace VerkkokauppaWeb.Models
         }
     
         public int AsiakasID { get; set; }
-        public string Nimi { get; set; }
-        public string Katuosoite { get; set; }
-        public string Postinumero { get; set; }
-        public string Postitoimipaikka { get; set; }
+        public string Etunimi { get; set; }
+        public string Sukunimi { get; set; }
         public string Email { get; set; }
-        public string Puhelinnumero { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Logins> Logins { get; set; }

@@ -22,7 +22,7 @@ namespace VerkkokauppaWeb.Models
     
         public int TuoteID { get; set; }
         public int KategoriaID { get; set; }
-        public string Nimi { get; set; }
+        public string TuoteNimi { get; set; }
         public decimal Hinta { get; set; }
         public int Varastomaara { get; set; }
         public string Kuvaus { get; set; }

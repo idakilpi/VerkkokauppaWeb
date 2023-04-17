@@ -17,8 +17,8 @@ namespace VerkkokauppaWeb.Models
         public int TilausriviID { get; set; }
         public int TilausID { get; set; }
         public int TuoteID { get; set; }
-        public decimal Hinta { get; set; }
-        public Nullable<int> Maara { get; set; }
+        public decimal KappaleHinta { get; set; }
+        public int Maara { get; set; }
     
         public virtual Tilaukset Tilaukset { get; set; }
         public virtual Tuotteet Tuotteet { get; set; }

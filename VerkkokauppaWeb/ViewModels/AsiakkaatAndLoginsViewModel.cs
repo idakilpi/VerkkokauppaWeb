@@ -10,14 +10,12 @@ namespace VerkkokauppaWeb.ViewModels
     public class AsiakkaatAndLoginsViewModel
     {
         public int AsiakasID { get; set; }
-        public string Nimi { get; set; }
-        public string Katuosoite { get; set; }
-        public string Postinumero { get; set; }
-        public string Postitoimipaikka { get; set; }
+        public string Etunimi { get; set; }
+        public string Sukunimi { get; set; }
         public string Email { get; set; }
-        public string Puhelinnumero { get; set; }
+        public string Kayttajatunnus { get; set; }
         public string Salasana { get; set; }
-        public string Tunnus { get; set; }
+
 
     }
 }

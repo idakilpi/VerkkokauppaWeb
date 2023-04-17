@@ -12,19 +12,18 @@ namespace VerkkokauppaWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Kategoriat
+    public partial class Postitoimipaikat
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Kategoriat()
+        public Postitoimipaikat()
         {
-            this.Tuotteet = new HashSet<Tuotteet>();
+            this.Tilaukset = new HashSet<Tilaukset>();
         }
     
-        public int KategoriaID { get; set; }
-        public string KategoriaNimi { get; set; }
-        public string Kuvaus { get; set; }
+        public string Postinumero { get; set; }
+        public string Postitoimipaikka { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tuotteet> Tuotteet { get; set; }
+        public virtual ICollection<Tilaukset> Tilaukset { get; set; }
     }
 }

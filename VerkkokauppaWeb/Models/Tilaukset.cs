@@ -23,9 +23,12 @@ namespace VerkkokauppaWeb.Models
         public int TilausID { get; set; }
         public int AsiakasID { get; set; }
         public System.DateTime TilausPvm { get; set; }
-        public System.DateTime LahetysPvm { get; set; }
+        public System.DateTime LähetysPvm { get; set; }
+        public string ToimitusOsoite { get; set; }
+        public string ToimitusPostinumero { get; set; }
     
         public virtual Asiakkaat Asiakkaat { get; set; }
+        public virtual Postitoimipaikat Postitoimipaikat { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tilausrivit> Tilausrivit { get; set; }
     }

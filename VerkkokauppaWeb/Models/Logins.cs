@@ -16,11 +16,11 @@ namespace VerkkokauppaWeb.Models
     {
         public int LoginID { get; set; }
         public int AsiakasID { get; set; }
-        public string Email { get; set; }
+        public string Kayttajatunnus { get; set; }
         public string Salasana { get; set; }
 
-        public string LoginErrorMessage { get; internal set; }
-
+        public string LoginErrorMessage { get; set; }
+    
         public virtual Asiakkaat Asiakkaat { get; set; }
     }
 }

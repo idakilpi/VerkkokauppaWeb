@@ -59,7 +59,7 @@ namespace VerkkokauppaWeb.Controllers
             {
                 objOstoskoriModel.TuoteID = tuoteid;
                 objOstoskoriModel.Kuva = objtuote.Kuva;
-                objOstoskoriModel.Nimi = objtuote.Nimi;
+                objOstoskoriModel.Nimi = objtuote.TuoteNimi;
                 objOstoskoriModel.Määrä = 1;
                 objOstoskoriModel.Summa = objtuote.Hinta;
                 objOstoskoriModel.Kappalehinta = objtuote.Hinta;
@@ -86,7 +86,9 @@ namespace VerkkokauppaWeb.Controllers
             {
                 AsiakasID = 1,
                 TilausPvm = DateTime.Now,
-                LahetysPvm = DateTime.Now.AddDays(7),
+                LähetysPvm = DateTime.Now.AddDays(7),
+                ToimitusOsoite = "Kotiosoite",
+                ToimitusPostinumero = "04500"
 
             };
 
@@ -97,10 +99,10 @@ namespace VerkkokauppaWeb.Controllers
             foreach(var tuot in listOfOstoskoriModels)
             {
                 Tilausrivit tilausrivitObj = new Tilausrivit();
-                tilausrivitObj.Hinta = tuot.Kappalehinta;
+                tilausrivitObj.KappaleHinta = tuot.Kappalehinta;
                 tilausrivitObj.TuoteID = tuot.TuoteID;
                 tilausrivitObj.TilausID = TilausID;
-                tilausrivitObj.Maara = tuot.Määrä;
+                tilausrivitObj.Maara = (int)tuot.Määrä;
                 objVerkkokauppaDBEntities.Tilausrivit.Add(tilausrivitObj);
                 objVerkkokauppaDBEntities.SaveChanges();
             }

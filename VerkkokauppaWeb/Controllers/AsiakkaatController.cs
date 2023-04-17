@@ -32,14 +32,10 @@ namespace VerkkokauppaWeb.Controllers
                             select new AsiakkaatAndLoginsViewModel
                             {
                                 AsiakasID = a.AsiakasID,
-                                Nimi = a.Nimi,
-                                Katuosoite = a.Katuosoite,
-                                Postinumero = a.Postinumero,
-                                Postitoimipaikka = a.Postitoimipaikka,
+                                Etunimi = a.Etunimi,
+                                Sukunimi = a.Sukunimi,
                                 Email = a.Email,
-                                Puhelinnumero = a.Puhelinnumero,
                                 Salasana = l.Salasana,
-                                Tunnus = l.Email
                             };
 
             return View(modelList);
@@ -72,24 +68,21 @@ namespace VerkkokauppaWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AsiakasID,Nimi,Katuosoite,Postinumero,Postitoimipaikka,Email,Puhelinnumero,Salasana,Tunnus")] AsiakkaatAndLoginsViewModel uusiAsiakas)
+        public ActionResult Create([Bind(Include = "AsiakasID,Etunimi,Sukunimi,Email,Salasana,Kayttajatunnus")] AsiakkaatAndLoginsViewModel uusiAsiakas)
         {
             if (ModelState.IsValid)
             {
                 var asiakas = new Asiakkaat
                 {
-                    Nimi = uusiAsiakas.Nimi,
-                    Katuosoite = uusiAsiakas.Katuosoite,
-                    Postinumero = uusiAsiakas.Postinumero,
-                    Postitoimipaikka = uusiAsiakas.Postitoimipaikka,
+                    Etunimi = uusiAsiakas.Etunimi,
+                    Sukunimi = uusiAsiakas.Sukunimi,
                     Email = uusiAsiakas.Email,
-                    Puhelinnumero = uusiAsiakas.Puhelinnumero
                 };
 
                 var login = new Logins
                 {
                     Salasana = uusiAsiakas.Salasana,
-                    Email = uusiAsiakas.Tunnus
+                    Kayttajatunnus = uusiAsiakas.Email
                 };
 
                 db.Asiakkaat.Add(asiakas);

@@ -33,13 +33,13 @@ namespace VerkkokauppaWeb.Controllers
         {
             VerkkokauppaDBEntities db = new VerkkokauppaDBEntities();
             //Haetaan käyttäjän/Loginin tiedot annetuilla tunnustiedoilla tietokannasta LINQ -kyselyllä
-            var LoggedUser = db.Logins.SingleOrDefault(x => x.Email == LoginModel.Email && x.Salasana == LoginModel.Salasana);
+            var LoggedUser = db.Logins.SingleOrDefault(x => x.Kayttajatunnus == LoginModel.Kayttajatunnus && x.Salasana == LoginModel.Salasana);
             if (LoggedUser != null)
             {
                 ViewBag.LoginMessage = "Successfull login";
                 ViewBag.LoggedStatus = "In";
                 ViewBag.LoginError = 0; //Ei virhettä
-                Session["UserName"] = LoggedUser.Email;
+                Session["UserName"] = LoggedUser.Kayttajatunnus;
                 Session["LoginID"] = LoggedUser.LoginID;
                 //Session["AccessLevel"] = LoggedUser.AccessLevel;
                 return RedirectToAction("Index", "Home"); //Tässä määritellään mihin onnistunut kirjautuminen johtaa --> Home/Index
