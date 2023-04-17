@@ -1,10 +1,11 @@
 ﻿@{
     ViewBag.Title = "JETISIDE";
 }
+<br />
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title</h2>
     <h3>@ViewBag.Message</h3>
-
+    <br />
     <div class="row">
         <div class="col-md-6">
             <p>Tervetuloa seikkailijan unelmakauppaan! Olemme ulkoiluvaatteisiin ja vaellustarvikkeisiin erikoistunut pienyritys, joka tarjoaa kaiken, mitä tarvitset liikkuessasi luonnossa. Valikoimamme sisältää laadukkaita ulkoiluvaatteita ja vaellusvarusteita, kuten telttoja, juomapulloja, vaelluskenkiä ja reppuja.</p>
@@ -16,7 +17,7 @@
         </div>
     </div>
 </main>
-
+<br />
 @{
     Html.RenderPartial("_LoginModal");
 }
