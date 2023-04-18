@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
@@ -106,6 +107,20 @@ namespace VerkkokauppaWeb.Controllers
                 objVerkkokauppaDBEntities.Tilausrivit.Add(tilausrivitObj);
                 objVerkkokauppaDBEntities.SaveChanges();
             }
+
+            //MailMessage mail = new MailMessage();
+            //mail.From = new MailAddress("jetiside@gmail.com");
+            //mail.To.Add("jonathan.nissinen@gmail.com");
+            //mail.Subject = "Otsikko";
+            //mail.Body = "Tämä viesti tuli läpi!";
+
+            //SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+            //smtp.Port = 587;
+            //smtp.Credentials = new NetworkCredential("jetiside@gmail.com", "Salasana1");
+            //smtp.EnableSsl = true;
+
+            //smtp.Send(mail);
+
             Session["OstoskoriTuote"] = null;
             Session["OstoskoriCounter"] = null;
             return RedirectToAction("Index");
