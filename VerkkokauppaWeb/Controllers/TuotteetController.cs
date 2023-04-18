@@ -18,7 +18,8 @@ namespace VerkkokauppaWeb.Controllers
         private VerkkokauppaDBEntities db = new VerkkokauppaDBEntities();
 
         private VerkkokauppaDBEntities objVerkkokauppaDBEntities;
-            List<Ostoskori> listOfOstoskoriModels;
+        List<Ostoskori> listOfOstoskoriModels;
+        string asiakasEmail;
         public TuotteetController() 
         {
             objVerkkokauppaDBEntities = new VerkkokauppaDBEntities();
@@ -75,8 +76,26 @@ namespace VerkkokauppaWeb.Controllers
 
         public ActionResult Ostoskori()
         {
+            List<Asiakkaat> asiakkaat = new List<Asiakkaat>();
+            asiakasEmail = Session["Username"] as string;
+            Asiakkaat Asiakas = objVerkkokauppaDBEntities.Asiakkaat.Single(model => model.Email == asiakasEmail);
             listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
+
+                foreach(var item in listOfOstoskoriModels)
+                {
+                    item.Etunimi= Asiakas.Etunimi;
+                    item.Sukunimi = Asiakas.Sukunimi;
+                    item.Email = Asiakas.Email;
+                }
             return View(listOfOstoskoriModels);
+        }
+
+        public ActionResult Tilaustiedot()
+        {
+            asiakasEmail = Session["Username"] as string;
+            Asiakkaat asiakas = objVerkkokauppaDBEntities.Asiakkaat.Single(model => model.Email == asiakasEmail);
+
+            return View(asiakas);
         }
         [HttpPost]
         public ActionResult LisaaTilaus()
@@ -234,5 +253,6 @@ namespace VerkkokauppaWeb.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

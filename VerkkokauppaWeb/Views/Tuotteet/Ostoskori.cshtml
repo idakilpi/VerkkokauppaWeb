@@ -5,50 +5,105 @@
 
 }
 
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myButton').click(function () {
+                if ($('#toimitustiedot').is(':visible')) {
+                    $('#toimitustiedot').hide();
+                    $('#tallennus').hide();
+                    $('#myButton').text('Kassalle');
+                } else {
+                    $('#toimitustiedot').show();
+                    $('#myButton').text('Peruuta');
+                    $('#tallennus').show();
+                }
+            });
+        });
+    </script>
+
+
 <h2>Ostoskori</h2>
 
 @using (Html.BeginForm("LisaaTilaus", "Tuotteet", FormMethod.Post))
-            {
-                <table class="table-hover" style="width:100%">
-                    @foreach (var tuot in Model)
-                    {
-                        summa += tuot.Summa;
-                        var base64 = Convert.ToBase64String(tuot.Kuva);
-                        var imgscr = string.Format("data:image/jpg;base64,{0}", base64);
-                        <tr>
-                            <td>
+{
+    <table class="table-hover" style="width:100%">
+        @foreach (var tuot in Model)
+        {
+            summa += tuot.Summa;
+            var base64 = Convert.ToBase64String(tuot.Kuva);
+            var imgscr = string.Format("data:image/jpg;base64,{0}", base64);
+            <tr>
+                <td>
 
-                                <img src="@imgscr" alt="Kuva tuotteesta" height="75" width="75" class="rounded">
-                            </td>
-                            <td style="text-align: right">
-                                @tuot.TuoteNimi
-                            </td>
-                            <td style="text-align: right">
-                                @tuot.Määrä
-                            </td>
-                            <td style="text-align: right">
-                                @tuot.Kappalehinta.ToString("#,##0.00")
-                            </td>
-                            <td style="text-align: right">
-                                @tuot.Summa.ToString("#,##0.00")
-                            </td>
-                        </tr>
-                    }
-                    <tr style="border-top: 2px solid black">
-                        <td colspan="4" style="text-align: right">
-                            <h3>Yhteensä</h3>
-                        </td>
-                        <td style="text-align: right">
-                            <h3>@summa.ToString("#,##0.00")</h3>
-                        </td>
-                    </tr>
-                    <tr style="text-align: right">
-                        <td>
-                            <input type="submit" value="Save" name="Save" class="btn btn-primary" />
-                        </td>
-                    </tr>
-                </table>
+                    <img src="@imgscr" alt="Kuva tuotteesta" height="75" width="75" class="rounded">
+                </td>
+                <td style="text-align: right">
+                    @tuot.TuoteNimi
+                </td>
+                <td style="text-align: right">
+                    @tuot.Määrä
+                </td>
+                <td style="text-align: right">
+                    @tuot.Kappalehinta.ToString("#,##0.00")
+                </td>
+                <td style="text-align: right">
+                    @tuot.Summa.ToString("#,##0.00")
+                </td>
+            </tr>
+        }
+        <tr style="border-top: 2px solid black">
+            <td colspan="4" style="text-align: right">
+                <h3>Yhteensä</h3>
+            </td>
+            <td style="text-align: right">
+                <h3>@summa.ToString("#,##0.00")</h3>
+            </td>
+        </tr>
+
+        <div id="toimitustiedot" style="display:none">
+            @foreach (var asiakastieto in Model)
+            {
+                <div>
+                    Etunimi:
+                    <div>@asiakastieto.Etunimi</div>
+                </div>
+                <div>
+                    Sukunimi:
+                    <div>@asiakastieto.Sukunimi</div>
+                </div>
+                <div>
+                    Sähköposti:
+                    <div>@asiakastieto.Email</div>
+                </div>
+                <div class="form-group">
+                    Toimitusosoite
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => asiakastieto.ToimitusOsoite, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => asiakastieto.ToimitusOsoite, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    Postinumero
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => asiakastieto.ToimitusPostinumero, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => asiakastieto.ToimitusPostinumero, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             }
+        </div>
+
+
+        
+        <tr style="text-align: right">
+            <td id="tallennus" style="display:none">
+                <input type="submit" value="Tee tilaus" name="Save" class="btn btn-primary" />
+            </td>
+        </tr>
+    </table>
+}
+
+<button id="myButton">Kassalle</button>
 
 
 

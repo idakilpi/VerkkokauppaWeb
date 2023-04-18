@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using VerkkokauppaWeb.Models;
 
 namespace VerkkokauppaWeb.ViewModels
 {
@@ -14,5 +15,13 @@ namespace VerkkokauppaWeb.ViewModels
         public decimal Summa { get; set; }
         public string KuvaPolku { get; set; }
         public byte[] Kuva { get; set; }
+
+        //public Asiakkaat Asiakas { get; set; }
+        public int AsiakasID { get; set; }
+        public string Etunimi { get; set; }
+        public string Sukunimi { get; set; }
+        public string Email { get; set; }
+        public string ToimitusOsoite { get; set; }
+        public string ToimitusPostinumero { get; set; }
     }
 }
