@@ -37,7 +37,7 @@
     <br />
     <br />
     <div>
-        @if (Session["UserName"] as string == "teppo") { 
+        @if (Session["UserName"] as string == "teppo@jetiside.fi") { 
             <button class="btn btn-success">
                 @Html.ActionLink("Luo uusi tuote", "Create")
             </button>
@@ -73,7 +73,7 @@
                         <li class="list-group-item">Kategoria: @tuot.Kategoriat.KategoriaNimi</li>
                         <li class="btn btn-primary" name="LisaaKoriin" value="Lisaa Koriin" tuoteid="@tuot.TuoteID" id="btnLisaaKoriin" onclick="LisaaKoriin(this)">Lisää tuote ostoskoriin<img src="~/Icons/cart.svg"></li>
                     </ul>
-                    @if (Session["UserName"] as string == "teppo")
+                    @if (Session["UserName"] as string == "teppo@jetiside.fi")
                     {
                         <div class="card-footer text-bg-success">
                             @Html.ActionLink("Muokkaa", "Edit", new { id = tuot.TuoteID }) |
