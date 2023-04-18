@@ -12,28 +12,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nimi)
+            @Html.DisplayNameFor(model => model.Etunimi)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Katuosoite)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Postinumero)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Postitoimipaikka)
+            @Html.DisplayNameFor(model => model.Sukunimi)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Puhelinnumero)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Salasana)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Tunnus)
+            @Html.DisplayNameFor(model => model.Kayttajatunnus)
         </th>
         <th></th>
     </tr>
@@ -41,28 +32,19 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Nimi)
+            @Html.DisplayFor(modelItem => item.Etunimi)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Katuosoite)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Postinumero)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Postitoimipaikka)
+            @Html.DisplayFor(modelItem => item.Sukunimi)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Puhelinnumero)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Salasana)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Tunnus)
+            @Html.DisplayFor(modelItem => item.Kayttajatunnus)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.AsiakasID }) |

@@ -60,7 +60,7 @@ namespace VerkkokauppaWeb.Controllers
             {
                 objOstoskoriModel.TuoteID = tuoteid;
                 objOstoskoriModel.Kuva = objtuote.Kuva;
-                objOstoskoriModel.Nimi = objtuote.TuoteNimi;
+                objOstoskoriModel.TuoteNimi = objtuote.TuoteNimi;
                 objOstoskoriModel.Määrä = 1;
                 objOstoskoriModel.Summa = objtuote.Hinta;
                 objOstoskoriModel.Kappalehinta = objtuote.Hinta;
@@ -108,18 +108,7 @@ namespace VerkkokauppaWeb.Controllers
                 objVerkkokauppaDBEntities.SaveChanges();
             }
 
-            //MailMessage mail = new MailMessage();
-            //mail.From = new MailAddress("jetiside@gmail.com");
-            //mail.To.Add("jonathan.nissinen@gmail.com");
-            //mail.Subject = "Otsikko";
-            //mail.Body = "Tämä viesti tuli läpi!";
-
-            //SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-            //smtp.Port = 587;
-            //smtp.Credentials = new NetworkCredential("jetiside@gmail.com", "Salasana1");
-            //smtp.EnableSsl = true;
-
-            //smtp.Send(mail);
+            
 
             Session["OstoskoriTuote"] = null;
             Session["OstoskoriCounter"] = null;
