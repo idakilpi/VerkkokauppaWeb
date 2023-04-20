@@ -20,5 +20,10 @@ namespace VerkkokauppaWeb.ViewModels
         public string LoginErrorMessage { get; internal set; }
 
         public virtual Asiakkaat Asiakkaat { get; set; }
+
+        public int TuoteID { get; set; }
+        public string TuoteNimi { get; set; }
+        public decimal Hinta { get; set; }
+        public string Kuvaus { get; set; }
     }
 }

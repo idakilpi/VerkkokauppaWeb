@@ -1,0 +1,26 @@
+﻿@model VerkkokauppaWeb.ViewModels.TuotteetAndLoginsViewModel
+
+<div class="modal fade" id="productDetailsModal" display="none" tabindex="-1" role="dialog" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: #fff;">
+            <div class="modal-header">
+                <h4 class="modal-title">@Model.TuoteNimi</h4>
+            </div>
+            <div class="modal-body">
+                <dl class="dl-horizontal">
+
+
+                    <dt>@Html.DisplayNameFor(model => model.Hinta)</dt>
+                    <dd>@Html.DisplayFor(model => model.Hinta)</dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.Kuvaus)</dt>
+                    <dd>@Html.DisplayFor(model => model.Kuvaus)</dd>
+
+                </dl>
+            </div>
+            <div class="modal-footer">
+                <a href="@Url.Action("Index", "Tuotteet")" class="btn btn-primary" data-dismiss="modal">Sulje</a>
+            </div>
+        </div>
+    </div>
+</div>

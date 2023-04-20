@@ -5,6 +5,8 @@
     ViewBag.Title = "Index";
 }
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script type="text/javascript">
     function LisaaKoriin(tuot) {
         var tuoteid = $(tuot).attr("tuoteid");
@@ -23,26 +25,41 @@
                     $("#koriTuote").text(data.Counter);
                 window.location.reload();
                 //alert("Tuote lisätty ostoskoriin");
-                
+
             },
             error: function () {
                 alert("Tuotteen lisääminen ostoskoriin epäonnistui");
             }
         })
     }
+
+    function showProductDetails(id) {
+        $.ajax({
+            url: "/Tuotteet/ProductDetails/" + id,
+            success: function (data) {
+                $("#productDetailsModalContent").html(data);
+                $("#productDetailsModal").modal("show");
+            }
+        });
+    }
 </script>
+
+<div id="productDetailsModalContent"></div>
 
 <div class="container-fluid">
     <h2>Tuotevalikoima</h2>
     <br />
     <br />
     <div>
-        @if (Session["UserName"] as string == "teppo@jetiside.fi") { 
+        @if (Session["UserName"] as string == "teppo@jetiside.fi")
+        {
             <button class="btn btn-success">
                 @Html.ActionLink("Luo uusi tuote", "Create")
             </button>
         }
     </div>
+
+
     <br />
     <br />
     <div class="row">
@@ -63,24 +80,27 @@
                         <img src="~/Icons/cart.svg" />
                     }
 
+                    <button type="button" class="btn btn-primary btn-details" onclick="showProductDetails(@tuot.TuoteID)">Katso lisätiedot</button>
 
                     <div class="card-body">
                         <p class="card-text">@tuot.Hinta</p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">@tuot.Kuvaus</li>
-                        <li class="list-group-item">Varastomäärä: @tuot.Varastomaara</li>
                         <li class="list-group-item">Kategoria: @tuot.Kategoriat.KategoriaNimi</li>
                         <li class="btn btn-primary" name="LisaaKoriin" value="Lisaa Koriin" tuoteid="@tuot.TuoteID" id="btnLisaaKoriin" onclick="LisaaKoriin(this)">Lisää tuote ostoskoriin<img src="~/Icons/cart.svg"></li>
                     </ul>
                     @if (Session["UserName"] as string == "teppo@jetiside.fi")
                     {
-                        <div class="card-footer text-bg-success">
-                            @Html.ActionLink("Muokkaa", "Edit", new { id = tuot.TuoteID }) |
-                            @Html.ActionLink("Lisätiedot", "Details", new { id = tuot.TuoteID }) |
-                            @Html.ActionLink("Poista", "Delete", new { id = tuot.TuoteID })
-                        </div>
-                    }
+                            <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Varastomäärä: @tuot.Varastomaara</li>
+                            </ul>
+                            <div class="card-footer text-bg-success">
+
+                                @Html.ActionLink("Muokkaa", "Edit", new { id = tuot.TuoteID }) |
+                                @Html.ActionLink("Lisätiedot", "Details", new { id = tuot.TuoteID }) |
+                                @Html.ActionLink("Poista", "Delete", new { id = tuot.TuoteID })
+                            </div>
+                            }
                     </div>
             </div>
         }
@@ -90,5 +110,3 @@
 @{
     Html.RenderPartial("_LoginModal");
 }
-
-

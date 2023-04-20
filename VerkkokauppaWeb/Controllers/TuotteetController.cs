@@ -7,6 +7,8 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using VerkkokauppaWeb.Models;
 using VerkkokauppaWeb.ViewModels;
@@ -18,8 +20,8 @@ namespace VerkkokauppaWeb.Controllers
         private VerkkokauppaDBEntities db = new VerkkokauppaDBEntities();
 
         private VerkkokauppaDBEntities objVerkkokauppaDBEntities;
-            List<Ostoskori> listOfOstoskoriModels;
-        public TuotteetController() 
+        List<Ostoskori> listOfOstoskoriModels;
+        public TuotteetController()
         {
             objVerkkokauppaDBEntities = new VerkkokauppaDBEntities();
             listOfOstoskoriModels = new List<Ostoskori>();
@@ -41,16 +43,16 @@ namespace VerkkokauppaWeb.Controllers
             //return View(tuotteet.ToList());
         }
         [HttpPost]
-        public JsonResult Index(int tuoteid) 
+        public JsonResult Index(int tuoteid)
         {
-            
+
             Ostoskori objOstoskoriModel = new Ostoskori();
             Tuotteet objtuote = objVerkkokauppaDBEntities.Tuotteet.Single(model => model.TuoteID == tuoteid);
             if (Session["OstoskoriCounter"] != null)
             {
                 listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
             }
-            if(listOfOstoskoriModels.Any(model => model.TuoteID == tuoteid))
+            if (listOfOstoskoriModels.Any(model => model.TuoteID == tuoteid))
             {
                 objOstoskoriModel = listOfOstoskoriModels.Single(model => model.TuoteID == tuoteid);
                 objOstoskoriModel.Määrä = objOstoskoriModel.Määrä + 1;
@@ -60,7 +62,7 @@ namespace VerkkokauppaWeb.Controllers
             {
                 objOstoskoriModel.TuoteID = tuoteid;
                 objOstoskoriModel.Kuva = objtuote.Kuva;
-                objOstoskoriModel.Nimi = objtuote.TuoteNimi;
+                objOstoskoriModel.TuoteNimi = objtuote.TuoteNimi;
                 objOstoskoriModel.Määrä = 1;
                 objOstoskoriModel.Summa = objtuote.Hinta;
                 objOstoskoriModel.Kappalehinta = objtuote.Hinta;
@@ -70,7 +72,7 @@ namespace VerkkokauppaWeb.Controllers
             Session["OstoskoriCounter"] = listOfOstoskoriModels.Count;
             Session["OstoskoriTuote"] = listOfOstoskoriModels;
 
-            return Json(new {Success = true, Counter = listOfOstoskoriModels.Count}, JsonRequestBehavior.AllowGet);
+            return Json(new { Success = true, Counter = listOfOstoskoriModels.Count }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Ostoskori()
@@ -97,7 +99,7 @@ namespace VerkkokauppaWeb.Controllers
             objVerkkokauppaDBEntities.SaveChanges();
             TilausID = tilausObj.TilausID;
 
-            foreach(var tuot in listOfOstoskoriModels)
+            foreach (var tuot in listOfOstoskoriModels)
             {
                 Tilausrivit tilausrivitObj = new Tilausrivit();
                 tilausrivitObj.KappaleHinta = tuot.Kappalehinta;
@@ -124,21 +126,6 @@ namespace VerkkokauppaWeb.Controllers
             Session["OstoskoriTuote"] = null;
             Session["OstoskoriCounter"] = null;
             return RedirectToAction("Index");
-        }
-
-        // GET: Tuotteet/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Tuotteet tuotteet = db.Tuotteet.Find(id);
-            if (tuotteet == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tuotteet);
         }
 
         // GET: Tuotteet/Create
@@ -199,7 +186,7 @@ namespace VerkkokauppaWeb.Controllers
                 int count = Request.Files.Count;
                 var file = Request.Files[0];
                 string fileName = file.FileName;
-                byte[] buffer =new byte[file.InputStream.Length];
+                byte[] buffer = new byte[file.InputStream.Length];
                 file.InputStream.Read(buffer, 0, (int)file.InputStream.Length);
                 db.Entry(tuotteet).State = EntityState.Modified;
                 tuotteet.Kuva = buffer;
@@ -244,6 +231,25 @@ namespace VerkkokauppaWeb.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult ProductDetails(int id)
+        {
+            var product = db.Tuotteet.FirstOrDefault(p => p.TuoteID == id);
+
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            var model = new TuotteetAndLoginsViewModel()
+            {
+                TuoteID = product.TuoteID,
+                TuoteNimi = product.TuoteNimi,
+                Hinta = product.Hinta,
+                Kuvaus = product.Kuvaus
+            };
+
+            return PartialView("_ProductDetails", model);
         }
     }
 }
