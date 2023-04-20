@@ -6,21 +6,21 @@
 }
 
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#myButton').click(function () {
-                if ($('#toimitustiedot').is(':visible')) {
-                    $('#toimitustiedot').hide();
-                    $('#tallennus').hide();
-                    $('#myButton').text('Kassalle');
-                } else {
-                    $('#toimitustiedot').show();
-                    $('#myButton').text('Peruuta');
-                    $('#tallennus').show();
-                }
-            });
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myButton').click(function () {
+            if ($('#toimitustiedot').is(':visible')) {
+                $('#toimitustiedot').hide();
+                $('#tallennus').hide();
+                $('#myButton').text('Kassalle');
+            } else {
+                $('#toimitustiedot').show();
+                $('#myButton').text('Peruuta');
+                $('#tallennus').show();
+            }
         });
-    </script>
+    });
+</script>
 
 
 <h2>Ostoskori</h2>
@@ -65,6 +65,10 @@
             @foreach (var asiakastieto in Model)
             {
                 <div>
+                    Asiakasnumero:
+                    <div>@asiakastieto.AsiakasID</div>
+                </div>
+                <div>
                     Etunimi:
                     <div>@asiakastieto.Etunimi</div>
                 </div>
@@ -94,7 +98,7 @@
         </div>
 
 
-        
+
         <tr style="text-align: right">
             <td id="tallennus" style="display:none">
                 <input type="submit" value="Tee tilaus" name="Save" class="btn btn-primary" />

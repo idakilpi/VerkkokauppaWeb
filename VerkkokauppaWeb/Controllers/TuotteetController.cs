@@ -81,12 +81,20 @@ namespace VerkkokauppaWeb.Controllers
             Asiakkaat Asiakas = objVerkkokauppaDBEntities.Asiakkaat.Single(model => model.Email == asiakasEmail);
             listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
 
-                foreach(var item in listOfOstoskoriModels)
-                {
-                    item.Etunimi= Asiakas.Etunimi;
-                    item.Sukunimi = Asiakas.Sukunimi;
-                    item.Email = Asiakas.Email;
-                }
+            var firstItem = listOfOstoskoriModels.FirstOrDefault();
+
+            firstItem.AsiakasID = Asiakas.AsiakasID;
+            firstItem.Etunimi = Asiakas.Etunimi;
+            firstItem.Sukunimi = Asiakas.Sukunimi;
+            firstItem.Email = Asiakas.Email;
+
+            listOfOstoskoriModels[0] = firstItem;
+            //foreach(var item in listOfOstoskoriModels)
+            //{
+            //    item.Etunimi= Asiakas.Etunimi;
+            //    item.Sukunimi = Asiakas.Sukunimi;
+            //    item.Email = Asiakas.Email;
+            //}
             return View(listOfOstoskoriModels);
         }
 
@@ -98,18 +106,17 @@ namespace VerkkokauppaWeb.Controllers
             return View(asiakas);
         }
         [HttpPost]
-        public ActionResult LisaaTilaus()
+        public ActionResult LisaaTilaus([Bind(Include = "ToimitusOsoite,ToimitusPostinumero")] Ostoskori tiedot)
         {
             int TilausID = 0;
             listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
             Tilaukset tilausObj = new Tilaukset()
             {
-                AsiakasID = 1,
+                AsiakasID = listOfOstoskoriModels[0].AsiakasID,
                 TilausPvm = DateTime.Now,
                 LähetysPvm = DateTime.Now.AddDays(7),
-                ToimitusOsoite = "Kotiosoite",
-                ToimitusPostinumero = "04500"
-
+                ToimitusOsoite = tiedot.ToimitusOsoite,
+                ToimitusPostinumero = tiedot.ToimitusPostinumero
             };
 
             objVerkkokauppaDBEntities.Tilaukset.Add(tilausObj);
