@@ -25,5 +25,8 @@ namespace VerkkokauppaWeb.ViewModels
         public string TuoteNimi { get; set; }
         public decimal Hinta { get; set; }
         public string Kuvaus { get; set; }
+
+        public string KuvaPolku { get; set; }
+        public byte[] Kuva { get; set; }
     }
 }

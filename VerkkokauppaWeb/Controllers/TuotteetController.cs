@@ -152,7 +152,7 @@ namespace VerkkokauppaWeb.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "Nimi", tuotteet.KategoriaID);
+            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "KategoriaNimi", tuotteet.KategoriaID);
             return View(tuotteet);
         }
 
@@ -168,7 +168,7 @@ namespace VerkkokauppaWeb.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "Nimi", tuotteet.KategoriaID);
+            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "KategoriaNimi", tuotteet.KategoriaID);
             return View(tuotteet);
         }
 
@@ -178,7 +178,7 @@ namespace VerkkokauppaWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TuoteID,KategoriaID,Nimi,Hinta,Varastomaara,Kuvaus,KuvaPolku,Kuva,kuvitus")] HttpPostedFileBase kuvitus, Tuotteet tuotteet)
+        public ActionResult Edit([Bind(Include = "TuoteID,KategoriaID,TuoteNimi,Hinta,Varastomaara,Kuvaus,KuvaPolku,Kuva,kuvitus")] HttpPostedFileBase kuvitus, Tuotteet tuotteet)
         {
             if (ModelState.IsValid)
             {
@@ -194,7 +194,7 @@ namespace VerkkokauppaWeb.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "Nimi", tuotteet.KategoriaID);
+            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "KategoriaNimi", tuotteet.KategoriaID);
             return View(tuotteet);
         }
 
@@ -246,7 +246,9 @@ namespace VerkkokauppaWeb.Controllers
                 TuoteID = product.TuoteID,
                 TuoteNimi = product.TuoteNimi,
                 Hinta = product.Hinta,
-                Kuvaus = product.Kuvaus
+                Kuvaus = product.Kuvaus,
+                KuvaPolku =product.KuvaPolku,
+                Kuva  = product.Kuva
             };
 
             return PartialView("_ProductDetails", model);

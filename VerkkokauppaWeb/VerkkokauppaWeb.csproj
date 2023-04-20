@@ -197,6 +197,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Icons\box-arrow-right.svg" />
     <Content Include="Icons\cart.svg" />
+    <Content Include="Icons\info-circle.svg" />
     <Content Include="Models\VerkkokauppaWebModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>VerkkokauppaWebModel.edmx</DependentUpon>
