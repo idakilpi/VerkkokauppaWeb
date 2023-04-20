@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -106,21 +107,24 @@ namespace VerkkokauppaWeb.Controllers
             return View(asiakas);
         }
         [HttpPost]
-        public ActionResult LisaaTilaus([Bind(Include = "ToimitusOsoite,ToimitusPostinumero")] Ostoskori tiedot)
+        public ActionResult LisaaTilaus([Bind(Include = "ToimitusOsoite,ToimitusPostinumero")] Ostoskori firstItem)
         {
+            string tieto = firstItem.ToimitusOsoite;
+            string tieto2 = firstItem.ToimitusPostinumero;
             int TilausID = 0;
             listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
             Tilaukset tilausObj = new Tilaukset()
             {
                 AsiakasID = listOfOstoskoriModels[0].AsiakasID,
                 TilausPvm = DateTime.Now,
-                LähetysPvm = DateTime.Now.AddDays(7),
-                ToimitusOsoite = tiedot.ToimitusOsoite,
-                ToimitusPostinumero = tiedot.ToimitusPostinumero
+                LähetysPvm = DateTime.Now.AddDays(3),
+                ToimitusOsoite = firstItem.ToimitusOsoite,
+                ToimitusPostinumero = firstItem.ToimitusPostinumero
             };
 
             objVerkkokauppaDBEntities.Tilaukset.Add(tilausObj);
             objVerkkokauppaDBEntities.SaveChanges();
+
             TilausID = tilausObj.TilausID;
 
             foreach(var tuot in listOfOstoskoriModels)

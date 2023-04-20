@@ -60,55 +60,51 @@
                 <h3>@summa.ToString("#,##0.00")</h3>
             </td>
         </tr>
-
-        <div id="toimitustiedot" style="display:none">
-            @foreach (var asiakastieto in Model)
+    </table>
+    <div id="toimitustiedot" style="display:none">
+        @if (Model.Any())
+        {
+            var firstItem = Model.FirstOrDefault();
+            if (firstItem != null)
             {
                 <div>
-                    Asiakasnumero:
-                    <div>@asiakastieto.AsiakasID</div>
+                    Asiakas ID:
+                    <div>@firstItem.AsiakasID</div>
                 </div>
                 <div>
                     Etunimi:
-                    <div>@asiakastieto.Etunimi</div>
+                    <div>@firstItem.Etunimi</div>
                 </div>
                 <div>
                     Sukunimi:
-                    <div>@asiakastieto.Sukunimi</div>
+                    <div>@firstItem.Sukunimi</div>
                 </div>
                 <div>
                     Sähköposti:
-                    <div>@asiakastieto.Email</div>
+                    <div>@firstItem.Email</div>
                 </div>
                 <div class="form-group">
                     Toimitusosoite
                     <div class="col-md-10">
-                        @Html.EditorFor(model => asiakastieto.ToimitusOsoite, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => asiakastieto.ToimitusOsoite, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => firstItem.ToimitusOsoite, new { htmlAttributes = new { @class = "form-control", @name = "ToimitusOsoite" } })
+                        @Html.ValidationMessageFor(model => firstItem.ToimitusOsoite, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     Postinumero
                     <div class="col-md-10">
-                        @Html.EditorFor(model => asiakastieto.ToimitusPostinumero, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => asiakastieto.ToimitusPostinumero, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => firstItem.ToimitusPostinumero, new { htmlAttributes = new { @class = "form-control", @name = "ToimitusPostinumero" } })
+                        @Html.ValidationMessageFor(model => firstItem.ToimitusPostinumero, "", new { @class = "text-danger" })
                     </div>
                 </div>
             }
+        }
+
+    </div>
+
+        <div id="tallennus" style="text-align:right; display:none;">
+            <input type="submit" value="Tee tilaus" name="Save" class="btn btn-primary" />
         </div>
-
-
-
-        <tr style="text-align: right">
-            <td id="tallennus" style="display:none">
-                <input type="submit" value="Tee tilaus" name="Save" class="btn btn-primary" />
-            </td>
-        </tr>
-    </table>
 }
 
-<button id="myButton">Kassalle</button>
-
-
-
-
+        <button id="myButton">Kassalle</button>
