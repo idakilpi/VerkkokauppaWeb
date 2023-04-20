@@ -96,9 +96,7 @@
                             <li class="list-group-item">Varastomäärä: @tuot.Varastomaara</li>
                         </ul>
                         <div class="card-footer text-bg-success">
-
                             @Html.ActionLink("Muokkaa", "Edit", new { id = tuot.TuoteID }) |
-                            @Html.ActionLink("Lisätiedot", "Details", new { id = tuot.TuoteID }) |
                             @Html.ActionLink("Poista", "Delete", new { id = tuot.TuoteID })
                         </div>
                     }

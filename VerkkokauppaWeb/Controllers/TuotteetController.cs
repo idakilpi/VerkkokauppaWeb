@@ -131,7 +131,7 @@ namespace VerkkokauppaWeb.Controllers
         // GET: Tuotteet/Create
         public ActionResult Create()
         {
-            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "Nimi");
+            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "KategoriaNimi");
             return View();
         }
 
@@ -140,7 +140,7 @@ namespace VerkkokauppaWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TuoteID,KategoriaID,Nimi,Hinta,Varastomaara,Kuvaus,Kuva")] Tuotteet tuotteet, HttpPostedFileBase ImageFile)
+        public ActionResult Create([Bind(Include = "TuoteID,KategoriaID,TuoteNimi,Hinta,Varastomaara,Kuvaus,Kuva")] Tuotteet tuotteet, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
