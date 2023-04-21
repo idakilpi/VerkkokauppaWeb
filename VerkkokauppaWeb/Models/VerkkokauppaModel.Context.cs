@@ -30,11 +30,11 @@ namespace VerkkokauppaWeb.Models
         public virtual DbSet<Asiakkaat> Asiakkaat { get; set; }
         public virtual DbSet<Kategoriat> Kategoriat { get; set; }
         public virtual DbSet<Logins> Logins { get; set; }
+        public virtual DbSet<Postitoimipaikat> Postitoimipaikat { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tilaukset> Tilaukset { get; set; }
         public virtual DbSet<Tilausrivit> Tilausrivit { get; set; }
         public virtual DbSet<Tuotteet> Tuotteet { get; set; }
-        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -138,5 +138,9 @@ namespace VerkkokauppaWeb.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
+
+        public System.Data.Entity.DbSet<VerkkokauppaWeb.ViewModels.Register> Registers { get; set; }
+
+        public System.Data.Entity.DbSet<VerkkokauppaWeb.ViewModels.AsiakkaatAndLoginsViewModel> AsiakkaatAndLoginsViewModels { get; set; }
     }
 }
