@@ -204,6 +204,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Icons\box-arrow-right.svg" />
     <Content Include="Icons\cart.svg" />
+    <Content Include="Images\jetiside-modalkuva.png" />
+    <Content Include="Images\jetiside-tausta.jpg" />
     <Content Include="Models\VerkkokauppaModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>VerkkokauppaModel.edmx</DependentUpon>
@@ -269,7 +271,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
