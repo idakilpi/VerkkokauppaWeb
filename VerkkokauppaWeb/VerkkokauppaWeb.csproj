@@ -207,7 +207,9 @@
     <Content Include="Images\jetiside-modalkuva.png" />
     <Content Include="Images\jetiside-reppu.jpg" />
     <Content Include="Images\jetiside-tausta.jpg" />
+    <Content Include="Images\jetiside-tausta2.jpg" />
     <Content Include="Images\jetiside-tausta3.jpg" />
+    <Content Include="Images\jetiside-tausta6.jpg" />
     <Content Include="Models\VerkkokauppaModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>VerkkokauppaModel.edmx</DependentUpon>

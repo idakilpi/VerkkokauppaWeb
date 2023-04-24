@@ -24,8 +24,16 @@ textarea {
 }
 .navEdit {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    background: linear-gradient(160deg, #30742f, #4c9b32);
-    color: rgb(255 255 255 / 68%);
+    /*VIHREÄ*/
+    /*background: linear-gradient(160deg, #30742f, #4c9b32);
+    color: rgb(255 255 255 / 68%);*/
+
+    /*SININEN*/
+    color: #212529;
+    font-size: large;
+    font-family: 'Roboto', sans-serif;
+    background-color: #74a2b2;
+    
 }
 
 
@@ -186,7 +194,7 @@ textarea {
 
 .modal-content {
     height: 60vh;
-    background-image: url(/Images/jetiside-tausta3.jpg);
+    background-image: url(/Images/jetiside-tausta.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -205,6 +213,7 @@ textarea {
     border-radius: 0px 5px 5px 0px;
     overflow: hidden;
     padding: 0;
+    filter: brightness(90%);
 }
 .modalImg {
     width: 100%;
@@ -214,7 +223,7 @@ textarea {
 
 @keyframes scl {
     0% {
-        transform: scale(1.5);
+        transform: scale(1.3);
     }
 
     100% {
