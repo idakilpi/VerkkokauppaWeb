@@ -18,5 +18,6 @@ namespace VerkkokauppaWeb.ViewModels
         public string Kayttajatunnus { get; set; }
         public string Salasana { get; set; }
 
+
     }
 }

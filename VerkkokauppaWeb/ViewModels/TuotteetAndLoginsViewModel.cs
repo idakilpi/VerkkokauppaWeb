@@ -15,11 +15,19 @@ namespace VerkkokauppaWeb.ViewModels
         public int LoginID { get; set; }
         public int AsiakasID { get; set; }
         public string Kayttajatunnus { get; set; }
-        public string Email { get; set; }
+	public string Email { get; set; }
         public string Salasana { get; set; }
 
         public string LoginErrorMessage { get; internal set; }
 
         public virtual Asiakkaat Asiakkaat { get; set; }
+
+        public int TuoteID { get; set; }
+        public string TuoteNimi { get; set; }
+        public decimal Hinta { get; set; }
+        public string Kuvaus { get; set; }
+
+        public string KuvaPolku { get; set; }
+        public byte[] Kuva { get; set; }
     }
 }

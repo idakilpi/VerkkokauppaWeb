@@ -4,8 +4,11 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using VerkkokauppaWeb.Models;
 using VerkkokauppaWeb.ViewModels;
@@ -17,8 +20,8 @@ namespace VerkkokauppaWeb.Controllers
         private VerkkokauppaDBEntities db = new VerkkokauppaDBEntities();
 
         private VerkkokauppaDBEntities objVerkkokauppaDBEntities;
-            List<Ostoskori> listOfOstoskoriModels;
-        public TuotteetController() 
+        List<Ostoskori> listOfOstoskoriModels;
+        public TuotteetController()
         {
             objVerkkokauppaDBEntities = new VerkkokauppaDBEntities();
             listOfOstoskoriModels = new List<Ostoskori>();
@@ -40,16 +43,16 @@ namespace VerkkokauppaWeb.Controllers
             //return View(tuotteet.ToList());
         }
         [HttpPost]
-        public JsonResult Index(int tuoteid) 
+        public JsonResult Index(int tuoteid)
         {
-            
+
             Ostoskori objOstoskoriModel = new Ostoskori();
             Tuotteet objtuote = objVerkkokauppaDBEntities.Tuotteet.Single(model => model.TuoteID == tuoteid);
             if (Session["OstoskoriCounter"] != null)
             {
                 listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
             }
-            if(listOfOstoskoriModels.Any(model => model.TuoteID == tuoteid))
+            if (listOfOstoskoriModels.Any(model => model.TuoteID == tuoteid))
             {
                 objOstoskoriModel = listOfOstoskoriModels.Single(model => model.TuoteID == tuoteid);
                 objOstoskoriModel.Määrä = objOstoskoriModel.Määrä + 1;
@@ -59,7 +62,7 @@ namespace VerkkokauppaWeb.Controllers
             {
                 objOstoskoriModel.TuoteID = tuoteid;
                 objOstoskoriModel.Kuva = objtuote.Kuva;
-                objOstoskoriModel.Nimi = objtuote.TuoteNimi;
+		objOstoskoriModel.TuoteNimi = objtuote.TuoteNimi;
                 objOstoskoriModel.Määrä = 1;
                 objOstoskoriModel.Summa = objtuote.Hinta;
                 objOstoskoriModel.Kappalehinta = objtuote.Hinta;
@@ -87,6 +90,8 @@ namespace VerkkokauppaWeb.Controllers
                 AsiakasID = 1,
                 TilausPvm = DateTime.Now,
                 LähetysPvm = DateTime.Now.AddDays(7),
+                ToimitusOsoite = "Kotiosoite",
+                ToimitusPostinumero = "04500"
 
             };
 
@@ -104,30 +109,29 @@ namespace VerkkokauppaWeb.Controllers
                 objVerkkokauppaDBEntities.Tilausrivit.Add(tilausrivitObj);
                 objVerkkokauppaDBEntities.SaveChanges();
             }
+
+            //MailMessage mail = new MailMessage();
+            //mail.From = new MailAddress("jetiside@gmail.com");
+            //mail.To.Add("jonathan.nissinen@gmail.com");
+            //mail.Subject = "Otsikko";
+            //mail.Body = "Tämä viesti tuli läpi!";
+
+            //SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+            //smtp.Port = 587;
+            //smtp.Credentials = new NetworkCredential("jetiside@gmail.com", "Salasana1");
+            //smtp.EnableSsl = true;
+
+            //smtp.Send(mail);
+
             Session["OstoskoriTuote"] = null;
             Session["OstoskoriCounter"] = null;
             return RedirectToAction("Index");
         }
 
-        // GET: Tuotteet/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Tuotteet tuotteet = db.Tuotteet.Find(id);
-            if (tuotteet == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tuotteet);
-        }
-
         // GET: Tuotteet/Create
         public ActionResult Create()
         {
-            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "Nimi");
+            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "KategoriaNimi");
             return View();
         }
 
@@ -136,7 +140,7 @@ namespace VerkkokauppaWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TuoteID,KategoriaID,Nimi,Hinta,Varastomaara,Kuvaus,Kuva")] Tuotteet tuotteet, HttpPostedFileBase ImageFile)
+        public ActionResult Create([Bind(Include = "TuoteID,KategoriaID,TuoteNimi,Hinta,Varastomaara,Kuvaus,Kuva")] Tuotteet tuotteet, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
@@ -148,7 +152,7 @@ namespace VerkkokauppaWeb.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "Nimi", tuotteet.KategoriaID);
+            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "KategoriaNimi", tuotteet.KategoriaID);
             return View(tuotteet);
         }
 
@@ -164,7 +168,7 @@ namespace VerkkokauppaWeb.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "Nimi", tuotteet.KategoriaID);
+            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "KategoriaNimi", tuotteet.KategoriaID);
             return View(tuotteet);
         }
 
@@ -174,7 +178,7 @@ namespace VerkkokauppaWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TuoteID,KategoriaID,Nimi,Hinta,Varastomaara,Kuvaus,KuvaPolku,Kuva,kuvitus")] HttpPostedFileBase kuvitus, Tuotteet tuotteet)
+        public ActionResult Edit([Bind(Include = "TuoteID,KategoriaID,TuoteNimi,Hinta,Varastomaara,Kuvaus,KuvaPolku,Kuva,kuvitus")] HttpPostedFileBase kuvitus, Tuotteet tuotteet)
         {
             if (ModelState.IsValid)
             {
@@ -182,7 +186,7 @@ namespace VerkkokauppaWeb.Controllers
                 int count = Request.Files.Count;
                 var file = Request.Files[0];
                 string fileName = file.FileName;
-                byte[] buffer =new byte[file.InputStream.Length];
+                byte[] buffer = new byte[file.InputStream.Length];
                 file.InputStream.Read(buffer, 0, (int)file.InputStream.Length);
                 db.Entry(tuotteet).State = EntityState.Modified;
                 tuotteet.Kuva = buffer;
@@ -190,7 +194,7 @@ namespace VerkkokauppaWeb.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "Nimi", tuotteet.KategoriaID);
+            ViewBag.KategoriaID = new SelectList(db.Kategoriat, "KategoriaID", "KategoriaNimi", tuotteet.KategoriaID);
             return View(tuotteet);
         }
 
@@ -227,6 +231,27 @@ namespace VerkkokauppaWeb.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult ProductDetails(int id)
+        {
+            var product = db.Tuotteet.FirstOrDefault(p => p.TuoteID == id);
+
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            var model = new TuotteetAndLoginsViewModel()
+            {
+                TuoteID = product.TuoteID,
+                TuoteNimi = product.TuoteNimi,
+                Hinta = product.Hinta,
+                Kuvaus = product.Kuvaus,
+                KuvaPolku =product.KuvaPolku,
+                Kuva  = product.Kuva
+            };
+
+            return PartialView("_ProductDetails", model);
         }
     }
 }

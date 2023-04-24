@@ -154,37 +154,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="VerkkokauppaDBModelStoreContainer">
           <EntitySet Name="Asiakkaat" EntityType="Self.Asiakkaat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kategoriat" EntityType="Self.Kategoriat" Schema="dbo" store:Type="Tables" />
@@ -336,6 +305,14 @@
           <Property Name="Postitoimipaikka" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Tilaukset" Relationship="VerkkokauppaDBModel.FK_Tilaukset_Postitoimipaikat" FromRole="Postitoimipaikat" ToRole="Tilaukset" />
         </EntityType>
+        <EntityType Name="Postitoimipaikat">
+          <Key>
+            <PropertyRef Name="Postinumero" />
+          </Key>
+          <Property Name="Postinumero" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Postitoimipaikka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tilaukset" Relationship="Self.FK_Tilaukset_Postitoimipaikat" FromRole="Postitoimipaikat" ToRole="Tilaukset" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -424,8 +401,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tilaukset_Postitoimipaikat">
-          <End Type="VerkkokauppaDBModel.Postitoimipaikat" Role="Postitoimipaikat" Multiplicity="1" />
-          <End Type="VerkkokauppaDBModel.Tilaukset" Role="Tilaukset" Multiplicity="*" />
+          <End Role="Postitoimipaikat" Type="Self.Postitoimipaikat" Multiplicity="1" />
+          <End Role="Tilaukset" Type="Self.Tilaukset" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Postitoimipaikat">
               <PropertyRef Name="Postinumero" />
@@ -459,6 +436,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="VerkkokauppaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Asiakkaat" EntityType="Self.Asiakkaat" />
+          <EntitySet Name="Kategoriat" EntityType="Self.Kategoriat" />
+          <EntitySet Name="Logins" EntityType="Self.Logins" />
+          <EntitySet Name="Postitoimipaikat" EntityType="Self.Postitoimipaikat" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tilaukset" EntityType="Self.Tilaukset" />
+          <EntitySet Name="Tilausrivit" EntityType="Self.Tilausrivit" />
+          <EntitySet Name="Tuotteet" EntityType="Self.Tuotteet" />
+          <AssociationSet Name="FK_Logins_Asiakkaat" Association="Self.FK_Logins_Asiakkaat">
+            <End Role="Asiakkaat" EntitySet="Asiakkaat" />
+            <End Role="Logins" EntitySet="Logins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tilaukset_Asiakkaat" Association="Self.FK_Tilaukset_Asiakkaat">
+            <End Role="Asiakkaat" EntitySet="Asiakkaat" />
+            <End Role="Tilaukset" EntitySet="Tilaukset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tuotteet_Kategoriat" Association="Self.FK_Tuotteet_Kategoriat">
+            <End Role="Kategoriat" EntitySet="Kategoriat" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tilaukset_Postitoimipaikat" Association="Self.FK_Tilaukset_Postitoimipaikat">
+            <End Role="Postitoimipaikat" EntitySet="Postitoimipaikat" />
+            <End Role="Tilaukset" EntitySet="Tilaukset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tilausrivit_Tilaukset" Association="Self.FK_Tilausrivit_Tilaukset">
+            <End Role="Tilaukset" EntitySet="Tilaukset" />
+            <End Role="Tilausrivit" EntitySet="Tilausrivit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tilausrivit_Tuotteet" Association="Self.FK_Tilausrivit_Tuotteet">
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+            <End Role="Tilausrivit" EntitySet="Tilausrivit" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -492,27 +503,27 @@
           <EntitySetMapping Name="Asiakkaat">
             <EntityTypeMapping TypeName="VerkkokauppaDBModel.Asiakkaat">
               <MappingFragment StoreEntitySet="Asiakkaat">
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Sukunimi" ColumnName="Sukunimi" />
-                <ScalarProperty Name="Etunimi" ColumnName="Etunimi" />
                 <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
+                <ScalarProperty Name="Etunimi" ColumnName="Etunimi" />
+                <ScalarProperty Name="Sukunimi" ColumnName="Sukunimi" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Kategoriat">
             <EntityTypeMapping TypeName="VerkkokauppaDBModel.Kategoriat">
               <MappingFragment StoreEntitySet="Kategoriat">
-                <ScalarProperty Name="Kuvaus" ColumnName="Kuvaus" />
-                <ScalarProperty Name="KategoriaNimi" ColumnName="KategoriaNimi" />
                 <ScalarProperty Name="KategoriaID" ColumnName="KategoriaID" />
+                <ScalarProperty Name="KategoriaNimi" ColumnName="KategoriaNimi" />
+                <ScalarProperty Name="Kuvaus" ColumnName="Kuvaus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Logins">
             <EntityTypeMapping TypeName="VerkkokauppaDBModel.Logins">
               <MappingFragment StoreEntitySet="Logins">
-                <ScalarProperty Name="Salasana" ColumnName="Salasana" />
                 <ScalarProperty Name="Kayttajatunnus" ColumnName="Kayttajatunnus" />
+                <ScalarProperty Name="Salasana" ColumnName="Salasana" />
                 <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
                 <ScalarProperty Name="LoginID" ColumnName="LoginID" />
               </MappingFragment>
@@ -523,6 +534,14 @@
               <MappingFragment StoreEntitySet="Postitoimipaikat">
                 <ScalarProperty Name="Postitoimipaikka" ColumnName="Postitoimipaikka" />
                 <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Postitoimipaikat">
+            <EntityTypeMapping TypeName="VerkkokauppaDBModel.Postitoimipaikat">
+              <MappingFragment StoreEntitySet="Postitoimipaikat">
+                <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
+                <ScalarProperty Name="Postitoimipaikka" ColumnName="Postitoimipaikka" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -540,12 +559,12 @@
           <EntitySetMapping Name="Tilaukset">
             <EntityTypeMapping TypeName="VerkkokauppaDBModel.Tilaukset">
               <MappingFragment StoreEntitySet="Tilaukset">
-                <ScalarProperty Name="ToimitusPostinumero" ColumnName="ToimitusPostinumero" />
-                <ScalarProperty Name="ToimitusOsoite" ColumnName="ToimitusOsoite" />
-                <ScalarProperty Name="LähetysPvm" ColumnName="LähetysPvm" />
-                <ScalarProperty Name="TilausPvm" ColumnName="TilausPvm" />
-                <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
                 <ScalarProperty Name="TilausID" ColumnName="TilausID" />
+                <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
+                <ScalarProperty Name="TilausPvm" ColumnName="TilausPvm" />
+                <ScalarProperty Name="LähetysPvm" ColumnName="LähetysPvm" />
+                <ScalarProperty Name="ToimitusOsoite" ColumnName="ToimitusOsoite" />
+                <ScalarProperty Name="ToimitusPostinumero" ColumnName="ToimitusPostinumero" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

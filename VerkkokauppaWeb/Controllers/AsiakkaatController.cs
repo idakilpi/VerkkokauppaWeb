@@ -74,7 +74,7 @@ namespace VerkkokauppaWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AsiakasID,Etunimi,Sukunimi,Email,Salasana")] Register uusiAsiakas)
+	public ActionResult Create([Bind(Include = "AsiakasID,Etunimi,Sukunimi,Email,Salasana")] Register uusiAsiakas)
         {
             if (ModelState.IsValid)
             {
