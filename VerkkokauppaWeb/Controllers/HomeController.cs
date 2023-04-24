@@ -43,6 +43,8 @@ namespace VerkkokauppaWeb.Controllers
             return View();
         }
 
+        
+
         [HttpPost]
         public ActionResult Authorize(Logins LoginModel)
         {
@@ -55,7 +57,9 @@ namespace VerkkokauppaWeb.Controllers
                 ViewBag.LoggedStatus = "In";
                 ViewBag.LoginError = 0; //Ei virhettä
                 Session["UserName"] = LoggedUser.Kayttajatunnus;
+                Session["UserFirstName"] = LoggedUser.Asiakkaat.Etunimi;
                 Session["LoginID"] = LoggedUser.LoginID;
+                Session["UserID"] = LoggedUser.AsiakasID;
                 //Session["AccessLevel"] = LoggedUser.AccessLevel;
                 return RedirectToAction("Index", "Home"); //Tässä määritellään mihin onnistunut kirjautuminen johtaa --> Home/Index
             }

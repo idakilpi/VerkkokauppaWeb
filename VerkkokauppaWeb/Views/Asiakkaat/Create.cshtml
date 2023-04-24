@@ -1,48 +1,30 @@
-﻿@model VerkkokauppaWeb.ViewModels.AsiakkaatAndLoginsViewModel
+﻿@model VerkkokauppaWeb.ViewModels.Register
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Rekisteröidy";
 }
-
-<h2>Create</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>Asiakkaat</h4>
+    <h4>Rekisteröidy</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(model => model.Nimi, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Etunimi, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Nimi, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Nimi, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Etunimi, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Etunimi, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Katuosoite, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Sukunimi, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Katuosoite, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Katuosoite, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Postinumero, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Postinumero, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Postinumero, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Postitoimipaikka, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Postitoimipaikka, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Postitoimipaikka, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Sukunimi, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Sukunimi, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -55,37 +37,22 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Puhelinnumero, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Puhelinnumero, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Puhelinnumero, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
         @Html.LabelFor(model => model.Salasana, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Salasana, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Salasana, "", new { @class = "text-danger" })
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Tunnus, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Tunnus, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Tunnus, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
+    <br />
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Tallenna" class="btnn saveBtn" />
         </div>
     </div>
 </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Home", "Index")
 </div>
+

@@ -62,7 +62,7 @@ namespace VerkkokauppaWeb.Controllers
             {
                 objOstoskoriModel.TuoteID = tuoteid;
                 objOstoskoriModel.Kuva = objtuote.Kuva;
-                objOstoskoriModel.TuoteNimi = objtuote.TuoteNimi;
+		objOstoskoriModel.TuoteNimi = objtuote.TuoteNimi;
                 objOstoskoriModel.Määrä = 1;
                 objOstoskoriModel.Summa = objtuote.Hinta;
                 objOstoskoriModel.Kappalehinta = objtuote.Hinta;
@@ -72,7 +72,7 @@ namespace VerkkokauppaWeb.Controllers
             Session["OstoskoriCounter"] = listOfOstoskoriModels.Count;
             Session["OstoskoriTuote"] = listOfOstoskoriModels;
 
-            return Json(new { Success = true, Counter = listOfOstoskoriModels.Count }, JsonRequestBehavior.AllowGet);
+            return Json(new {Success = true, Counter = listOfOstoskoriModels.Count}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Ostoskori()
@@ -99,7 +99,7 @@ namespace VerkkokauppaWeb.Controllers
             objVerkkokauppaDBEntities.SaveChanges();
             TilausID = tilausObj.TilausID;
 
-            foreach (var tuot in listOfOstoskoriModels)
+            foreach(var tuot in listOfOstoskoriModels)
             {
                 Tilausrivit tilausrivitObj = new Tilausrivit();
                 tilausrivitObj.KappaleHinta = tuot.Kappalehinta;

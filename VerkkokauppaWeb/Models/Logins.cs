@@ -19,8 +19,7 @@ namespace VerkkokauppaWeb.Models
         public string Kayttajatunnus { get; set; }
         public string Salasana { get; set; }
 
-        public string LoginErrorMessage { get; set; }
-    
+        public string LoginErrorMessage { get; internal set; }
         public virtual Asiakkaat Asiakkaat { get; set; }
     }
 }
