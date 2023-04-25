@@ -188,11 +188,11 @@ textarea {
 /*Modaaliasetuksia*/
 
 
-.modal-body {
+.modal-body .loG {
     padding: 0;
 }
 
-.modal-content {
+.modal-content .logModal {
     height: 60vh;
     background-image: url(/Images/jetiside-tausta.jpg);
     background-repeat: no-repeat;
