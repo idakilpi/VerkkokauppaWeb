@@ -264,7 +264,6 @@
     <Content Include="Views\Tuotteet\_ProductDetails.cshtml" />
     <Content Include="Views\Tilaukset\Create.cshtml" />
     <Content Include="Views\Tilaukset\Delete.cshtml" />
-    <Content Include="Views\Tilaukset\Details.cshtml" />
     <Content Include="Views\Tilaukset\Edit.cshtml" />
     <Content Include="Views\Tilaukset\Index.cshtml" />
     <Content Include="Views\Tilaukset\_OrderLines.cshtml" />

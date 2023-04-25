@@ -21,21 +21,6 @@ namespace VerkkokauppaWeb.Controllers
             return View(tilaukset.ToList());
         }
 
-        // GET: Tilaukset/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Tilaukset tilaukset = db.Tilaukset.Find(id);
-            if (tilaukset == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tilaukset);
-        }
-
         // GET: Tilaukset/Create
         public ActionResult Create()
         {
