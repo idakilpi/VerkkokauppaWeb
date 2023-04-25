@@ -4,10 +4,13 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using VerkkokauppaWeb.Models;
 using VerkkokauppaWeb.ViewModels;
+
 
 namespace VerkkokauppaWeb.Controllers
 {
@@ -26,7 +29,7 @@ namespace VerkkokauppaWeb.Controllers
             //    Logins = login
             //};
             //return View(viewModel);
-
+            
             var modelList = from a in db.Asiakkaat
                             join l in db.Logins on a.AsiakasID equals l.AsiakasID
                             select new AsiakkaatAndLoginsViewModel
@@ -50,6 +53,7 @@ namespace VerkkokauppaWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Asiakkaat asiakkaat = db.Asiakkaat.Find(id);
+            
             if (asiakkaat == null)
             {
                 return HttpNotFound();
@@ -57,6 +61,8 @@ namespace VerkkokauppaWeb.Controllers
             return View(asiakkaat);
         }
 
+
+        
         // GET: Asiakkaat/Create
         public ActionResult Create()
         {
@@ -68,7 +74,7 @@ namespace VerkkokauppaWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AsiakasID,Etunimi,Sukunimi,Email,Salasana,Kayttajatunnus")] AsiakkaatAndLoginsViewModel uusiAsiakas)
+	public ActionResult Create([Bind(Include = "AsiakasID,Etunimi,Sukunimi,Email,Salasana")] Register uusiAsiakas)
         {
             if (ModelState.IsValid)
             {
@@ -88,68 +94,13 @@ namespace VerkkokauppaWeb.Controllers
                 db.Asiakkaat.Add(asiakas);
                 db.Logins.Add(login);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.Message = string.Format("User {0} Successfully Created", uusiAsiakas.Etunimi);
+                return RedirectToAction("Index","Asiakkaat");
             }
 
             return View(uusiAsiakas);
         }
 
-        // GET: Asiakkaat/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Asiakkaat asiakkaat = db.Asiakkaat.Find(id);
-            if (asiakkaat == null)
-            {
-                return HttpNotFound();
-            }
-            return View(asiakkaat);
-        }
-
-        // POST: Asiakkaat/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AsiakasID,Nimi,Katuosoite,Postinumero,Postitoimipaikka,Email,Puhelinnumero")] Asiakkaat asiakkaat)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(asiakkaat).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(asiakkaat);
-        }
-
-        // GET: Asiakkaat/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Asiakkaat asiakkaat = db.Asiakkaat.Find(id);
-            if (asiakkaat == null)
-            {
-                return HttpNotFound();
-            }
-            return View(asiakkaat);
-        }
-
-        // POST: Asiakkaat/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Asiakkaat asiakkaat = db.Asiakkaat.Find(id);
-            db.Asiakkaat.Remove(asiakkaat);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {
@@ -158,6 +109,93 @@ namespace VerkkokauppaWeb.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult AdminPage()
+        {
+
+            var modelList = from a in db.Asiakkaat
+                            join l in db.Logins on a.AsiakasID equals l.AsiakasID
+                            select new AsiakkaatAndLoginsViewModel
+                            {
+                                AsiakasID = a.AsiakasID,
+                                Etunimi = a.Etunimi,
+                                Sukunimi = a.Sukunimi,
+                                Email = a.Email,
+                                Salasana = l.Salasana,
+                            };
+
+            return View(modelList);
+        }
+
+        public ActionResult Editprofile(int id, string view)
+        {
+            var asiakas = (from a in db.Asiakkaat
+                           join l in db.Logins on a.AsiakasID equals l.AsiakasID
+                           where l.AsiakasID == id
+                           select new AsiakkaatAndLoginsViewModel
+                           {
+                               AsiakasID = a.AsiakasID,
+                               Etunimi = a.Etunimi,
+                               Sukunimi = a.Sukunimi,
+                               Email = a.Email,
+                               Salasana = l.Salasana,
+                           }).SingleOrDefault();
+                return View(asiakas);
+            //return View(asiakas);
+        }
+        [HttpPost]
+        public ActionResult EditProfile(int? id, string view,[Bind(Include = "AsiakasID,Etunimi,Sukunimi,Email,Salasana,Kayttajatunnus")] AsiakkaatAndLoginsViewModel uusiAsiakas) 
+        { 
+            if (id == null) { 
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest); 
+            } 
+            if (ModelState.IsValid) { 
+                var asiakas = db.Asiakkaat.Find(id);
+                var login = db.Logins.FirstOrDefault(l => l.AsiakasID == id);
+                if (asiakas == null || login == null) { 
+                    return HttpNotFound(); 
+                } 
+                asiakas.Etunimi = uusiAsiakas.Etunimi; 
+                asiakas.Sukunimi = uusiAsiakas.Sukunimi; 
+                asiakas.Email = uusiAsiakas.Email; 
+                login.Salasana = uusiAsiakas.Salasana; 
+                login.Kayttajatunnus = uusiAsiakas.Email; 
+                db.Entry(asiakas).State = EntityState.Modified; 
+                db.Entry(login).State = EntityState.Modified; 
+                db.SaveChanges();
+                return RedirectToAction("Index", "Tuotteet");
+            }
+                return View(uusiAsiakas); 
+        }
+        public ActionResult Delete(int? id)
+        {
+            var asiakas = (from a in db.Asiakkaat
+                           join l in db.Logins on a.AsiakasID equals l.AsiakasID
+                           where l.AsiakasID == id
+                           select new AsiakkaatAndLoginsViewModel
+                           {
+                               AsiakasID = a.AsiakasID,
+                               Etunimi = a.Etunimi,
+                               Sukunimi = a.Sukunimi,
+                               Email = a.Email,
+                               Salasana = l.Salasana,
+                           }).SingleOrDefault();
+            return View(asiakas);
+        }
+
+        // POST: Asiakkaat/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            var asiakas = db.Asiakkaat.Find(id);
+            var login = db.Logins.FirstOrDefault(l => l.AsiakasID == id);
+
+            db.Asiakkaat.Remove(asiakas);
+            db.Logins.Remove(login);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

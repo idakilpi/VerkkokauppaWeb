@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using VerkkokauppaWeb.Models;
@@ -9,6 +10,7 @@ namespace VerkkokauppaWeb.ViewModels
 {
     public class AsiakkaatAndLoginsViewModel
     {
+        [Key]
         public int AsiakasID { get; set; }
         public string Etunimi { get; set; }
         public string Sukunimi { get; set; }
