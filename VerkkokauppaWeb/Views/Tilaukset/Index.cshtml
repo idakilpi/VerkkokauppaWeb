@@ -1,0 +1,83 @@
+﻿@model IEnumerable<VerkkokauppaWeb.Models.Tilaukset>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<style>
+    #accordion .content {
+        display: none;
+    }
+
+    #accordion .active .content {
+        display: block;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $('.header').click(function () {
+            $(this).toggleClass('active');
+            $(this).next('.content').slideToggle(500);
+        });
+    });
+</script>
+
+<header>
+    <div class="p-5 text-center bg-light">
+        <h1 class="mb-3">Tilaukset</h1>
+        <p>
+            @Html.ActionLink("Uusi tilaus", "Create", new { }, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</header>
+
+<div id="accordion">
+    @foreach (var item in Model)
+    {
+        <div class="section">
+            <div class="header">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Tilaus ID: @Html.DisplayFor(modelItem => item.TilausID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LähetysPvm)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TilausPvm)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ToimitusOsoite)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ToimitusPostinumero)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>@Html.DisplayFor(modelItem => item.LähetysPvm)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TilausPvm)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ToimitusOsoite)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ToimitusPostinumero)</td>
+                            <td>
+                                @Html.ActionLink("Muokkaa", "Edit", new { id = item.TilausID }, new { @class = "btn btn-primary" }) 
+                                @Html.ActionLink("Poista", "Delete", new { id = item.TilausID }, new { @class = "btn btn-danger" })
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="content">
+                @{Html.RenderPartial("_OrderLines", item.Tilausrivit);}
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,64 @@
+﻿@model VerkkokauppaWeb.Models.Tilaukset
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Tilaukset</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TilausPvm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TilausPvm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LähetysPvm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LähetysPvm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToimitusOsoite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToimitusOsoite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Asiakkaat.Etunimi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Asiakkaat.Etunimi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Postitoimipaikat.Postitoimipaikka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Postitoimipaikat.Postitoimipaikka)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

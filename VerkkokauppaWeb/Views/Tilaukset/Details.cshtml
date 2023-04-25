@@ -1,0 +1,58 @@
+﻿@model VerkkokauppaWeb.Models.Tilaukset
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tilaukset</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TilausPvm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TilausPvm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LähetysPvm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LähetysPvm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToimitusOsoite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToimitusOsoite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Asiakkaat.Etunimi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Asiakkaat.Etunimi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Postitoimipaikat.Postitoimipaikka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Postitoimipaikat.Postitoimipaikka)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TilausID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
