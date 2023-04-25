@@ -99,13 +99,6 @@ namespace VerkkokauppaWeb.Controllers
             return View(listOfOstoskoriModels);
         }
 
-        public ActionResult Tilaustiedot()
-        {
-            asiakasEmail = Session["Username"] as string;
-            Asiakkaat asiakas = objVerkkokauppaDBEntities.Asiakkaat.Single(model => model.Email == asiakasEmail);
-
-            return View(asiakas);
-        }
         [HttpPost]
         public ActionResult LisaaTilaus([Bind(Include = "ToimitusOsoite,ToimitusPostinumero")] Ostoskori firstItem)
         {
