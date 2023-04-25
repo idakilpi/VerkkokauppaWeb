@@ -244,6 +244,26 @@ namespace VerkkokauppaWeb.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult ProductDetails(int id)
+        {
+            var product = db.Tuotteet.FirstOrDefault(p => p.TuoteID == id);
 
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            var model = new TuotteetAndLoginsViewModel()
+            {
+                TuoteID = product.TuoteID,
+                TuoteNimi = product.TuoteNimi,
+                Hinta = product.Hinta,
+                Kuvaus = product.Kuvaus,
+                KuvaPolku = product.KuvaPolku,
+                Kuva = product.Kuva
+            };
+
+            return PartialView("_ProductDetails", model);
+        }
     }
 }
