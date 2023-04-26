@@ -25,12 +25,12 @@
                 </button>
                 <div class="collapse navbar-collapse d-md-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1" style="display: flex;">
-                        <li class="btn"><a class="nav-link zoom" href="~/home/Index">Etusivu</a></li>
+                        <li class="btn"><a class="nav-link underline underline-home" href="~/home/Index">Etusivu</a></li>
                         <li class="btn"><a class="nav-link zoom" href="~/home/About">Meistä</a></li>
                         <li class="btn"><a class="nav-link zoom" href="~/tuotteet/index">Tuotteet</a></li>
                         @if (Session["UserName"] == null)
                         {
-                            <li class="btn"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#LoginRuutu">Kirjaudu</a></li>
+                            <li class="btn"><a class="nav-link zoom" data-bs-toggle="modal" data-bs-target="#LoginRuutu">Kirjaudu</a></li>
                         }
 
                         @if (Session["UserName"] as string == "teppo@jetiside.fi")

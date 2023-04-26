@@ -27,15 +27,21 @@ textarea {
     /*VIHREÄ*/
     /*background: linear-gradient(160deg, #30742f, #4c9b32);
     color: rgb(255 255 255 / 68%);*/
-
     /*SININEN*/
-    color: #212529;
+    /*    color: #212529;
+*/ /*font-size: large;*/
+    background: linear-gradient(9deg, #74a2b2, #c8d8dd);
+    padding: 5px;
+    font-family: Calibri;
+}
+.navbar-nav a {
     font-size: large;
-    font-family: 'Roboto', sans-serif;
-    background-color: #74a2b2;
+    font-family: Calibri;
     
 }
-
+.nav-link {
+    color: #003e4d !important;
+}
 
 /*Haku oikeaan reunaan*/
 .toSide {
@@ -48,7 +54,8 @@ textarea {
 }
 
 .zoom:hover {
-    transform: scale(1.1);
+    color: #002f3b;
+    transform: scale(1.2);
 }
 
 .dropdown {
@@ -238,7 +245,7 @@ textarea {
 .underline::before {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
     right: 0;
     width: 0;
     height: 2px;
@@ -246,12 +253,16 @@ textarea {
     transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+.underline-home::before {
+    bottom: 5px;
+}
+
 @media (hover: hover) and (pointer: fine) {
 .underline:hover::before {
     left: 0;
     right: auto;
     width: 100%;
-}
+    }
 }
 
 
