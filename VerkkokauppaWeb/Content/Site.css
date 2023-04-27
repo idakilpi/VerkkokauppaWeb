@@ -240,41 +240,41 @@ background-size: cover;
 /*Modaaliasetuksia*/
 
 
+/*Modaaliasetuksia*/
+
 .loG {
     padding: 0;
 }
 
 .logModal {
-    width: 100% !important;
-    max-width: 900px !important;
-    height: 60vh;
-    max-height: 600px;
-    min-height: 450px;
     background-image: url(/Images/jetiside-tausta.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .loginSide {
-    height: 60vh;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: center;
     padding: 30px;
 }
 
 .modalPic {
     display: flex;
-    height: 60vh;
     border-radius: 0px 5px 5px 0px;
     overflow: hidden;
     padding: 0;
     filter: brightness(90%);
 }
+
 .modalImg {
     width: 100%;
     height: 100%;
     animation: scl 2s;
+}
+
+.LogModal {
+    top: 100px;
 }
 
 @keyframes scl {
@@ -347,16 +347,18 @@ footer li {
     .prodImg {
         height: 70vw;
     }
+
     .logModal {
         display: block;
     }
+
     .modalPic {
         display: none;
     }
-    .loginSide {
-        background: url(~/Images/jetiside-modalkuva.png);
-    }
 
+    .LogModal {
+        top: auto;
+    }
 }
 
 
