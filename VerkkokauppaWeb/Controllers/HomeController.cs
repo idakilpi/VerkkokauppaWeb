@@ -19,20 +19,6 @@ namespace VerkkokauppaWeb.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Rakkaudesta luontoon ja seikkailuun.";
-
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("jetiside@outlook.com");
-            mail.To.Add("jonathan.nissinen@hotmail.com");
-            mail.Subject = "Testi Otsikko 2";
-            mail.Body = "Tämä viesti tuli läpi myös!";
-
-            SmtpClient smtp = new SmtpClient("smtp.office365.com");
-            smtp.Port = 587;
-            smtp.Credentials = new NetworkCredential("jetiside@outlook.com", "Salasana1");
-            smtp.EnableSsl = true;
-
-            smtp.Send(mail);
-
             return View();
         }
 

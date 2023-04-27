@@ -43,6 +43,51 @@ textarea {
     color: #003e4d !important;
 }
 
+/*PARALLAX KOODIT*/
+
+/*body {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+main {
+    height: 100vh;
+    width: 94vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 2px;
+}
+
+section {
+    transform-style: preserve-3d;
+    position: relative;
+    height: 75vh;
+    display: flex;
+}
+
+.no-parallax {
+    background-color: #fff;
+    z-index: 999;
+}
+.parallax {
+    height: 50vh;
+}
+.parallax::after {
+    content: " ";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateZ(-1px) scale(1.5);
+    background-size: 100%;
+    z-index: -1;
+}
+
+.bg::after {
+background: url(/Images/backpacker-g78fdbc4ab_1920.jpg);
+background-size: cover;
+}*/
+
 /*Haku oikeaan reunaan*/
 .toSide {
     justify-content: flex-end;
@@ -200,7 +245,11 @@ textarea {
 }
 
 .logModal {
+    width: 100% !important;
+    max-width: 900px !important;
     height: 60vh;
+    max-height: 600px;
+    min-height: 450px;
     background-image: url(/Images/jetiside-tausta.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -297,6 +346,15 @@ footer li {
 @media screen and (max-width: 990px) {
     .prodImg {
         height: 70vw;
+    }
+    .logModal {
+        display: block;
+    }
+    .modalPic {
+        display: none;
+    }
+    .loginSide {
+        background: url(~/Images/jetiside-modalkuva.png);
     }
 
 }
