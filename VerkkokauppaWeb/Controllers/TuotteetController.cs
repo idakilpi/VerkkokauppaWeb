@@ -104,8 +104,6 @@ namespace VerkkokauppaWeb.Controllers
         [HttpPost]
         public ActionResult LisaaTilaus([Bind(Include = "ToimitusOsoite,ToimitusPostinumero")] Ostoskori firstItem)
         {
-            string tieto = firstItem.ToimitusOsoite;
-            string tieto2 = firstItem.ToimitusPostinumero;
             int TilausID = 0;
             listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
             Tilaukset tilausObj = new Tilaukset()
@@ -133,7 +131,32 @@ namespace VerkkokauppaWeb.Controllers
                 objVerkkokauppaDBEntities.SaveChanges();
             }
 
+            asiakasEmail = Session["Username"] as string;
+            decimal? totalPrice = listOfOstoskoriModels.Sum(item => item.Summa);
+
+            string cartString = "";
             
+            foreach (var item in listOfOstoskoriModels)
+            {
+                cartString += $"      {item.TuoteID}      {item.TuoteNimi} {item.Määrä} = {item.Summa}€\n";
+            }
+            cartString += $"Yhteensä: {totalPrice}€";
+
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("jetiside@outlook.com");
+            mail.To.Add(asiakasEmail);
+            mail.Subject = "Tilausvahvistus Jetiside, Tilausnumero: " + TilausID;
+            mail.Body = "Hei!\nKiitos tilauksestasi!\nTilaamasi tuotteet toimitetaan n.3-7 arkipäivän kuluttua.\n\n" +
+                "Tilausnumero: "+TilausID+"\nTuoteluettelo:\n| Tuote ID | Nimi | Määrä | Hinta |\n" + cartString +
+                "\n\nTervetuloa asioimaan uudelleen!";
+
+            SmtpClient smtp = new SmtpClient("smtp.office365.com");
+            smtp.Port = 587;
+            smtp.Credentials = new NetworkCredential("jetiside@outlook.com", "Salasana1");
+            smtp.EnableSsl = true;
+
+            smtp.Send(mail);
+
 
             Session["OstoskoriTuote"] = null;
             Session["OstoskoriCounter"] = null;
