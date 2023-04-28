@@ -18,6 +18,13 @@ namespace VerkkokauppaWeb.Controllers
         public ActionResult Index()
         {
             var tilaukset = db.Tilaukset.Include(t => t.Asiakkaat).Include(t => t.Postitoimipaikat);
+
+            if (Session["UserName"] as string != "teppo@jetiside.fi")
+            {
+                tilaukset = tilaukset.Where(t => t.Asiakkaat.Email == Session["UserName"] as string);
+                return RedirectToAction("Index", "Home");
+            }
+
             return View(tilaukset.ToList());
         }
 

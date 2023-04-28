@@ -25,9 +25,11 @@ namespace VerkkokauppaWeb.Models
         public int TilausID { get; set; }
         public int AsiakasID { get; set; }
 
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy HH:mm}")]
         public System.DateTime TilausPvm { get; set; }
 
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy HH:mm}")]
         public System.DateTime LähetysPvm { get; set; }
         public string ToimitusOsoite { get; set; }
