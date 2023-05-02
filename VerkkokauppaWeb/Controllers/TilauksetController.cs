@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -14,8 +15,9 @@ namespace VerkkokauppaWeb.Controllers
     {
         private VerkkokauppaDBEntities db = new VerkkokauppaDBEntities();
 
-        // GET: Tilaukset
-        public ActionResult Index()
+        const int PageSize = 10;
+
+        public ActionResult Index(int page = 1)
         {
             var tilaukset = db.Tilaukset.Include(t => t.Asiakkaat).Include(t => t.Postitoimipaikat);
 
@@ -25,10 +27,20 @@ namespace VerkkokauppaWeb.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            return View(tilaukset.ToList());
+            var pagedTilaukset = tilaukset.OrderBy(t => t.TilausPvm)
+            .Skip((page - 1) * PageSize)
+                                           .Take(PageSize)
+                                           .ToList();
+
+            var totalItems = tilaukset.Count();
+            var totalPages = (int)Math.Ceiling(totalItems / (double)PageSize);
+
+            ViewBag.Page = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(pagedTilaukset);
         }
 
-        // GET: Tilaukset/Create
         public ActionResult Create()
         {
             ViewBag.AsiakasID = new SelectList(db.Asiakkaat, "AsiakasID", "Etunimi");

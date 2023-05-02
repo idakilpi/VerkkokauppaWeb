@@ -10,9 +10,43 @@
     #accordion .content {
         display: none;
     }
-
     #accordion .active .content {
         display: block;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+    .pagination a {
+        color: white;
+        padding: 4px 15px;
+        text-decoration: none;
+        background-color: steelblue;
+        border-radius: 5px;
+        margin: 0 4px;
+        order: 1;
+    }
+    .pagination a.active {
+        background-color: white;
+        color: black;
+    }
+
+    .pagination a:hover:not(.active) {
+     background-color: #ddd;
+    }
+
+    .pagination a:nth-child(2) {
+    order: 2;
+    }
+
+    .pagination a:nth-child(3) {
+    order: 3;
+    }
+
+    .pagination a:last-child {
+    order: 4;
     }
 </style>
 
@@ -68,7 +102,7 @@
                             <td>@Html.DisplayFor(modelItem => item.ToimitusOsoite)</td>
                             <td>@Html.DisplayFor(modelItem => item.ToimitusPostinumero)</td>
                             <td>
-                                @Html.ActionLink("Muokkaa", "Edit", new { id = item.TilausID }, new { @class = "btn btn-primary" }) 
+                                @Html.ActionLink("Muokkaa", "Edit", new { id = item.TilausID }, new { @class = "btn btn-primary" })
                                 @Html.ActionLink("Poista", "Delete", new { id = item.TilausID }, new { @class = "btn btn-danger" })
                             </td>
                         </tr>
@@ -81,3 +115,20 @@
         </div>
     }
 </div>
+
+@if (ViewBag.TotalPages > 1)
+{
+    <div class="pagination">
+        Page @(ViewBag.Page) of @ViewBag.TotalPages
+        @if (ViewBag.Page > 1)
+        {
+            @Html.ActionLink("<<", "Index", new { page = 1 })
+            @Html.ActionLink("<", "Index", new { page = ViewBag.Page - 1 })
+        }
+        @if (ViewBag.Page < ViewBag.TotalPages)
+        {
+            @Html.ActionLink(">", "Index", new { page = ViewBag.Page + 1 })
+            @Html.ActionLink(">>", "Index", new { page = ViewBag.TotalPages })
+        }
+    </div>
+}
