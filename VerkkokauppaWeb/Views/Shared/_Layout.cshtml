@@ -14,6 +14,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+
     <div class="logoNavbar">
         <img class="navLogo" src="~/Images/JetisideLogoValm3.png" />
         <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-dark navEdit">
@@ -51,7 +52,7 @@
                             }
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <li><a class="dropdown-item" href="@Url.Action("EditProfile", "Asiakkaat", new { id = Session["UserID"] })">Omat tiedot</a></li>
-                                <li><a class="dropdown-item" href="/Home/Logout">Kirjaudu ulos</a></li>
+                                <li><a class="dropdown-item" href="/Login/Logout">Kirjaudu ulos</a></li>
                             </ul>
                         </div>
                         <div class="btn">

@@ -11,11 +11,13 @@ namespace VerkkokauppaWeb.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Logins
     {
         public int LoginID { get; set; }
         public int AsiakasID { get; set; }
+        [Display(Name ="Käyttäjätunnus")]
         public string Kayttajatunnus { get; set; }
         public string Salasana { get; set; }
 

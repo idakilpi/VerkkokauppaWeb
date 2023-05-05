@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
+using System.Web.Mvc;
+using VerkkokauppaWeb.Validation;
 
 namespace VerkkokauppaWeb.ViewModels
 {
+
     public class Register
     {
         [Key]
@@ -19,16 +23,18 @@ namespace VerkkokauppaWeb.ViewModels
 
         [Required(ErrorMessage = "Kirjoita sähköpostiosoite.")]
         [RegularExpression("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", ErrorMessage = "Tarkista sähköpostiosoite")]
-
         public string Email { get; set; }
 
+        [PasswordValidation]
         [Required(ErrorMessage = "Kirjoita salasana.")]
         [DataType(DataType.Password)]
         public string Salasana { get; set; }
 
-        //[Compare("Password", ErrorMessage = "Vahvista salasana")]
-        //[DataType(DataType.Password)]
-        //public string VahvistaSalasana { get; set; }
+        [Display(Name = "Vahvista salasana")]
+        [Required(ErrorMessage = "Kirjoita salasana.")]
+        [DataType(DataType.Password)]
+        [System.ComponentModel.DataAnnotations.Compare("Salasana", ErrorMessage = "Salasana ei täsmää.")]
+        public string VahvistaSalasana { get; set; }
 
         public string Tunnus { get; set; }
     }

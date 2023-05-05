@@ -15,6 +15,7 @@ namespace VerkkokauppaWeb.ViewModels
         public string Etunimi { get; set; }
         public string Sukunimi { get; set; }
         public string Email { get; set; }
+        [Display(Name = "Käyttäjätunnus")]
         public string Kayttajatunnus { get; set; }
         public string Salasana { get; set; }
 

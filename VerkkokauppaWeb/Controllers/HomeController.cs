@@ -30,7 +30,6 @@ namespace VerkkokauppaWeb.Controllers
         }
 
         
-
         [HttpPost]
         public ActionResult Authorize(Logins LoginModel)
         {

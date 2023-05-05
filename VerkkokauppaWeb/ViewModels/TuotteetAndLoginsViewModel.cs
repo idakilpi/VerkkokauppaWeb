@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
@@ -14,6 +15,7 @@ namespace VerkkokauppaWeb.ViewModels
 
         public int LoginID { get; set; }
         public int AsiakasID { get; set; }
+        [Display(Name = "Käyttäjätunnus")]
         public string Kayttajatunnus { get; set; }
 	    public string Email { get; set; }
         public string Salasana { get; set; }
