@@ -29,14 +29,12 @@ input, select {
 
 body {
     color: var(--bs-petrol);
-    overflow-x: hidden;
-    perspective: 1px;
-    transform-style: preserve-3d;
 }
 
 .navLogo {
     width: 100%;
 }
+
 .navEdit {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     /*VIHREÄ*/
@@ -49,11 +47,13 @@ body {
     padding: 5px;
     font-family: Calibri;
 }
+
 .navbar-nav a {
     font-size: large;
     font-family: Calibri;
     
 }
+
 .nav-link {
     color: #003e4d !important;
 }
@@ -198,7 +198,6 @@ body {
 .tekstiCont {
     width: 80%;
     padding: 20px;
-    transform-style: preserve-3d;
 }
 
 .kuvaParallax {
