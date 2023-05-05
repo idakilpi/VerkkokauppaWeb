@@ -14,63 +14,75 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <script type="text/javascript">
+        //const nav = document.querySelector('.navbar')
+        //window.addEventListener('scroll', fixNav)
+
+        //function fixNav() {
+        //    if (window.scrollY > nav.offsetHeight + 150) {
+        //        nav.classList.add('active')
+        //    } else {
+        //        nav.classList.remove('active')
+        //    }
+        //}
+
+       
+    </script>
 
     <div class="logoNavbar">
         <img class="navLogo" src="~/Images/JetisideLogoValm3.png" />
-        <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-dark navEdit">
-            <div class="container">
-                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse d-md-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1" style="display: flex;">
-                        <li class="btn"><a class="nav-link underline underline-home" href="~/home/Index">Etusivu</a></li>
-                        <li class="btn"><a class="nav-link underline underline-home" href="~/home/About">Meistä</a></li>
-                        <li class="btn"><a class="nav-link underline underline-home" href="~/tuotteet/index">Tuotteet</a></li>
-                        @if (Session["UserName"] == null)
-                        {
-                            <li class="btn"><a class="nav-link underline underline-home" data-bs-toggle="modal" data-bs-target="#LoginRuutu">Kirjaudu</a></li>
-                        }
+    </div>
+    <nav class="navbar navbar-expand-md navbar-dark navEdit sticky-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav flex-grow-1 me-auto">
+                    <li class="btn"><a class="nav-link underline underline-home" href="~/home/Index">Etusivu</a></li>
+                    <li class="btn"><a class="nav-link underline underline-home" href="~/home/About">Meistä</a></li>
+                    <li class="btn"><a class="nav-link underline underline-home" href="~/tuotteet/index">Tuotteet</a></li>
+                    @if (Session["UserName"] == null)
+                    {
+                        <li class="btn"><a class="nav-link underline underline-home" data-bs-toggle="modal" data-bs-target="#LoginRuutu">Kirjaudu</a></li>
+                    }
 
-                        @if (Session["UserName"] as string == "teppo@jetiside.fi")
+                    @if (Session["UserName"] as string == "teppo@jetiside.fi")
+                    {
+                        <li class="btn"><a class="nav-link underline underline-home" href="~/Asiakkaat/AdminPage">Asiakkaat</a></li>
+                    }
+                </ul>
+                <div class="navbar-nav toSide">
+                    <div class="dropdown">
+                        @if (Session["UserName"] != null)
                         {
-                            <li class="btn"><a class="nav-link underline underline-home" href="~/Asiakkaat/AdminPage">Asiakkaat</a></li>
+                            <a class="btn underline underline-home teppo dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="color: inherit;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
+                                </svg>
+                                @Session["UserFirstName"]
+                            </a>
                         }
-                    </ul>
-                    <div class="navbar-nav toSide">
-                        <div class="dropdown">
-                            @if (Session["UserName"] != null)
-                            {
-                                <a class="btn underline underline-home teppo dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="color: inherit;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
-                                    </svg>
-                                    @Session["UserFirstName"]
-                                </a>
-                            }
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="@Url.Action("EditProfile", "Asiakkaat", new { id = Session["UserID"] })">Omat tiedot</a></li>
-                                <li><a class="dropdown-item" href="/Login/Logout">Kirjaudu ulos</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn">
-                            @{
-                                Html.RenderPartial("_Ostoskori");
-                            }
-                        </div>
-                        <div class="container-input">
-                            <input type="text" placeholder="Etsi" name="text" class="input">
-                            <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
-                            </svg>
-                        </div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="@Url.Action("EditProfile", "Asiakkaat", new { id = Session["UserID"] })">Omat tiedot</a></li>
+                            <li><a class="dropdown-item" href="/Login/Logout">Kirjaudu ulos</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn">
+                        @{
+                            Html.RenderPartial("_Ostoskori");
+                        }
+                    </div>
+                    <div class="container-input">
+                        <input type="text" placeholder="Etsi" name="text" class="input">
+                        <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+                        </svg>
                     </div>
                 </div>
             </div>
-        </nav>
-    </div>
+        </div>
+    </nav>
     <br />
     <div class="container body-content">
         @RenderBody()
