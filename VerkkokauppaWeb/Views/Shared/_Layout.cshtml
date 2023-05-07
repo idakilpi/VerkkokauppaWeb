@@ -25,12 +25,12 @@
                 </button>
                 <div class="collapse navbar-collapse d-md-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1" style="display: flex;">
-                        <li class="btn"><a class="nav-link zoom" href="~/home/Index">Etusivu</a></li>
-                        <li class="btn"><a class="nav-link zoom" href="~/home/About">Meistä</a></li>
-                        <li class="btn"><a class="nav-link zoom" href="~/tuotteet/index">Tuotteet</a></li>
+                        <li class="btn"><a class="nav-link underline underline-home" href="~/home/Index">Etusivu</a></li>
+                        <li class="btn"><a class="nav-link underline underline-home" href="~/home/About">Meistä</a></li>
+                        <li class="btn"><a class="nav-link underline underline-home" href="~/tuotteet/index">Tuotteet</a></li>
                         @if (Session["UserName"] == null)
                         {
-                            <li class="btn"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#LoginRuutu">Kirjaudu</a></li>
+                            <li class="btn"><a class="nav-link underline underline-home" data-bs-toggle="modal" data-bs-target="#LoginRuutu">Kirjaudu</a></li>
                         }
 
                         @if (Session["UserName"] as string == "teppo@jetiside.fi")
@@ -43,7 +43,7 @@
                         <div class="dropdown">
                             @if (Session["UserName"] != null)
                             {
-                                <a class="btn zoom teppo dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="color: inherit;">
+                                <a class="btn underline underline-home teppo dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="color: inherit;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                                         <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
                                     </svg>
@@ -71,13 +71,15 @@
             </div>
         </nav>
     </div>
+    <br />
     <div class="container body-content">
         @RenderBody()
-        <hr />
+
     </div>
+    <br />
     <footer>
         <div class="row footerNav">
-            <div class="col-md-3 footerNavCol">
+            <div class="col-md-3 footerNavCol footerMove">
                 <ul>
                     <li><a href="#">Etusivu</a></li>
                     <li><a href="#">Meistä</a></li>
@@ -85,7 +87,7 @@
                     <li><a href="#">Kirjaudu</a></li>
                 </ul>
             </div>
-            <div class="col-md-3 footerNavCol">
+            <div class="col-md-3 footerNavCol footerMove">
                 <ul>
                     <li><a href="#">Facebook</a></li>
                     <li><a href="#">Instagram</a></li>
@@ -93,7 +95,7 @@
                     <li><a href="#">Twitter</a></li>
                 </ul>
             </div>
-            <div class="col-md-3 footerNavCol footerMove">
+            <div class="col-md-3 footerNavCol">
                 <ul>
                     <li><a href="#">Seikkailijanpolku 3</a></li>
                     <li><a href="#">58030</a></li>

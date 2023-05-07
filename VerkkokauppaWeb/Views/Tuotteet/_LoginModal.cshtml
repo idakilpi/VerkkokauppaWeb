@@ -2,12 +2,12 @@
 @model VerkkokauppaWeb.ViewModels.TuotteetAndLoginsViewModel
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="LoginRuutu">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg LogModal">
         <div class="modal-content logModal">
             <div class="modal-body loG">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6 loginSide">
+                        <div class="col-lg-6 loginSide">
                             @using (Html.BeginForm("Authorize", "Home", FormMethod.Post, new { id = "loginForm" }))
 
                             {
@@ -50,7 +50,7 @@
                                 <a href="@Url.Action("Index", "Home")" class="btnn deleteBtn">Peruuta</a>
                             </div>
                         </div>
-                        <div class="col-md-6 ml-auto modalPic">
+                        <div class="col-lg-6 ml-auto modalPic">
                             <img src="~/Images/jetiside-modalkuva.png" class="modalImg" />
                         </div>
                     </div>

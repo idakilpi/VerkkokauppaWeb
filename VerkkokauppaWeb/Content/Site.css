@@ -1,4 +1,13 @@
-﻿/* Set padding to keep content from hitting the edges */
+﻿@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Serif+Display&family=Righteous&family=Russo+One&display=swap');
+
+:root {
+    --bs-petrol: #002F3B;
+    --bs-lightblue: #CEE2E8;
+    --bs-orange: #FE5C22;
+    --bs-beige: #EFCAAE;
+}
+
+/* Set padding to keep content from hitting the edges */
 .body-content {
     margin-top: 15px;
     padding-left: 15px;
@@ -13,10 +22,16 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
+
+select {
     max-width: 280px;
+}
+
+body {
+    color: var(--bs-petrol);
+    overflow-x: hidden;
+    perspective: 1px;
+    transform-style: preserve-3d;
 }
 
 .navLogo {
@@ -27,13 +42,20 @@ textarea {
     /*VIHREÄ*/
     /*background: linear-gradient(160deg, #30742f, #4c9b32);
     color: rgb(255 255 255 / 68%);*/
-
     /*SININEN*/
-    color: #212529;
+    /*    color: #212529;
+*/ /*font-size: large;*/
+    background: linear-gradient(9deg, #74a2b2, #c8d8dd);
+    padding: 5px;
+    font-family: Calibri;
+}
+.navbar-nav a {
     font-size: large;
-    font-family: 'Roboto', sans-serif;
-    background-color: #74a2b2;
+    font-family: Calibri;
     
+}
+.nav-link {
+    color: #003e4d !important;
 }
 
 
@@ -41,6 +63,7 @@ textarea {
 .toSide {
     justify-content: flex-end;
 }
+/*------------*/
 
 
 .zoom {
@@ -48,7 +71,8 @@ textarea {
 }
 
 .zoom:hover {
-    transform: scale(1.1);
+    color: #002f3b;
+    transform: scale(1.2);
 }
 
 .dropdown {
@@ -94,9 +118,19 @@ textarea {
 }
 /*---*/
 
-.carouselCont {
-    width: 50%;
-    margin: 0 auto;
+/*.homeContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}*/
+
+
+#otsikko {
+    font-family: 'DM Serif Display', serif;
+    text-align: center;
+    font-size: 60px;
+    padding: 30px;
+    margin-bottom: 40px;
 }
 
 
@@ -108,6 +142,131 @@ textarea {
     margin: 0 auto;
 }
 
+/*"Katso tästä"*/
+
+.katsoCarousel {
+    margin-bottom: 80px;
+}
+
+
+.katsoTästä {
+    margin-top: 30px;
+    color: #002f3b;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    padding: 30px;
+}
+
+.katsoTästä h2 {
+    font-size: xx-large;
+    font-family: 'DM Serif Display', serif;
+}
+
+.katsoTästä section {
+    position: relative;
+    top: 40px;
+}
+
+.katsoTästäBtn {
+    border: 0px;
+    background-color: transparent;
+    font-size: x-large;
+    transition: 0.15s ease-in-out;
+    margin: 10px;
+}
+
+/*----------*/
+
+.teksti {
+    background-color: #efcaae;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1080%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/rect%3e%3cpath d='M 0%2c476 C 288%2c401.2 1152%2c176.8 1440%2c102L1440 560L0 560z' fill='rgba(239%2c 202%2c 174%2c 1)'%3e%3c/path%3e%3cpath d='M 0%2c38 C 288%2c110.4 1152%2c327.6 1440%2c400L1440 560L0 560z' fill='rgba(116%2c 162%2c 178%2c 0.63)'%3e%3c/path%3e%3cpath d='M 0%2c17 C 288%2c115.8 1152%2c412.2 1440%2c511L1440 560L0 560z' fill='rgba(206%2c 226%2c 232%2c 0.72)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1080'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 30px;
+    margin: 0 auto;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+
+.tekstiCont {
+    width: 80%;
+    padding: 20px;
+    transform-style: preserve-3d;
+}
+
+.kuvaParallax {
+    background-color: #efcaae;
+    background-image: url("/Images/rock-climbing-gda966f741_1920.jpg");
+    background-size: cover;
+    background-position:center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 500px;
+}
+
+.asiakasKokemus {
+    background-color: var(--bs-lightblue);
+    padding: 50px;
+    margin: 0px;
+    margin-bottom: 80px;
+}
+
+#palauteOtsikko {
+    display: flex;
+    height:fit-content;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+.palauteNimi {
+    color: var(--bs-orange);
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 0px;
+}
+
+/*------ONKO KYSYTTÄVÄÄ----------*/
+
+.palauteLomakeCont {
+    background-image: url(/Images/Jetiside-taustaa.jpg);
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    gap: 10px;
+}
+
+.lomakeOtsikot, .palauteLomakkeet, .lomakeBtn {
+    width: 60%;
+}
+
+.palauteLomakkeet {
+    display: flex;
+    flex-direction: column;
+}
+
+#lomakeIso {
+    min-height: 150px;
+    resize: none;
+}
+
+.lomakeBtn {
+    display: flex;
+    justify-content: flex-end;
+}
 
 /*Tuotteet*/
 .prodImg {
@@ -130,10 +289,10 @@ textarea {
     text-decoration: none;
     vertical-align: middle;
 }
-    .btnn a {
-        text-decoration: none;
-        color: #e6e6e6 ;
-    }
+.btnn a {
+    text-decoration: none;
+    color: #e6e6e6 ;
+}
 
 .btnn:hover {
     color: #fff;
@@ -187,40 +346,41 @@ textarea {
 
 /*Modaaliasetuksia*/
 
+.modal-content {
+    width: 100%;
+    max-width: 1300px;
+}
 
 .loG {
     padding: 0;
 }
 
 .logModal {
-    height: 60vh;
     background-image: url(/Images/jetiside-tausta.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .loginSide {
-    height: 60vh;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: center;
     padding: 30px;
 }
 
 .modalPic {
     display: flex;
-    height: 60vh;
     border-radius: 0px 5px 5px 0px;
     overflow: hidden;
     padding: 0;
     filter: brightness(90%);
 }
+
 .modalImg {
     width: 100%;
     height: 100%;
     animation: scl 2s;
 }
-
 @keyframes scl {
     0% {
         transform: scale(1.3);
@@ -231,6 +391,14 @@ textarea {
     }
 }
 
+.LogModal {
+    top: 100px;
+}
+
+
+/*-----------------------*/
+
+
 .underline {
     position: relative;
 }
@@ -238,12 +406,16 @@ textarea {
 .underline::before {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
     right: 0;
     width: 0;
     height: 2px;
-    background-color: #002f3b;
+    background-color: var(--bs-petrol);
     transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.underline-home::before {
+    bottom: 5px;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -251,7 +423,7 @@ textarea {
     left: 0;
     right: auto;
     width: 100%;
-}
+    }
 }
 
 
@@ -288,6 +460,21 @@ footer li {
         height: 70vw;
     }
 
+    .logModal {
+        display: block;
+    }
+
+    .modalPic {
+        display: none;
+    }
+
+    .LogModal {
+        top: auto;
+    }
+
+    .lomakeOtsikot, .palauteLomakkeet, .lomakeBtn {
+        width: 100%;
+    }
 }
 
 
@@ -296,18 +483,30 @@ footer li {
     .toSide {
         align-items: center;
     }
-    /*Footerin tekstit keskelle?*/
-/*    .footerNavCol {
+
+    .palauteLomakeCont {
+        padding: 30px 0px;
+    }
+
+    #otsikko {
+        font-size: 50px;
+    }
+
+    .katsoTästä h2 {
+        font-size: xx-large;
+    }
+        /*Footerin tekstit keskelle*/
+    .footerNavCol {
         display: flex;
         justify-content: center;
     }
     .footerMove {
         position: relative;
-        left: 20px;
-    }*/
+        right: 25px;
+    }
+    .palauteLomakeCont {
+        background-repeat: no-repeat;
+        background-size: 150%;
+    }
 }
 
-.modal-content {
-    width: 100%;
-    max-width: 1300px;
-}

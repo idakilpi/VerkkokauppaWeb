@@ -199,6 +199,11 @@
     <Content Include="Content\Site.css" />
     <Content Include="Icons\box-arrow-right.svg" />
     <Content Include="Icons\cart.svg" />
+    <Content Include="Images\backpacker-g78fdbc4ab_1920.jpg" />
+    <Content Include="Images\jetiside-modalkuva.png" />
+    <Content Include="Images\Jetiside-taustaa.jpg" />
+    <Content Include="Images\rock-climbing-gda966f741_1920.jpg" />
+    <Content Include="Images\wave %281%29.png" />
     <Content Include="Models\VerkkokauppaWebModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>VerkkokauppaWebModel.edmx</DependentUpon>
@@ -270,7 +275,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
