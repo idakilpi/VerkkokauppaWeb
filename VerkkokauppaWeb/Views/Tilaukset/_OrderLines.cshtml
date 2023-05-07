@@ -1,0 +1,23 @@
+﻿@model IEnumerable<VerkkokauppaWeb.Models.Tilausrivit>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>TuoteID</th>
+            <th>TuoteNimi</th>
+            <th>Määrä</th>
+            <th>KappaleHinta</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tilausrivi in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => tilausrivi.TuoteID)</td>
+                <td>@Html.DisplayFor(modelItem => tilausrivi.Tuotteet.TuoteNimi)</td>
+                <td>@Html.DisplayFor(modelItem => tilausrivi.Maara)</td>
+                <td>@Html.DisplayFor(modelItem => tilausrivi.KappaleHinta)</td>
+            </tr>
+        }
+    </tbody>
+</table>
