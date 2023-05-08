@@ -264,12 +264,12 @@
     <Content Include="Views\Tuotteet\Ostoskori.cshtml" />
     <Content Include="Views\Asiakkaat\Create.cshtml" />
     <Content Include="Views\Asiakkaat\Delete.cshtml" />
-    <Content Include="Views\Asiakkaat\Details.cshtml" />
-    <Content Include="Views\Asiakkaat\Edit.cshtml" />
     <Content Include="Views\Asiakkaat\Index.cshtml" />
     <Content Include="Views\Tuotteet\_ProductDetails.cshtml" />
-    <Content Include="Views\Login\_LoginModal.cshtml" />
     <Content Include="Views\Home\_LoginModal.cshtml" />
+    <Content Include="Views\Asiakkaat\AdminPage.cshtml" />
+    <Content Include="Views\Asiakkaat\EditProfile.cshtml" />
+    <Content Include="Views\Asiakkaat\_LoginModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,59 @@
+﻿@model VerkkokauppaWeb.Models.Logins
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="LoginRuutu">
+    <div class="modal-dialog modal-lg LogModal">
+        <div class="modal-content logModal">
+            <div class="modal-body loG">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 loginSide">
+                            @using (Html.BeginForm("Authorize", "Home", FormMethod.Post, new { id = "loginForm" }))
+
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+                                    <h1>Tervetuloa!</h1>
+                                    <h5>Kirjaudu sisään:</h5>
+                                    <hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(m => m.LoginID)
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Kayttajatunnus, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(m => m.Kayttajatunnus, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(m => m.Kayttajatunnus, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Salasana, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(m => m.Salasana, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                                            @Html.ValidationMessageFor(m => m.Salasana, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        Uusi käyttäjä? Rekisteröidy <a href="@Url.Action("Create", "Asiakkaat")" class=" reg underline">tästä.</a>
+                                    </div>
+
+                                    <label class="text-danger">
+                                        @Html.DisplayFor(m => m.LoginErrorMessage)
+                                    </label>
+                                </div>
+                            }
+                            <div class="modal-footer">
+                                <button type="submit" class="btnn saveBtn" form="loginForm">Kirjaudu</button>
+                                <a href="@Url.Action("Index", "Home")" class="btnn deleteBtn">Peruuta</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 ml-auto modalPic">
+                            <img src="~/Images/jetiside-modalkuva.png" class="modalImg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

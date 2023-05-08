@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using VerkkokauppaWeb.Validation;
+using VerkkokauppaWeb.ViewModels;
+using VerkkokauppaWeb.Models;
 
 namespace VerkkokauppaWeb.ViewModels
 {
@@ -36,6 +38,7 @@ namespace VerkkokauppaWeb.ViewModels
         [System.ComponentModel.DataAnnotations.Compare("Salasana", ErrorMessage = "Salasana ei täsmää.")]
         public string VahvistaSalasana { get; set; }
 
-        public string Tunnus { get; set; }
+        public virtual AsiakkaatAndLoginsViewModel Logs { get; set; }
+
     }
 }

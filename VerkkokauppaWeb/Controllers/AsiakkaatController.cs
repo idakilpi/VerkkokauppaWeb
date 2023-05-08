@@ -183,7 +183,7 @@ namespace VerkkokauppaWeb.Controllers
             db.Asiakkaat.Remove(asiakas);
             db.Logins.Remove(login);
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("AdminPage", "Asiakkaat");
         }
     }
 }
