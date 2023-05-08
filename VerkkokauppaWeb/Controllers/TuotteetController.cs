@@ -30,7 +30,7 @@ namespace VerkkokauppaWeb.Controllers
         }
 
         // GET: Tuotteet
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string searchValue)
         {
             var tuotteet = db.Tuotteet.Include(t => t.Kategoriat).ToList();
             var login = new Logins();
@@ -39,7 +39,44 @@ namespace VerkkokauppaWeb.Controllers
                 Tuotteet = tuotteet,
                 Logins = login
             };
-            return View(viewModel);
+
+            try
+            {
+                tuotteet = db.Tuotteet.Include(t => t.Kategoriat).ToList();
+
+                if (tuotteet.Count == 0)
+                {
+                    TempData["InfoMessage"] = "Tuotetta ei ole saatavilla.";
+                }
+                else
+                {
+                    if(string.IsNullOrEmpty(searchValue))
+                    {
+                        TempData["InfoMessage"] = "Kirjoita hakusana.";
+                        return View(tuotteet);
+                    }
+                    else
+                    {
+                        if (searchBy.ToLower() == "productname")
+                        {
+                            var searchByProductName = tuotteet.Where(p => p.TuoteNimi.ToLower().Contains(searchValue.ToLower()));
+                            return View(searchByProductName);
+                        }
+                        else if (searchBy.ToLower() == "price")
+                        {
+                            var searchByProductPrice = tuotteet.Where(p => p.Hinta == decimal.Parse(searchValue));
+                            return View(searchByProductPrice);
+                        }
+                    }
+                }
+
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            { 
+                TempData["Virheilmoitus."] = ex.Message;
+                return View();
+            }
 
             //var tuotteet = db.Tuotteet.Include(t => t.Kategoriat);
             //return View(tuotteet.ToList());

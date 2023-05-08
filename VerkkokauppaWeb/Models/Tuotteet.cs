@@ -19,7 +19,7 @@ namespace VerkkokauppaWeb.Models
         {
             this.Tilausrivit = new HashSet<Tilausrivit>();
         }
-    
+
         public int TuoteID { get; set; }
         public int KategoriaID { get; set; }
         public string TuoteNimi { get; set; }

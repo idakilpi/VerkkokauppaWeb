@@ -1,5 +1,5 @@
 ﻿@*@model IEnumerable<VerkkokauppaWeb.Models.Tuotteet>*@
-@*@model VerkkokauppaWeb.ViewModels.TuotteetAndLoginsViewModel*@
+@*@@model VerkkokauppaWeb.ViewModels.TuotteetAndLoginsViewModel*@
 
 @{
     ViewBag.Title = "Index";
@@ -58,6 +58,31 @@
             </button>
         }
     </div>
+
+<div>
+   @using (Html.BeginForm("Index", "Tuotteet", FormMethod.Get))
+            {
+                <table>
+                    <tr>
+                        <td>
+                            <span><b>Hae tuotevalikoimasta:</b></span>
+                            @Html.RadioButton("searchBy", "ProductName", true)
+                            <text> Tuotenimi </text>
+                            @Html.RadioButton("searchBy", "Price")
+                            <text> Hinta </text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.TextBox("searchValue", null, new {Class = "form-control", placeholder="Anna tuotenimi tai hinta"})
+                        </td>
+                        <td>
+                            <input type="submit" value="Hae" class="btn btn-success" />
+                        </td>
+                    </tr>
+                </table>
+            }
+</div>
 
 
     <br />
