@@ -32,17 +32,10 @@ namespace VerkkokauppaWeb.Controllers
         // GET: Tuotteet
         public ActionResult Index(string searchBy, string searchValue)
         {
-            var tuotteet = db.Tuotteet.Include(t => t.Kategoriat).ToList();
-            var login = new Logins();
-            var viewModel = new TuotteetAndLoginsViewModel
-            {
-                Tuotteet = tuotteet,
-                Logins = login
-            };
-
+            var viewModel = new TuotteetAndLoginsViewModel();
             try
             {
-                tuotteet = db.Tuotteet.Include(t => t.Kategoriat).ToList();
+                var tuotteet = db.Tuotteet.Include(t => t.Kategoriat).ToList();
 
                 if (tuotteet.Count == 0)
                 {
@@ -50,36 +43,36 @@ namespace VerkkokauppaWeb.Controllers
                 }
                 else
                 {
-                    if(string.IsNullOrEmpty(searchValue))
+                    if (string.IsNullOrEmpty(searchValue))
                     {
                         TempData["InfoMessage"] = "Kirjoita hakusana.";
-                        return View(tuotteet);
+                        viewModel.Tuotteet = tuotteet;
                     }
                     else
                     {
                         if (searchBy.ToLower() == "productname")
                         {
-                            var searchByProductName = tuotteet.Where(p => p.TuoteNimi.ToLower().Contains(searchValue.ToLower()));
-                            return View(searchByProductName);
+                            var searchByProductName = tuotteet.Where(p => p.TuoteNimi.ToLower().Contains(searchValue.ToLower())).ToList();
+                            viewModel.Tuotteet = searchByProductName;
                         }
                         else if (searchBy.ToLower() == "price")
                         {
-                            var searchByProductPrice = tuotteet.Where(p => p.Hinta == decimal.Parse(searchValue));
-                            return View(searchByProductPrice);
+                            var searchByProductPrice = tuotteet.Where(p => p.Hinta == decimal.Parse(searchValue)).ToList();
+                            viewModel.Tuotteet = searchByProductPrice;
                         }
                     }
                 }
-
-                return View(viewModel);
             }
             catch (Exception ex)
-            { 
+            {
                 TempData["Virheilmoitus."] = ex.Message;
                 return View();
             }
 
-            //var tuotteet = db.Tuotteet.Include(t => t.Kategoriat);
-            //return View(tuotteet.ToList());
+            var login = new Logins();
+            viewModel.Logins = login;
+
+            return View(viewModel);
         }
         [HttpPost]
         public JsonResult Index(int tuoteid)
