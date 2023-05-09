@@ -66,8 +66,8 @@
         @foreach (var tuot in Model.Tuotteet)
         {
             <div class="col-lg-4">
-                <div class="card md-3 h-100">
-                    <h3 class="card-header text-bg-success">@tuot.TuoteNimi</h3>
+                <div class="card @*md-3*@ h-100">
+                    <h3 class="card-header">@tuot.TuoteNimi</h3>
 
                     @if (tuot.Kuva != null)
                     {
@@ -88,7 +88,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Kategoria: @tuot.Kategoriat.KategoriaNimi</li>
-                        <li class="btn btn-primary" name="LisaaKoriin" value="Lisaa Koriin" tuoteid="@tuot.TuoteID" id="btnLisaaKoriin" onclick="LisaaKoriin(this)">Lisää tuote ostoskoriin<img src="~/Icons/cart.svg"></li>
+                        <li class="btnn saveBtn" name="LisaaKoriin" value="Lisaa Koriin" tuoteid="@tuot.TuoteID" id="btnLisaaKoriin" onclick="LisaaKoriin(this)">Lisää tuote ostoskoriin</li>
                     </ul>
                     @if (Session["UserName"] as string == "teppo@jetiside.fi")
                     {

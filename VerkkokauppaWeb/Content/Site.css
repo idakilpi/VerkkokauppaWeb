@@ -30,6 +30,9 @@ input, select {
 body {
     color: var(--bs-petrol);
 }
+h1, h2, h3 {
+    font-family: 'DM Serif Display', serif;
+}
 
 .navLogo {
     width: 100%;
@@ -65,6 +68,7 @@ body {
 }
 /*------------*/
 
+/*Hover efektit ja lisää naviasetuksia*/
 
 .zoom {
     transition: transform .2s;
@@ -74,6 +78,36 @@ body {
     color: #002f3b;
     transform: scale(1.2);
 }
+/*--------*/
+
+.underline {
+    position: relative;
+}
+
+.underline::before {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--bs-petrol);
+    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.underline-home::before {
+    bottom: 5px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .underline:hover::before {
+        left: 0;
+        right: auto;
+        width: 100%;
+    }
+}
+
+/*-----------*/
 
 .dropdown {
     display: flex;
@@ -116,14 +150,9 @@ body {
     opacity: 1;
     width: 250px;
 }
-/*---*/
+/*---------------*/
 
-/*.homeContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 100px;
-}*/
-
+/*ETUSIVU*/
 
 #otsikko {
     font-family: 'DM Serif Display', serif;
@@ -134,7 +163,7 @@ body {
 }
 
 
-/*Tekstin taustalle vaalennusta*/
+/*Karusellin tekstin taustalle vaalennusta*/
 .crslBg {
     background-image: radial-gradient( #ffffff94, #fff0);
     padding: 10px;
@@ -232,7 +261,7 @@ body {
     margin-bottom: 0px;
 }
 
-/*------ONKO KYSYTTÄVÄÄ----------*/
+/*Onko kysyttävää*/
 
 .palauteLomakeCont {
     background-image: url(/Images/Jetiside-taustaa.jpg);
@@ -270,11 +299,26 @@ body {
     justify-content: flex-end;
 }
 
+/*Etusivu loppuu*/
+
+/*Meistä*/
+
+#title, .abouth3 {
+    font-family: 'DM Serif Display', serif;
+}
+
+/*Meistä loppuu*/
+
 /*Tuotteet*/
+
+.card-header {
+    text-align: center;
+}
+
 .prodImg {
     width: 100%;
     object-fit: cover;
-    height: 25vw;
+    height: 17vw;
 }
 
 /*Buttoneita*/
@@ -346,13 +390,7 @@ body {
     color: #000;
 }
 
-/*Modaaliasetuksia*/
-
-body.modal-open {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
+/* LoginModaalin asetuksia*/
 
 .modal-content {
     width: 100%;
@@ -399,39 +437,7 @@ body.modal-open {
     }
 }
 
-
-
 /*-----------------------*/
-
-
-.underline {
-    position: relative;
-}
-
-.underline::before {
-    content: '';
-    position: absolute;
-    bottom: 0px;
-    right: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--bs-petrol);
-    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.underline-home::before {
-    bottom: 5px;
-}
-
-@media (hover: hover) and (pointer: fine) {
-.underline:hover::before {
-    left: 0;
-    right: auto;
-    width: 100%;
-    }
-}
-
-
 
 
 footer {
@@ -441,6 +447,7 @@ footer {
     /*background: linear-gradient(130deg, white, #002f3b);*/
     color: #dee2e6;
 }
+
 .footerNav {
     display: flex;
     justify-content: center;
@@ -450,6 +457,7 @@ footer {
 footer a {
     text-decoration: none;
 }
+
 ul {
     list-style-type: none;
 }
@@ -459,6 +467,21 @@ footer li {
     font-size: 14px;
 }
 
+/*-----------*/
+
+/*Media screenit*/
+
+@media screen and (max-width: 1900px) {
+    .prodImg {
+        height: 22vw;
+    }
+}
+
+/*@media screen and (min-width: 1400px) {
+    .prodImg {
+        height: 23vw;
+    }
+}*/
 
 @media screen and (max-width: 990px) {
     .prodImg {
