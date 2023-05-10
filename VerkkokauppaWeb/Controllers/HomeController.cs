@@ -63,5 +63,34 @@ namespace VerkkokauppaWeb.Controllers
             ViewBag.LoggedStatus = "Out";
             return RedirectToAction("Index", "Home"); //Uloskirjautumisen jälkeen pääsivulle
         }
+
+
+        [HttpPost]
+        public ActionResult SendEmail(string nimi, string email, string input)
+        {
+
+            if (string.IsNullOrWhiteSpace(nimi) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(input))
+            {
+                ModelState.AddModelError("", "Please fill in all required fields.");
+                return View();
+            }
+
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("jetiside2@outlook.com");
+            mail.To.Add(new MailAddress("jetiside@outlook.com"));
+            mail.Subject = "Asiakaspalaute sähköpostiosoitteesta " + email ;
+            mail.Body = input + "\n\nLähettäjä: " + nimi;
+
+            SmtpClient smtp = new SmtpClient("smtp.office365.com");
+            smtp.Port = 587;
+            smtp.Credentials = new NetworkCredential("jetiside@outlook.com", "Salasana1");
+            smtp.Credentials = new NetworkCredential("jetiside2@outlook.com", "Salasana1");
+
+            smtp.EnableSsl = true;
+
+            smtp.Send(mail);
+            ViewBag.SuccessMessage = "Sähköpostin lähetys onnistui!";
+            return View("SendEmail");
+        }
     }
 }

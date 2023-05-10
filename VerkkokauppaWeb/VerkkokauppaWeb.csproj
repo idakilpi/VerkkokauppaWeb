@@ -270,6 +270,7 @@
     <Content Include="Views\Asiakkaat\AdminPage.cshtml" />
     <Content Include="Views\Asiakkaat\EditProfile.cshtml" />
     <Content Include="Views\Shared\_LoginModal.cshtml" />
+    <Content Include="Views\Home\SendEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
