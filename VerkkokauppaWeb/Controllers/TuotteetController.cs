@@ -29,21 +29,54 @@ namespace VerkkokauppaWeb.Controllers
             listOfOstoskoriModels = new List<Ostoskori>();
         }
 
-        // GET: Tuotteet
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string searchValue)
         {
-            var tuotteet = db.Tuotteet.Include(t => t.Kategoriat).ToList();
-            var login = new Logins();
-            var viewModel = new TuotteetAndLoginsViewModel
+            var viewModel = new TuotteetAndLoginsViewModel();
+
+            try
             {
-                Tuotteet = tuotteet,
-                Logins = login
-            };
+                var tuotteet = db.Tuotteet.Include(t => t.Kategoriat).ToList();
+
+                if (tuotteet.Count == 0)
+                {
+                    TempData["InfoMessage"] = "Tuotetta ei ole saatavilla.";
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(searchValue))
+                    {
+                        TempData["InfoMessage"] = "Kirjoita hakusana.";
+                        viewModel.Tuotteet = tuotteet;
+                    }
+                    else
+                    {
+                        if (searchBy.ToLower() == "productname")
+                        {
+                            var searchByProductName = tuotteet.Where(p => p.TuoteNimi.ToLower().Contains(searchValue.ToLower())).ToList();
+                            viewModel.Tuotteet = searchByProductName;
+                        }
+                        else if (searchBy.ToLower() == "price")
+                        {
+                            var searchByProductPrice = tuotteet.Where(p => p.Hinta == decimal.Parse(searchValue.ToLower())).ToList();
+                            viewModel.Tuotteet = searchByProductPrice;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                TempData["Virheilmoitus."] = ex.Message;
+                return View();
+            }
+
+            var login = new Logins();
+            viewModel.Logins = login;
+
             return View(viewModel);
 
-            //var tuotteet = db.Tuotteet.Include(t => t.Kategoriat);
-            //return View(tuotteet.ToList());
         }
+            
         [HttpPost]
         public JsonResult Index(int tuoteid)
         {
