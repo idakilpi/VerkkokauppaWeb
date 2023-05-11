@@ -502,7 +502,7 @@ footer li {
 
 @media screen and (max-width: 990px) {
     .prodImg {
-        height: 70vw;
+        height: 30vw;
     }
 
     .logModal {
@@ -539,6 +539,10 @@ footer li {
 
     .katsoTästä h2 {
         font-size: xx-large;
+    }
+
+    .prodImg {
+        height: 70vw;
     }
 
     /*Footerin tekstit keskelle*/

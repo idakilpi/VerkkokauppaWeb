@@ -273,6 +273,7 @@
     <Content Include="Views\Tilaukset\Edit.cshtml" />
     <Content Include="Views\Tilaukset\Index.cshtml" />
     <Content Include="Views\Tilaukset\_OrderLines.cshtml" />
+    <Content Include="Views\Shared\_LoginModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
