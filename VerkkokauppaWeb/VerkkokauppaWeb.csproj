@@ -264,8 +264,6 @@
     <Content Include="Views\Tuotteet\Ostoskori.cshtml" />
     <Content Include="Views\Asiakkaat\Create.cshtml" />
     <Content Include="Views\Asiakkaat\Delete.cshtml" />
-    <Content Include="Views\Asiakkaat\Details.cshtml" />
-    <Content Include="Views\Asiakkaat\Edit.cshtml" />
     <Content Include="Views\Asiakkaat\Index.cshtml" />
     <Content Include="Views\Tuotteet\_ProductDetails.cshtml" />
     <Content Include="Views\Tilaukset\Create.cshtml" />
@@ -274,6 +272,8 @@
     <Content Include="Views\Tilaukset\Index.cshtml" />
     <Content Include="Views\Tilaukset\_OrderLines.cshtml" />
     <Content Include="Views\Shared\_LoginModal.cshtml" />
+    <Content Include="Views\Asiakkaat\AdminPage.cshtml" />
+    <Content Include="Views\Asiakkaat\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
