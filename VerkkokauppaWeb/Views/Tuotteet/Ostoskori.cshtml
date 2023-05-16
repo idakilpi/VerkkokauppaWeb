@@ -22,21 +22,6 @@
         });
     </script>
 }
-@*<script type="text/javascript">
-    $(document).ready(function () {
-        $('#myButton').click(function () {
-            if ($('#toimitustiedot').is(':visible')) {
-                $('#toimitustiedot').hide();
-                $('#tallennus').hide();
-                $('#myButton').text('Kassalle');
-            } else {
-                $('#toimitustiedot').show();
-                $('#myButton').text('Peruuta');
-                $('#tallennus').show();
-            }
-        });
-    });
-</script>*@
 
 
 <h2>Ostoskori</h2>
@@ -119,6 +104,7 @@
                         @Html.EditorFor(model => firstItem.ToimitusPostinumero, new { htmlAttributes = new { @class = "form-control", @name = "ToimitusPostinumero" } })
                         @Html.ValidationMessageFor(model => firstItem.ToimitusPostinumero, "", new { @class = "text-danger" })
                     </div>
+                    <div> </div>
                 </div>
             }
         }
