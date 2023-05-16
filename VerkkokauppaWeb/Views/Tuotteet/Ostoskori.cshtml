@@ -5,8 +5,24 @@
 
 }
 
-
-<script type="text/javascript">
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myButton').click(function () {
+                if ($('#toimitustiedot').is(':visible')) {
+                    $('#toimitustiedot').hide();
+                    $('#tallennus').hide();
+                    $('#myButton').text('Kassalle');
+                } else {
+                    $('#toimitustiedot').show();
+                    $('#myButton').text('Peruuta');
+                    $('#tallennus').show();
+                }
+            });
+        });
+    </script>
+}
+@*<script type="text/javascript">
     $(document).ready(function () {
         $('#myButton').click(function () {
             if ($('#toimitustiedot').is(':visible')) {
@@ -20,7 +36,7 @@
             }
         });
     });
-</script>
+</script>*@
 
 
 <h2>Ostoskori</h2>
@@ -28,6 +44,13 @@
 @using (Html.BeginForm("LisaaTilaus", "Tuotteet", FormMethod.Post))
 {
     <table class="table-hover" style="width:100%">
+        <tr style="border-bottom: 2px solid black">
+            <th>Kuva</th>
+            <th style="text-align: right"> Nimi</th>
+            <th style="text-align: right">Määrä</th>
+            <th style="text-align: right">Kappalehinta</th>
+            <th style="text-align: right">Summa</th>
+        </tr>
         @foreach (var tuot in Model)
         {
             summa += tuot.Summa;
@@ -36,7 +59,7 @@
             <tr>
                 <td>
 
-                    <img src="@imgscr" alt="Kuva tuotteesta" height="75" width="75" class="rounded">
+                    <img src="@imgscr" alt="Kuva tuotteesta" height="100" width="100" class="rounded">
                 </td>
                 <td style="text-align: right">
                     @tuot.TuoteNimi
