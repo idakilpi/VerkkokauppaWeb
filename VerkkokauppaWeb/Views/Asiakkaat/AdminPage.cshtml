@@ -3,12 +3,20 @@
     ViewBag.Title = "AdminPage";
 }
 
-<h2>AdminPage</h2>
+<header>
+    <div class="p-5 text-center bg-light">
+        <h1 class="mb-3">Asiakkaat</h1>
+        <button class=" btnn saveBtn">
+            @Html.ActionLink("Lisää uusi", "Create")
+        </button>
+    </div>
+</header>
+@*<h2>AdminPage</h2>
 
 
 <button class=" btnn saveBtn">
     @Html.ActionLink("Uusi asiakas", "Create")
-</button>
+</button>*@
 <table class="table table-hover">
     <tr>
         <th>

@@ -10,31 +10,35 @@
     #accordion .content {
         display: none;
     }
+
     #accordion .active .content {
         display: block;
     }
+
     .pagination {
         display: flex;
         justify-content: center;
         align-items: center;
         margin-top: 20px;
     }
+
     .pagination a {
         color: white;
         padding: 4px 15px;
         text-decoration: none;
-        background-color: steelblue;
+        background-color: #7ea8b7;
         border-radius: 5px;
         margin: 0 4px;
         order: 1;
     }
+
     .pagination a.active {
         background-color: white;
         color: black;
     }
 
     .pagination a:hover:not(.active) {
-     background-color: #ddd;
+        background-color: #5a8b9d;
     }
 
     .pagination a:nth-child(2) {
@@ -63,7 +67,7 @@
     <div class="p-5 text-center bg-light">
         <h1 class="mb-3">Tilaukset</h1>
         <p>
-            @Html.ActionLink("Uusi tilaus", "Create", new { }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Uusi tilaus", "Create", new { }, new { @class = "btnn saveBtn" })
         </p>
     </div>
 </header>
@@ -102,8 +106,8 @@
                             <td>@Html.DisplayFor(modelItem => item.ToimitusOsoite)</td>
                             <td>@Html.DisplayFor(modelItem => item.ToimitusPostinumero)</td>
                             <td>
-                                @Html.ActionLink("Muokkaa", "Edit", new { id = item.TilausID }, new { @class = "btn btn-primary" })
-                                @Html.ActionLink("Poista", "Delete", new { id = item.TilausID }, new { @class = "btn btn-danger" })
+                                @Html.ActionLink("Muokkaa", "Edit", new { id = item.TilausID }, new { @class = "btnn saveBtn" })
+                                @Html.ActionLink("Poista", "Delete", new { id = item.TilausID }, new { @class = "btnn deleteBtn" })
                             </td>
                         </tr>
                     </tbody>

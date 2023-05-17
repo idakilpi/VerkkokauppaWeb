@@ -47,16 +47,18 @@
 <div id="productDetailsModalContent"></div>
 
 <div class="container-fluid">
-    <h2>Tuotevalikoima</h2>
-    <br />
-    <div>
-        @if (Session["UserName"] as string == "teppo@jetiside.fi")
-        {
-            <button class="btn btn-dark">
-                @Html.ActionLink("Luo uusi tuote", "Create")
-            </button>
-        }
-    </div>
+    <header>
+        <div class="p-5 text-center bg-light">
+            <h1 class="mb-3">Tuotevalikoima</h1>
+            @if (Session["UserName"] as string == "teppo@jetiside.fi")
+            {
+                <button class="btnn saveBtn">
+                    @Html.ActionLink("Luo uusi tuote", "Create")
+                </button>
+            }
+        </div>
+    </header>
+
 
     <div>
         @using (Html.BeginForm("Index", "Tuotteet", FormMethod.Get))
@@ -76,7 +78,7 @@
                         @Html.TextBox("searchValue", null, new { Class = "form-control", placeholder = "Anna tuotenimi tai hinta" })
                     </td>
                     <td>
-                        <input type="submit" value="Hae" class="btn btn-success" />
+                        <input type="submit" value="Hae" class="btnn saveBtn" />
                     </td>
                 </tr>
             </table>
@@ -120,9 +122,9 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Varastomäärä: @tuot.Varastomaara</li>
                         </ul>
-                        <div class="card-footer text-bg-success">
-                            @Html.ActionLink("Muokkaa", "Edit", new { id = tuot.TuoteID }) |
-                            @Html.ActionLink("Poista", "Delete", new { id = tuot.TuoteID })
+                        <div class="card-footer text-bg text-center">
+                            <a>@Html.ActionLink("Muokkaa", "Edit", new { id = tuot.TuoteID })</a> |
+                            <a>@Html.ActionLink("Poista", "Delete", new { id = tuot.TuoteID })</a>
                         </div>
                     }
                 </div>
@@ -130,6 +132,8 @@
         }
     </div>
 </div>
+
+
 
 @{
     Html.RenderPartial("_LoginModal");

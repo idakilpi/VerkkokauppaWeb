@@ -22,26 +22,7 @@ namespace VerkkokauppaWeb.Controllers
         public ActionResult Index()
         {
             return View();
-            //return View(db.Asiakkaat.ToList());
         }
-
-        // GET: Asiakkaat/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Asiakkaat asiakkaat = db.Asiakkaat.Find(id);
-            
-            if (asiakkaat == null)
-            {
-                return HttpNotFound();
-            }
-            return View(asiakkaat);
-        }
-
-
         
         // GET: Asiakkaat/Create
         public ActionResult Create()
@@ -58,7 +39,7 @@ namespace VerkkokauppaWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var varattu = db.Asiakkaat.Any(x => x.Email == uusiAsiakas.Email);
+                var varattu = db.Asiakkaat.Any(x => x.Email == uusiAsiakas.Email); //Tarkistetaan, onko syötetty sähköposti jo olemassa tietokannassa
                 if (varattu)
                 {
                     ModelState.AddModelError("Email", "Sähköpostiosoite on jo käytössä.");
@@ -66,13 +47,13 @@ namespace VerkkokauppaWeb.Controllers
                 }
                 
 
-                var asiakas = new Asiakkaat {
+                var asiakas = new Asiakkaat { //Luodaan uuden asiakkaan tiedot Asiakkaat -tauluun
                 Etunimi = uusiAsiakas.Etunimi,
                 Sukunimi = uusiAsiakas.Sukunimi,
                 Email = uusiAsiakas.Email,
                 };
 
-                var login = new Logins
+                var login = new Logins //Luodaan uuden asiakkaan tiedot Logins -tauluun
                 {
                     Salasana = uusiAsiakas.Salasana,
                     Kayttajatunnus = uusiAsiakas.Email
@@ -82,7 +63,7 @@ namespace VerkkokauppaWeb.Controllers
                 db.Logins.Add(login);
                 db.SaveChanges();
                 ViewBag.Message = string.Format("User {0} Successfully Created", uusiAsiakas.Etunimi);
-                return RedirectToAction("Index","Asiakkaat");
+                return RedirectToAction("Index","Home");
                 }
 
             return View(uusiAsiakas);
@@ -101,7 +82,7 @@ namespace VerkkokauppaWeb.Controllers
         public ActionResult AdminPage()
         {
 
-            var modelList = from a in db.Asiakkaat
+            var modelList = from a in db.Asiakkaat //Haetaan asiakkaiden tiedot ja login -tiedot
                             join l in db.Logins on a.AsiakasID equals l.AsiakasID
                             select new AsiakkaatAndLoginsViewModel
                             {
@@ -115,9 +96,9 @@ namespace VerkkokauppaWeb.Controllers
             return View(modelList);
         }
 
-        public ActionResult Editprofile(int id, string view)
+        public ActionResult Editprofile(int id)
         {
-            var asiakas = (from a in db.Asiakkaat
+            var asiakas = (from a in db.Asiakkaat //Haetaan tietyn asiakkaan tiedot
                            join l in db.Logins on a.AsiakasID equals l.AsiakasID
                            where l.AsiakasID == id
                            select new AsiakkaatAndLoginsViewModel
@@ -132,18 +113,20 @@ namespace VerkkokauppaWeb.Controllers
             //return View(asiakas);
         }
         [HttpPost]
-        public ActionResult EditProfile(int? id, string view,[Bind(Include = "AsiakasID,Etunimi,Sukunimi,Email,Salasana,Kayttajatunnus")] AsiakkaatAndLoginsViewModel päivitäAsiakas) 
+        public ActionResult EditProfile(int? id,[Bind(Include = "AsiakasID,Etunimi,Sukunimi,Email,Salasana,Kayttajatunnus")] AsiakkaatAndLoginsViewModel päivitäAsiakas) 
         { 
             if (id == null) { 
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest); 
             } 
+
             if (ModelState.IsValid) { 
-                var asiakas = db.Asiakkaat.Find(id);
+                var asiakas = db.Asiakkaat.Find(id); 
                 var login = db.Logins.FirstOrDefault(l => l.AsiakasID == id);
 
                 if (asiakas == null || login == null) { 
                     return HttpNotFound(); 
                 } 
+
                 asiakas.Etunimi = päivitäAsiakas.Etunimi; 
                 asiakas.Sukunimi = päivitäAsiakas.Sukunimi; 
                 asiakas.Email = päivitäAsiakas.Email; 
@@ -152,7 +135,7 @@ namespace VerkkokauppaWeb.Controllers
                 db.Entry(asiakas).State = EntityState.Modified; 
                 db.Entry(login).State = EntityState.Modified; 
                 db.SaveChanges();
-                return RedirectToAction("Index", "Tuotteet");
+                return RedirectToAction("Index", "Home");
             }
                 return View(päivitäAsiakas); 
         }
