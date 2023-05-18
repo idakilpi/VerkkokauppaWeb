@@ -30,12 +30,26 @@ input, select {
 body {
     color: var(--bs-petrol);
 }
-h1, h2, h3, h4 {
+body, html {
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5 {
     font-family: 'DM Serif Display', serif;
+}
+
+.dropdown-item {
+    --bs-dropdown-link-active-bg: var(--bs-beige);
+    --bs-dropdown-link-active-color: #000;
 }
 
 .navLogo {
     width: 100%;
+}
+
+.navbar-toggler {
+    color: #002f3b4a;
+    border: #002f3b4a;
 }
 
 .navEdit {
@@ -47,17 +61,34 @@ h1, h2, h3, h4 {
     /*    color: #212529;
 */ /*font-size: large;*/
     background: linear-gradient(9deg, #74a2b2, #c8d8dd);
-    padding: 5px;
+    padding: 10px;
     font-family: Calibri;
 }
 
 .navbar-nav a {
     font-size: large;
     font-family: Calibri;
+    padding: 10px;
+    margin-right: 10px;
 }
 
 .nav-link {
     color: #003e4d !important;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    background-color: var(--bs-petrol);
 }
 
 
@@ -96,6 +127,10 @@ h1, h2, h3, h4 {
 
 .underline-home::before {
     bottom: 5px;
+}
+
+.underline_prodpic::before {
+    background-color: #fff;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -236,6 +271,7 @@ h1, h2, h3, h4 {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 500px;
+    height: 100%;
 }
 
 .asiakasKokemus {
@@ -325,20 +361,56 @@ h1, h2, h3, h4 {
 
 .card-header {
     text-align: center;
+    background-color: #cce5ee;
 }
 
 .prodImg {
     width: 100%;
     object-fit: cover;
-    height: 17vw;
+    height: 15vw;
+}
+
+.prodpic_overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    text-align: center;
+    cursor: pointer;
+}
+
+.prodpic_overlay > * {
+    transform: translateY(20px);
+    transition: transform 0.35s;
+}
+
+.prodpic_overlay:hover {
+    opacity: 1;
+}
+
+.prodpic_overlay:hover > * {
+    transform: translateY(0);
 }
 
 .card-footer a {
     color: var(--bs-petrol);
     text-decoration: none;
 }
-.card-footer a:hover {
+.card-footer a:hover, .adminLisääKoriin:hover {
     text-decoration: underline;
+}
+
+.adminLisääKoriin {
+    cursor: pointer;
 }
 
     /*Buttoneita*/
@@ -354,6 +426,7 @@ h1, h2, h3, h4 {
         text-align: center;
         text-decoration: none;
         vertical-align: middle;
+        cursor: pointer;
     }
 
 .btnn:hover {
@@ -419,10 +492,6 @@ h1, h2, h3, h4 {
 
 /* LoginModaalin asetuksia*/
 
-.modal-content {
-    width: 100%;
-    max-width: 1300px;
-}
 
 .loG {
     padding: 0;
@@ -504,6 +573,12 @@ footer li {
 
 /*Media screenit*/
 
+@media screen and (max-width: 2200px) {
+    .prodImg {
+        height: 18vw;
+    }
+}
+
 @media screen and (max-width: 1900px) {
 
     .prodImg {
@@ -511,65 +586,92 @@ footer li {
     }
 }
 
-@media screen and (max-width: 990px) {
-    .prodImg {
+@media screen and (max-width: 1300px) {
+    .prodImgModal {
         height: 30vw;
     }
-
-    .logModal {
-        display: block;
-    }
-
-    .modalPic {
-        display: none;
-    }
-
-    .LogModal {
-        top: auto;
-    }
-
-    .lomakeOtsikot, .palauteLomakkeet, .lomakeBtn {
-        width: 100%;
-    }
 }
 
+    @media screen and (max-width: 990px) {
+        .prodImg {
+            height: 30vw;
+        }
+        .prodImgModal {
+            background-size:contain;
+            height: 45vw;
+        }
 
-@media screen and (max-width: 768px) {
+        .logModal {
+            display: block;
+        }
 
-    .toSide {
-        align-items: center;
+        .modalPic {
+            display: none;
+        }
+
+        .LogModal {
+            top: auto;
+        }
+
+        .lomakeOtsikot, .palauteLomakkeet, .lomakeBtn {
+            width: 100%;
+        }
+
+        .container-input {
+            display: none;
+        }
     }
 
-    .palauteLomakeCont {
-        padding: 30px 0px;
-    }
 
-    #otsikko {
-        font-size: 50px;
-    }
+    @media screen and (max-width: 768px) {
 
-    .katsoTästä h2 {
-        font-size: xx-large;
-    }
+        .body-content {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
 
-    .prodImg {
-        height: 70vw;
-    }
+        .navbar-collapse li {
+            width: fit-content;
+            margin: 0 auto;
+        }
 
-    /*Footerin tekstit keskelle*/
-    .footerNavCol {
-        display: flex;
-        justify-content: center;
-    }
+        .toSide {
+            align-items: center;
+        }
 
-    .footerMove {
-        position: relative;
-        right: 25px;
-    }
+        .palauteLomakeCont {
+            padding: 30px 30px;
+        }
 
-    .palauteLomakeCont {
-        background-repeat: no-repeat;
-        background-size: 150%;
+        #otsikko {
+            font-size: 40px;
+            padding-top: 0px;
+        }
+
+        .katsoTästä h2 {
+            font-size: xx-large;
+        }
+
+        .prodImg {
+            height: 65vw;
+        }
+
+
+        /*Footerin tekstit keskelle*/
+        .footerNavCol {
+            display: flex;
+            justify-content: center;
+        }
+
+
+        .footerMove {
+            position: relative;
+            right: 25px;
+        }
+
+        .palauteLomakeCont {
+            background-repeat: no-repeat;
+            background-size: 150%;
+        }
     }
-}
 

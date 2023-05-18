@@ -35,19 +35,19 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-lg-6 col-md-12">
                         @if (Model.Kuva != null)
                         {
                             var base64 = Convert.ToBase64String(Model.Kuva);
                             var imgscr = string.Format("data:image/jpg;base64,{0}", base64);
-                            <img src="@imgscr" alt="Kuva tuotteesta" class="prodImg">
+                            <img src="@imgscr" alt="Kuva tuotteesta" class="prodImg prodImgModal">
                         }
                         else
                         {
                             <img src="~/Icons/cart.svg" />
                         }
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-lg-6 col-md-12">
                         <dl class="dl-horizontal">
                             <dt>@Html.DisplayNameFor(model => model.Hinta)</dt>
                             <dd>@Html.DisplayFor(model => model.Hinta)</dd>
@@ -59,8 +59,14 @@
                 </div>
             </div>
             <div class="modal-footer">
+                @if (Session["UserName"] == null)
+                {
+                    <a class="btnn saveBtn" data-bs-toggle="modal" data-bs-target="#LoginRuutu">Lisää tuote ostoskoriin</a>
+                }
+                else
+                {
                 <a class="btnn saveBtn" name="LisaaKoriin" value="Lisaa Koriin" tuoteid="@Model.TuoteID" id="btnLisaaKoriin" onclick="LisaaKoriin(this)">Lisää tuote ostoskoriin</a>
-                <a href="@Url.Action("Index", "Tuotteet")" class="btnn deleteBtn" data-dismiss="modal">Sulje</a>
+                }<a href="@Url.Action("Index", "Tuotteet")" class="btnn deleteBtn" data-dismiss="modal">Sulje</a>
             </div>
         </div>
     </div>

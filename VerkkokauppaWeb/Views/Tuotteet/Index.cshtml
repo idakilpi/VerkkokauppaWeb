@@ -92,47 +92,79 @@
     <div class="row">
         @foreach (var tuot in Model.Tuotteet)
         {
-            <div class="col-sm-12 col-md-6 col-lg-4  p-3">
-                <div class="card @*md-3*@ h-100">
-                    <h3 class="card-header">@tuot.TuoteNimi</h3>
+            if (Session["UserName"] as string == "teppo@jetiside.fi")
+            {
+                <div class="col-sm-12 col-md-6 col-lg-4  p-3">
+                    <div class="card @*md-3*@ h-100">
+                        <h3 class="card-header">@tuot.TuoteNimi</h3>
 
+                        @if (tuot.Kuva != null)
+                        {
+                            var base64 = Convert.ToBase64String(tuot.Kuva);
+                            var imgscr = string.Format("data:image/jpg;base64,{0}", base64);
+                            <img src="@imgscr" alt="Kuva tuotteesta" class="prodImg">
+                        }
+                        else
+                        {
+                            <img src="~/Icons/cart.svg" />
+                        }
+
+                        <div class="card-body d-flex justify-content-between">
+                            <p class="card-text">@tuot.Hinta</p>
+                            <button type="button" class="btn btn-light btn-details" onclick="showProductDetails(@tuot.TuoteID)">
+                                <img src="~/Icons/info-circle.svg">
+                            </button>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Kategoria: @tuot.Kategoriat.KategoriaNimi</li>
+                            <li class="list-group-item">Varastomäärä: @tuot.Varastomaara</li>
+                        </ul>
+                        <div class="card-footer text-bg text-center">
+                            <a>@Html.ActionLink("Muokkaa", "Edit", new { id = tuot.TuoteID })</a> |
+                            <a>@Html.ActionLink("Poista", "Delete", new { id = tuot.TuoteID })</a> |
+                            <a class="adminLisääKoriin" name="LisaaKoriin" value="Lisaa Koriin" tuoteid="@tuot.TuoteID" id="btnLisaaKoriin" onclick="LisaaKoriin(this)">Osta</a>
+
+                        </div>
+                    </div>
+                </div>
+
+        } else {
+
+            <div class="col-sm-12 col-md-6 col-lg-4 p-3">
+                <div class="card h-100">
                     @if (tuot.Kuva != null)
                     {
                         var base64 = Convert.ToBase64String(tuot.Kuva);
                         var imgscr = string.Format("data:image/jpg;base64,{0}", base64);
-                        <img src="@imgscr" alt="Kuva tuotteesta" class="prodImg">
+                        <img src="@imgscr" alt="Kuva tuotteesta" class="prodImg prodpic">
                     }
                     else
                     {
                         <img src="~/Icons/cart.svg" />
                     }
 
-                    <div class="card-body d-flex justify-content-between">
-                        <p class="card-text">@tuot.Hinta</p>
-                        <button type="button" class="btn btn-light btn-details" onclick="showProductDetails(@tuot.TuoteID)">
-                            <img src="~/Icons/info-circle.svg">
-                        </button>
+                    <div class="prodpic_overlay" onclick="showProductDetails(@tuot.TuoteID)">
+                        <h3 class="underline underline_prodpic">Osta tästä</h3>
                     </div>
-                    <ul class="list-group list-group-flush">
+
+                    <div class="card-body @*d-flex justify-content-between*@">
+                        <h5 @*class="card-header"*@ style="text-align:center;">@tuot.TuoteNimi</h5>
+
+                        <p class="card-text" style="text-align:center;">€@tuot.Hinta</p>
+
+
+                    </div>
+                    @*<ul class="list-group list-group-flush">
                         <li class="list-group-item">Kategoria: @tuot.Kategoriat.KategoriaNimi</li>
                         <li class="btnn saveBtn" name="LisaaKoriin" value="Lisaa Koriin" tuoteid="@tuot.TuoteID" id="btnLisaaKoriin" onclick="LisaaKoriin(this)">Lisää tuote ostoskoriin</li>
-                    </ul>
-                    @if (Session["UserName"] as string == "teppo@jetiside.fi")
-                    {
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Varastomäärä: @tuot.Varastomaara</li>
-                        </ul>
-                        <div class="card-footer text-bg text-center">
-                            <a>@Html.ActionLink("Muokkaa", "Edit", new { id = tuot.TuoteID })</a> |
-                            <a>@Html.ActionLink("Poista", "Delete", new { id = tuot.TuoteID })</a>
-                        </div>
-                    }
+                    </ul>*@
+                   
                 </div>
             </div>
+            }
         }
     </div>
 </div>
-
 
 
 @{

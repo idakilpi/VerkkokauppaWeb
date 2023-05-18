@@ -5,38 +5,63 @@
 
 }
 
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#myButton').click(function () {
-            if ($('#toimitustiedot').is(':visible')) {
-                $('#toimitustiedot').hide();
-                $('#tallennus').hide();
-                $('#myButton').text('Kassalle');
-            } else {
-                $('#toimitustiedot').show();
-                $('#myButton').text('Peruuta');
-                $('#tallennus').show();
-            }
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myButton').click(function () {
+                if ($('#toimitustiedot').is(':visible')) {
+                    $('#toimitustiedot').hide();
+                    $('#tallennus').hide();
+                    $('#myButton').text('Kassalle');
+                } else {
+                    $('#toimitustiedot').show();
+                    $('#myButton').text('Peruuta');
+                    $('#tallennus').show();
+                }
+            });
         });
-    });
-</script>
+    </script>
+    }
 
 
-<h2>Ostoskori</h2>
+<header>
+    <div class="p-5 text-center bg-light">
+        <h1 class="mb-3">Ostoskori</h1>
+    </div>
+</header>
 
 @using (Html.BeginForm("LisaaTilaus", "Tuotteet", FormMethod.Post))
 {
-    <table class="table-hover" style="width:100%">
+    <table class="table" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                <th style="text-align: right">
+                    Tuote
+                </th>
+                <th style="text-align: right">
+                    Määrä
+                </th>
+                <th style="text-align: right">
+                    Hinta
+                </th>
+                <th style="text-align: right">
+                    Yhteensä
+                </th>
+
+            </tr>
+        </thead>
         @foreach (var tuot in Model)
         {
             summa += tuot.Summa;
             var base64 = Convert.ToBase64String(tuot.Kuva);
             var imgscr = string.Format("data:image/jpg;base64,{0}", base64);
+
             <tr>
                 <td>
-
-                    <img src="@imgscr" alt="Kuva tuotteesta" height="75" width="75" class="rounded">
+                    <img src="@imgscr" alt="Kuva tuotteesta" height="85" width="85" class="rounded">
                 </td>
                 <td style="text-align: right">
                     @tuot.TuoteNimi
@@ -45,19 +70,19 @@
                     @tuot.Määrä
                 </td>
                 <td style="text-align: right">
-                    @tuot.Kappalehinta.ToString("#,##0.00")
+                    @tuot.Kappalehinta.ToString("#,##0.00")€
                 </td>
                 <td style="text-align: right">
-                    @tuot.Summa.ToString("#,##0.00")
+                    @tuot.Summa.ToString("#,##0.00")€
                 </td>
             </tr>
         }
         <tr style="border-top: 2px solid black">
             <td colspan="4" style="text-align: right">
-                <h3>Yhteensä</h3>
+                <h3>Loppusumma</h3>
             </td>
             <td style="text-align: right">
-                <h3>@summa.ToString("#,##0.00")</h3>
+                <h3>@summa.ToString("#,##0.00")€</h3>
             </td>
         </tr>
     </table>
@@ -103,8 +128,8 @@
     </div>
 
         <div id="tallennus" style="text-align:right; display:none;">
-            <input type="submit" value="Tee tilaus" name="Save" class="btn btn-primary" />
+            <input type="submit" value="Tee tilaus" name="Save" class="btnn saveBtn" />
         </div>
 }
 
-        <button id="myButton">Kassalle</button>
+        <button class="btnn saveBtn" id="myButton">Kassalle</button>
