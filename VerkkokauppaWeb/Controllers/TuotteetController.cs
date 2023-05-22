@@ -137,10 +137,12 @@ namespace VerkkokauppaWeb.Controllers
         [HttpPost]
         public ActionResult LisaaTilaus([Bind(Include = "ToimitusOsoite,ToimitusPostinumero")] Ostoskori firstItem)
         {
-            string tieto = firstItem.ToimitusOsoite;
-            string tieto2 = firstItem.ToimitusPostinumero;
+            string toimitusosoite = firstItem.ToimitusOsoite;
+            string postinumero = firstItem.ToimitusPostinumero;
             int TilausID = 0;
             listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
+            string etunimi = listOfOstoskoriModels[0].Etunimi;
+            string sukunimi = listOfOstoskoriModels[0].Sukunimi;
             Tilaukset tilausObj = new Tilaukset()
             {
                 AsiakasID = listOfOstoskoriModels[0].AsiakasID,
@@ -172,7 +174,7 @@ namespace VerkkokauppaWeb.Controllers
 
             foreach (var item in listOfOstoskoriModels)
             {
-                cartString += $"      {item.TuoteID}      {item.TuoteNimi} {item.Määrä} = {item.Summa}€\n";
+                cartString += $"      {item.TuoteID}      {item.TuoteNimi} {item.Määrä} kpl = {item.Summa}€\n";
             }
             cartString += $"Yhteensä: {totalPrice}€";
 
@@ -182,7 +184,8 @@ namespace VerkkokauppaWeb.Controllers
             mail.Subject = "Tilausvahvistus Jetiside, Tilausnumero: " + TilausID;
             mail.Body = "Hei!\nKiitos tilauksestasi!\nTilaamasi tuotteet toimitetaan n.3-7 arkipäivän kuluttua.\n\n" +
                 "Tilausnumero: " + TilausID + "\nTuoteluettelo:\n| Tuote ID | Nimi | Määrä | Hinta |\n" + cartString +
-                "\n\nTervetuloa asioimaan uudelleen!";
+                "Tilaamasi tuotteet toimitetaan osoitteeseen:\n" + etunimi +" "+ sukunimi + "\n" + toimitusosoite + "\n" + postinumero + "\n\nTervetuloa asioimaan uudelleen!";
+                
 
             SmtpClient smtp = new SmtpClient("smtp.office365.com");
             smtp.Port = 587;

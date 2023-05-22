@@ -33,13 +33,13 @@
 @using (Html.BeginForm("LisaaTilaus", "Tuotteet", FormMethod.Post))
 {
     <table class="table" style="width:100%">
-        <thead>
-            <tr>
-                <th>
-
-                </th>
-                <th style="text-align: right">
-                    Tuote
+        <tr style="border-bottom: 2px solid black">
+            <th>Kuva</th>
+            <th style="text-align: right"> Nimi</th>
+            <th style="text-align: right">Määrä</th>
+            <th style="text-align: right">Kappalehinta</th>
+            <th style="text-align: right">Summa</th>
+        </tr>
                 </th>
                 <th style="text-align: right">
                     Määrä
@@ -62,6 +62,7 @@
             <tr>
                 <td>
                     <img src="@imgscr" alt="Kuva tuotteesta" height="85" width="85" class="rounded">
+                    <img src="@imgscr" alt="Kuva tuotteesta" height="100" width="100" class="rounded">
                 </td>
                 <td style="text-align: right">
                     @tuot.TuoteNimi
@@ -121,6 +122,7 @@
                         @Html.EditorFor(model => firstItem.ToimitusPostinumero, new { htmlAttributes = new { @class = "form-control", @name = "ToimitusPostinumero" } })
                         @Html.ValidationMessageFor(model => firstItem.ToimitusPostinumero, "", new { @class = "text-danger" })
                     </div>
+                    <div> </div>
                 </div>
             }
         }
