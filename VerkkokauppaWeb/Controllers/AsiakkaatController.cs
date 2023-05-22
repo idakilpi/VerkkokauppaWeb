@@ -62,7 +62,7 @@ namespace VerkkokauppaWeb.Controllers
                 db.Asiakkaat.Add(asiakas);
                 db.Logins.Add(login);
                 db.SaveChanges();
-                ViewBag.Message = string.Format("User {0} Successfully Created", uusiAsiakas.Etunimi);
+                ViewBag.alertMessage = string.Format("Moi {0}! Rekisteröintisi onnistui.", uusiAsiakas.Etunimi);
                 return RedirectToAction("Index","Home");
                 }
 
@@ -79,7 +79,7 @@ namespace VerkkokauppaWeb.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult AdminPage()
+        public ActionResult GetCustomers()
         {
 
             var modelList = from a in db.Asiakkaat //Haetaan asiakkaiden tiedot ja login -tiedot
@@ -166,7 +166,7 @@ namespace VerkkokauppaWeb.Controllers
             db.Asiakkaat.Remove(asiakas);
             db.Logins.Remove(login);
             db.SaveChanges();
-            return RedirectToAction("AdminPage", "Asiakkaat");
+            return RedirectToAction("GetCustomers", "Asiakkaat");
         }
     }
 }

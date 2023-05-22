@@ -592,86 +592,86 @@ footer li {
     }
 }
 
-    @media screen and (max-width: 990px) {
-        .prodImg {
-            height: 30vw;
-        }
-        .prodImgModal {
-            background-size:contain;
-            height: 45vw;
-        }
+@media screen and (max-width: 990px) {
+    .prodImg {
+        height: 30vw;
+    }
+    .prodImgModal {
+        background-size:contain;
+        height: 45vw;
+    }
 
-        .logModal {
-            display: block;
-        }
+    .logModal {
+        display: block;
+    }
 
-        .modalPic {
-            display: none;
-        }
+    .modalPic {
+        display: none;
+    }
 
-        .LogModal {
-            top: auto;
-        }
+    .LogModal {
+        top: auto;
+    }
 
-        .lomakeOtsikot, .palauteLomakkeet, .lomakeBtn {
-            width: 100%;
-        }
+    .lomakeOtsikot, .palauteLomakkeet, .lomakeBtn {
+        width: 100%;
+    }
 
-        .container-input {
-            display: none;
-        }
+    .container-input {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .body-content {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .navbar-collapse li {
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    .toSide {
+        align-items: center;
+    }
+
+    .palauteLomakeCont {
+        padding: 30px 30px;
+    }
+
+    #otsikko {
+        font-size: 40px;
+        padding-top: 0px;
+    }
+
+    .katsoTästä h2 {
+        font-size: xx-large;
+    }
+
+    .prodImg {
+        height: 65vw;
     }
 
 
-    @media screen and (max-width: 768px) {
-
-        .body-content {
-            padding-left: 0px;
-            padding-right: 0px;
-        }
-
-        .navbar-collapse li {
-            width: fit-content;
-            margin: 0 auto;
-        }
-
-        .toSide {
-            align-items: center;
-        }
-
-        .palauteLomakeCont {
-            padding: 30px 30px;
-        }
-
-        #otsikko {
-            font-size: 40px;
-            padding-top: 0px;
-        }
-
-        .katsoTästä h2 {
-            font-size: xx-large;
-        }
-
-        .prodImg {
-            height: 65vw;
-        }
-
-
-        /*Footerin tekstit keskelle*/
-        .footerNavCol {
-            display: flex;
-            justify-content: center;
-        }
-
-
-        .footerMove {
-            position: relative;
-            right: 25px;
-        }
-
-        .palauteLomakeCont {
-            background-repeat: no-repeat;
-            background-size: 150%;
-        }
+    /*Footerin tekstit keskelle*/
+    .footerNavCol {
+        display: flex;
+        justify-content: center;
     }
+
+
+    .footerMove {
+        position: relative;
+        right: 25px;
+    }
+
+    .palauteLomakeCont {
+        background-repeat: no-repeat;
+        background-size: 150%;
+    }
+}
 

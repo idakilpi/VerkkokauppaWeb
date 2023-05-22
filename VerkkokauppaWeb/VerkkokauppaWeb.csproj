@@ -174,8 +174,6 @@
     <Compile Include="ViewModels\AsiakkaatAndLoginsViewModel.cs" />
     <Compile Include="ViewModels\Ostoskori.cs" />
     <Compile Include="ViewModels\Register.cs" />
-    <Compile Include="ViewModels\TilausModel.cs" />
-    <Compile Include="ViewModels\TilausrivitModel.cs" />
     <Compile Include="ViewModels\TuotteetAndLoginsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -272,7 +270,7 @@
     <Content Include="Views\Tilaukset\Index.cshtml" />
     <Content Include="Views\Tilaukset\_OrderLines.cshtml" />
     <Content Include="Views\Shared\_LoginModal.cshtml" />
-    <Content Include="Views\Asiakkaat\AdminPage.cshtml" />
+    <Content Include="Views\Asiakkaat\GetCustomers.cshtml" />
     <Content Include="Views\Asiakkaat\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>

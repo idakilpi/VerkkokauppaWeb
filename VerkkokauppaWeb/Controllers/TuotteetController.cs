@@ -112,7 +112,7 @@ namespace VerkkokauppaWeb.Controllers
 
         public ActionResult Ostoskori()
         {
-            List<Asiakkaat> asiakkaat = new List<Asiakkaat>();
+            List<Asiakkaat> asiakkaat = new List<Asiakkaat>(); //Ostoskorisivu, listaa ostoskorin tuotteet
             asiakasEmail = Session["Username"] as string;
             Asiakkaat Asiakas = objVerkkokauppaDBEntities.Asiakkaat.Single(model => model.Email == asiakasEmail);
             listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
@@ -137,7 +137,7 @@ namespace VerkkokauppaWeb.Controllers
         [HttpPost]
         public ActionResult LisaaTilaus([Bind(Include = "ToimitusOsoite,ToimitusPostinumero")] Ostoskori firstItem)
         {
-            string toimitusosoite = firstItem.ToimitusOsoite;
+            string toimitusosoite = firstItem.ToimitusOsoite; //Tilauksen tekeminen
             string postinumero = firstItem.ToimitusPostinumero;
             int TilausID = 0;
             listOfOstoskoriModels = Session["OstoskoriTuote"] as List<Ostoskori>;
@@ -178,7 +178,7 @@ namespace VerkkokauppaWeb.Controllers
             }
             cartString += $"Yhteensä: {totalPrice}€";
 
-            MailMessage mail = new MailMessage();
+            MailMessage mail = new MailMessage(); //tilausvahvistuksen lähetys
             mail.From = new MailAddress("jetiside@outlook.com");
             mail.To.Add(asiakasEmail);
             mail.Subject = "Tilausvahvistus Jetiside, Tilausnumero: " + TilausID;
