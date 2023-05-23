@@ -14,6 +14,7 @@ namespace VerkkokauppaWeb.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.LoginError = 0;
             return View();
         }
 
@@ -46,6 +47,7 @@ namespace VerkkokauppaWeb.Controllers
                 Session["UserFirstName"] = LoggedUser.Asiakkaat.Etunimi;
                 Session["LoginID"] = LoggedUser.LoginID;
                 Session["UserID"] = LoggedUser.AsiakasID;
+                ViewBag.LoginError = 0;
                 //Session["AccessLevel"] = LoggedUser.AccessLevel;
                 return RedirectToAction("Index", "Home"); //Tässä määritellään mihin onnistunut kirjautuminen johtaa --> Home/Index
             }
