@@ -200,8 +200,25 @@
     <Content Include="Icons\cart.svg" />
     <Content Include="Images\backpacker-g78fdbc4ab_1920.jpg" />
     <Content Include="Images\jetiside-modalkuva.png" />
+    <Content Include="Images\jetiside-reppu.jpg" />
+    <Content Include="Images\jetiside-tausta.jpg" />
+    <Content Include="Images\jetiside-tausta2.jpg" />
+    <Content Include="Images\jetiside-tausta3.jpg" />
+    <Content Include="Images\jetiside-tausta4.jpg" />
+    <Content Include="Images\jetiside-tausta5.jpg" />
+    <Content Include="Images\jetiside-tausta6.jpg" />
     <Content Include="Images\Jetiside-taustaa.jpg" />
+    <Content Include="Images\Jetiside2.png" />
+    <Content Include="Images\JetisideLogoValm.png" />
+    <Content Include="Images\JetisideLogoValm2.png" />
+    <Content Include="Images\JetisideLogoValm3.png" />
+    <Content Include="Images\Jetiside_meistä.png" />
+    <Content Include="Images\Jetiside_meistä2.png" />
+    <Content Include="Images\Jetiside_meistä3.png" />
     <Content Include="Images\rock-climbing-gda966f741_1920.jpg" />
+    <Content Include="Images\takki1.jpg" />
+    <Content Include="Images\takki2.jpg" />
+    <Content Include="Images\takki3.jpg" />
     <Content Include="Images\wave %281%29.png" />
     <Content Include="Models\VerkkokauppaWebModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
