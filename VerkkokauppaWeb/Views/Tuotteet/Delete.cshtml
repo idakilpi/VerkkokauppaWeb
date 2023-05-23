@@ -4,11 +4,9 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Poista tuote</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Tuotteet</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -48,7 +46,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Kuva)
+            @if (Model.Kuva != null)
+            {
+                var base64 = Convert.ToBase64String(Model.Kuva);
+                var imgscr = string.Format("data:image/jpg;base64,{0}", base64);
+                <img style="width:50%;" src="@imgscr" alt="Kuva tuotteesta">
+            }
         </dd>
 
         <dt>
@@ -65,8 +68,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Poista" class="btnn deleteBtn" />
+            <button class="btnn backBtn">@Html.ActionLink("Takaisin", "Index")</button>
         </div>
     }
 </div>

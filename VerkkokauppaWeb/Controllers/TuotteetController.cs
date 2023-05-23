@@ -184,7 +184,7 @@ namespace VerkkokauppaWeb.Controllers
             mail.Subject = "Tilausvahvistus Jetiside, Tilausnumero: " + TilausID;
             mail.Body = "Hei!\nKiitos tilauksestasi!\nTilaamasi tuotteet toimitetaan n.3-7 arkipäivän kuluttua.\n\n" +
                 "Tilausnumero: " + TilausID + "\nTuoteluettelo:\n| Tuote ID | Nimi | Määrä | Hinta |\n" + cartString +
-                "Tilaamasi tuotteet toimitetaan osoitteeseen:\n" + etunimi +" "+ sukunimi + "\n" + toimitusosoite + "\n" + postinumero + "\n\nTervetuloa asioimaan uudelleen!";
+                "\nTilaamasi tuotteet toimitetaan osoitteeseen:\n" + etunimi +" "+ sukunimi + "\n" + toimitusosoite + "\n" + postinumero + "\n\nTervetuloa asioimaan uudelleen!";
                 
 
             SmtpClient smtp = new SmtpClient("smtp.office365.com");
@@ -197,6 +197,7 @@ namespace VerkkokauppaWeb.Controllers
 
             Session["OstoskoriTuote"] = null;
             Session["OstoskoriCounter"] = null;
+            TempData["AlertMessage"] = "Tilaus vastaanotettu!";
             return RedirectToAction("Index");
         }
 

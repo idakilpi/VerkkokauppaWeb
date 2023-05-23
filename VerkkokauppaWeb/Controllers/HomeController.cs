@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using VerkkokauppaWeb.Models;
+using VerkkokauppaWeb.ViewModels;
 
 namespace VerkkokauppaWeb.Controllers
 {
@@ -90,7 +91,8 @@ namespace VerkkokauppaWeb.Controllers
 
             smtp.Send(mail);
             ViewBag.SuccessMessage = "Sähköpostin lähetys onnistui!";
-            return View("SendEmail");
+            TempData["AlertMessage"] = "Sähköpostin lähetys onnistui! Vastaamme mahdollisimman pian.";
+            return RedirectToAction("Index", "Home");
         }
     }
 }

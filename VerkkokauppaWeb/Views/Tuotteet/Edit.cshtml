@@ -5,7 +5,7 @@
 }
 
 
-<h2>Edit</h2>
+<h2>Muokkaa</h2>
 
 @using (Html.BeginForm("Edit", "Tuotteet", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
@@ -61,12 +61,12 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Kuva, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-6">
                 @if (Model.Kuva != null)
                 {
                     var base64 = Convert.ToBase64String(Model.Kuva);
                     var imgscr = string.Format("data:image/jpg;base64,{0}", base64);
-                    <img style="height:200px; width:100%; display:block;" src="@imgscr" alt="Kuva tuotteesta">
+                    <img style="width:100%;" src="@imgscr" alt="Kuva tuotteesta">
                 }
                 else
                 {
@@ -81,12 +81,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Tallenna" class="btnn saveBtn" />
+                <button class="btnn backBtn">@Html.ActionLink("Takaisin", "Index")</button>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

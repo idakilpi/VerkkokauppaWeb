@@ -227,6 +227,7 @@
       <DependentUpon>VerkkokauppaWebModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.6.3.intellisense.js" />
+    <Content Include="Scripts\Custom.js" />
     <Content Include="Scripts\jquery-3.6.3.js" />
     <Content Include="Scripts\jquery-3.6.3.min.js" />
     <Content Include="Scripts\jquery-3.6.3.slim.js" />

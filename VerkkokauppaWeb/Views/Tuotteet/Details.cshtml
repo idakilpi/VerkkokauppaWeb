@@ -10,57 +10,33 @@
     <h4>Tuotteet</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TuoteNimi)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.TuoteNimi)</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TuoteNimi)
-        </dd>
+        <dd>@Html.DisplayFor(model => model.TuoteNimi)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Hinta)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Hinta)</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Hinta)
-        </dd>
+        <dd>@Html.DisplayFor(model => model.Hinta)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Varastomaara)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Varastomaara)</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Varastomaara)
-        </dd>
+        <dd>@Html.DisplayFor(model => model.Varastomaara)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Kuvaus)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Kuvaus)</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Kuvaus)
-        </dd>
+        <dd>@Html.DisplayFor(model => model.Kuvaus)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Kuva)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Kuva)</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Kuva)
-        </dd>
+        <dd>@Html.DisplayFor(model => model.Kuva)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Kategoriat.KategoriaNimi)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Kategoriat.KategoriaNimi)</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Kategoriat.KategoriaNimi)
-        </dd>
+        <dd>@Html.DisplayFor(model => model.Kategoriat.KategoriaNimi)</dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TuoteID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Muokkaa", "Edit", new { id = Model.TuoteID }) |
+    @Html.ActionLink("Takaisin", "Index")
 </p>

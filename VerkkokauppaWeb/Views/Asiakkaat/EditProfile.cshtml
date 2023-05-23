@@ -52,7 +52,7 @@
                 <input type="submit" value="Tallenna" class="btnn saveBtn" />
                 @if (Session["UserName"] as string == "teppo@jetiside.fi")
                 {
-                    <button class="btnn backBtn">@Html.ActionLink("Takaisin", "AdminPage")</button>
+                    <button class="btnn backBtn">@Html.ActionLink("Takaisin", "GetCustomers")</button>
                 }
                 else
                 {

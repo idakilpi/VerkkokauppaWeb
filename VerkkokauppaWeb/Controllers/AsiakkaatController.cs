@@ -27,6 +27,7 @@ namespace VerkkokauppaWeb.Controllers
         // GET: Asiakkaat/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -63,7 +64,15 @@ namespace VerkkokauppaWeb.Controllers
                 db.Logins.Add(login);
                 db.SaveChanges();
                 ViewBag.alertMessage = string.Format("Moi {0}! Rekisteröintisi onnistui.", uusiAsiakas.Etunimi);
-                return RedirectToAction("Index","Home");
+                TempData["AlertMessage"] = string.Format("Moi {0}, Rekisteröintisi onnistui! Voit nyt kirjautua sisään.", uusiAsiakas.Etunimi);
+                if (Session["UserName"] as string == "teppo@jetiside.fi")
+                {
+                    return RedirectToAction("GetCustomers", "Asiakkaat");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
                 }
 
             return View(uusiAsiakas);
@@ -135,6 +144,8 @@ namespace VerkkokauppaWeb.Controllers
                 db.Entry(asiakas).State = EntityState.Modified; 
                 db.Entry(login).State = EntityState.Modified; 
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Tiedot päivitetty!";
+
                 return RedirectToAction("Index", "Home");
             }
                 return View(päivitäAsiakas); 
@@ -166,6 +177,8 @@ namespace VerkkokauppaWeb.Controllers
             db.Asiakkaat.Remove(asiakas);
             db.Logins.Remove(login);
             db.SaveChanges();
+            TempData["AlertMessage"] = "Tiedot poistettu!";
+
             return RedirectToAction("GetCustomers", "Asiakkaat");
         }
     }

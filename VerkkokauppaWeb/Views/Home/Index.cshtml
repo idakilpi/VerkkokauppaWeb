@@ -14,10 +14,17 @@
 
 
 <main>
-    <br />
     <div class="homeContainer">
         <div class="row katsoCarousel">
-            <h1 id="otsikko">Tervetuloa Jetiside-verkkokauppaan!</h1>
+            @if (@TempData["AlertMessage"] != null)
+            {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["AlertMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            }<div class="p-5 text-center bg-light">
+                <h1 id="otsikko">Tervetuloa Jetiside-verkkokauppaan!</h1>
+            </div>
 
             <div class="col-lg carouselCont">
                 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">

@@ -3,52 +3,60 @@
     ViewBag.Title = "GetCustomers";
 }
 
-<header>
-    <div class="p-5 text-center bg-light">
-        <h1 class="mb-3">Asiakkaat</h1>
-        <button class=" btnn saveBtn">
-            @Html.ActionLink("Lisää uusi", "Create")
-        </button>
+
+@if (@TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["AlertMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-</header>
-<table class="table table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Etunimi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sukunimi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Salasana)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+}
+    <header>
+        <div class="p-5 text-center bg-light">
+            <h1 class="mb-3">Asiakkaat</h1>
+            <button class=" btnn saveBtn">
+                @Html.ActionLink("Lisää uusi", "Create")
+            </button>
+        </div>
+    </header>
+    <table class="table table-hover">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Etunimi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sukunimi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salasana)
-            </td>
-            <td>
-                <button class="btnn backBtn"> @Html.ActionLink("Muokkaa", "EditProfile", new { id = item.AsiakasID })</button> |
-
-                <button class="btnn deleteBtn"> @Html.ActionLink("Poista", "Delete", new { id = item.AsiakasID })</button>
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Etunimi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sukunimi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salasana)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Etunimi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sukunimi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salasana)
+                </td>
+                <td>
+                    <button class="btnn backBtn"> @Html.ActionLink("Muokkaa", "EditProfile", new { id = item.AsiakasID })</button> |
+
+                    <button class="btnn deleteBtn"> @Html.ActionLink("Poista", "Delete", new { id = item.AsiakasID })</button>
+                </td>
+            </tr>
+        }
+
+    </table>
