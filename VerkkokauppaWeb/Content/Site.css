@@ -679,18 +679,6 @@ footer li {
         height: 70vw;
     }
 
-    .meistä {
-        padding: 6px;
-    }
-
-    .registerForm {
-        padding: 6px;
-    }
-
-    .customersTable {
-        padding: 8px;
-    }
-
     .customersResponsive {
         display: flex;
         flex-direction: column;
