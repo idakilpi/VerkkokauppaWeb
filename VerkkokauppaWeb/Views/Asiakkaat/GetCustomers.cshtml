@@ -19,8 +19,8 @@
             </button>
         </div>
     </header>
-    <table class="table table-hover">
-        <tr>
+    <table class="table table-hover table-responsive customersTable">
+        <tr class="customersTableLabel">
             <th>
                 @Html.DisplayNameFor(model => model.Etunimi)
             </th>
@@ -38,7 +38,7 @@
 
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="customersResponsive">
                 <td>
                     @Html.DisplayFor(modelItem => item.Etunimi)
                 </td>

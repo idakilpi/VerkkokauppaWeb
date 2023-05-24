@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html>
+<html lang="fi">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,18 +21,26 @@
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span>
-                <svg xmlns="http://www.w3.org/2000/svg" 
-                     width="25" height="25" fill="#002F3B" class="bi bi-list" viewBox="0 0 15 15">
-                <path fill-rule="evenodd" 
-                     d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="25" height="25" fill="#002F3B" class="bi bi-list" viewBox="0 0 15 15">
+                        <path fill-rule="evenodd"
+                              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    </svg>
                 </span>
             </button>
+            <div id="shopBag">
+                @{
+                Html.RenderPartial("_Ostoskori");
+                    }
+            </div>
+            
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav flex-grow-1 me-auto">
                     <li><a class="nav-link underline underline-home" href="~/home/Index">Etusivu</a></li>
                     <li><a class="nav-link underline underline-home" href="~/home/About">Meistä</a></li>
                     <li><a class="nav-link underline underline-home" href="~/tuotteet/index">Tuotteet</a></li>
-                    @if (ViewBag.Title == "Rekisteröidy") { 
+                    @if (ViewBag.Title == "Rekisteröidy")
+                    {
                         <li></li>
                     }
                     else if (Session["UserName"] == null)
@@ -40,10 +48,10 @@
                         <li><a class="nav-link underline underline-home" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#LoginRuutu">Kirjaudu</a></li>
                     }
 
-                        @if(Session["UserName"] as string == "teppo@jetiside.fi")
+                    @if (Session["UserName"] as string == "teppo@jetiside.fi")
                     {
-                            <li><a class="nav-link underline underline-home" href="~/Asiakkaat/GetCustomers">Asiakkaat</a></li>
-                            <li><a class="nav-link underline underline-home" href="~/Tilaukset/Index">Tilaukset</a></li>
+                        <li><a class="nav-link underline underline-home" href="~/Asiakkaat/GetCustomers">Asiakkaat</a></li>
+                        <li><a class="nav-link underline underline-home" href="~/Tilaukset/Index">Tilaukset</a></li>
                     }
                 </ul>
                 <div class="navbar-nav toSide">
@@ -62,7 +70,7 @@
                             <li><a class="dropdown-item" href="/Home/Logout">Kirjaudu ulos</a></li>
                         </ul>
                     </div>
-                    <div >
+                    <div>
                         @{
                             Html.RenderPartial("_Ostoskori");
                         }
@@ -85,7 +93,7 @@
     <br />
     <footer>
         <div class="row footerNav">
-            <div class="col-md-3 footerNavCol footerMove">
+            <div class="col-md-3 footerNavCol footerMove moveMore">
                 <ul>
                     <li><a href="~/home/Index">Etusivu</a></li>
                     <li><a href="~/home/About">Meistä</a></li>

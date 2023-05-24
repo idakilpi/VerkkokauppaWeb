@@ -40,13 +40,13 @@
 
 @using (Html.BeginForm("LisaaTilaus", "Tuotteet", FormMethod.Post))
 {
-    <table class="table" style="width:100%">
-        <tr style="border-bottom: 2px solid black">
-            <th>Kuva</th>
-            <th style="text-align: right"> Nimi</th>
-            <th style="text-align: right">Määrä</th>
-            <th style="text-align: right">Kappalehinta</th>
-            <th style="text-align: right">Summa</th>
+    <table class="table " style="width:100%">
+        <tr class="shoppingBagLabel" style="border-bottom: 2px solid black">
+            <th class="shoppingBagPic">Kuva</th>
+            <th> Nimi</th>
+            <th>Määrä</th>
+            <th>Kappalehinta</th>
+            <th>Summa</th>
         </tr>
                 
         @foreach (var tuot in Model)
@@ -55,32 +55,27 @@
             var base64 = Convert.ToBase64String(tuot.Kuva);
             var imgscr = string.Format("data:image/jpg;base64,{0}", base64);
 
-            <tr>
-                <td>
+            <tr class="shoppingBagContent">
+                <td class="shoppingBagPic">
                     <img src="@imgscr" alt="Kuva tuotteesta" height="100" width="100" class="rounded">
                 </td>
-                <td style="text-align: right">
-                    @tuot.TuoteNimi
-                </td>
-                <td style="text-align: right">
-                    @tuot.Määrä
-                </td>
-                <td style="text-align: right">
-                    @tuot.Kappalehinta.ToString("#,##0.00")€
-                </td>
-                <td style="text-align: right">
-                    @tuot.Summa.ToString("#,##0.00")€
-                </td>
+                <td>@tuot.TuoteNimi</td>
+                <td>@tuot.Määrä kpl</td>
+                <td>@tuot.Kappalehinta.ToString("#,##0.00")€</td>
+                <td>@tuot.Summa.ToString("#,##0.00")€</td>
             </tr>
         }
-        <tr style="border-top: 2px solid black">
-            <td colspan="4" style="text-align: right">
-                <h3>Loppusumma</h3>
-            </td>
-            <td style="text-align: right">
-                <h3>@summa.ToString("#,##0.00")€</h3>
-            </td>
-        </tr>
+    <tr class="shoppingBagEnd" style="border-top: 2px solid black">
+        <td id="shoppingBagSum" colspan="4">
+            <h3>Loppusumma</h3>
+        </td>
+        <td id="shoppingBagSum2">
+            <h3>Loppusumma</h3>
+        </td>
+        <td>
+            <h3>@summa.ToString("#,##0.00")€</h3>
+        </td>
+    </tr>
     </table>
     <div id="toimitustiedot" style="display:none">
         @if (Model.Any())

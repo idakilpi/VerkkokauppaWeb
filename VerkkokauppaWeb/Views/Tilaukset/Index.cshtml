@@ -77,9 +77,9 @@
     {
         <div class="section">
             <div class="header">
-                <table class="table">
+                <table class="table table-responsive ordersTable">
                     <thead>
-                        <tr>
+                        <tr class="ordersTableLabel">
                             <th>
                                 Tilaus ID: @Html.DisplayFor(modelItem => item.TilausID)
                             </th>
@@ -95,17 +95,17 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.ToimitusPostinumero)
                             </th>
-                            <th></th>
+                            <th class="ordersTableEmpty"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
+                        <tr class="ordersTableContent">
+                            <td class="ordersTableEmpty"></td>
                             <td>@Html.DisplayFor(modelItem => item.LähetysPvm)</td>
                             <td>@Html.DisplayFor(modelItem => item.TilausPvm)</td>
                             <td>@Html.DisplayFor(modelItem => item.ToimitusOsoite)</td>
                             <td>@Html.DisplayFor(modelItem => item.ToimitusPostinumero)</td>
-                            <td>
+                            <td class="ordersTableButtons">
                                 @Html.ActionLink("Muokkaa", "Edit", new { id = item.TilausID }, new { @class = "btnn saveBtn" })
                                 @Html.ActionLink("Poista", "Delete", new { id = item.TilausID }, new { @class = "btnn deleteBtn" })
                             </td>

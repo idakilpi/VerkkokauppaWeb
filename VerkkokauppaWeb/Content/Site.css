@@ -151,6 +151,10 @@ h1, h2, h3, h4, h5 {
     align-self: center;
     height: 80%;
 }
+
+#shopBag {
+    display: none;
+}
   
   
 /*Searchbar*/
@@ -350,16 +354,7 @@ h1, h2, h3, h4, h5 {
 
 /*Viestinlähetyssivu loppuu*/
 
-/*Meistä*/
-#title, .abouth3 {
-    font-family: 'DM Serif Display', serif;
-}
-
-/*Meistä loppuu*/
-
 /*Tuotteet*/
-
-
 .card {
     --bs-card-border-width: 2px;
 }
@@ -416,6 +411,7 @@ h1, h2, h3, h4, h5 {
 .adminLisääKoriin {
     cursor: pointer;
 }
+/*Tuotteet loppuu*/
 
 /*Buttoneita*/
 .btnn {
@@ -472,12 +468,12 @@ h1, h2, h3, h4, h5 {
     border-color: #99442d;
 }
 
-    .deleteBtn:hover {
-        background-color: #96513e;
-        border-color: #99442d;
-    }
+.deleteBtn:hover {
+    background-color: #96513e;
+    border-color: #99442d;
+}
 
-/*Rekkaus hover*/
+/*Rekisteröinti*/
 
 .reg {
     position: relative;
@@ -494,9 +490,8 @@ h1, h2, h3, h4, h5 {
     color: #000;
 }
 
+
 /* LoginModaalin asetuksia*/
-
-
 .loG {
     padding: 0;
 }
@@ -540,6 +535,17 @@ h1, h2, h3, h4, h5 {
 
 /*-----------------------*/
 
+/*OSTOSKORI*/
+
+.shoppingBagLabel, .shoppingBagContent, .shoppingBagEnd {
+    text-align: right;
+}
+.shoppingBagPic {
+    text-align: start;
+}
+#shoppingBagSum2 {
+    display: none;
+}
 
 footer {
     width: 100%;
@@ -624,14 +630,19 @@ footer li {
     .container-input {
         display: none;
     }
+
+    .ordersTableButtons {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 
 @media screen and (max-width: 768px) {
 
     .body-content {
-        padding-left: 0px;
-        padding-right: 0px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .navbar-collapse li {
@@ -641,6 +652,14 @@ footer li {
 
     .toSide {
         align-items: center;
+    }
+
+    #shopBag {
+        display: block;
+    }
+    .shopBag {
+        margin: 0;
+        padding: 0;
     }
 
     .palauteLomakeCont {
@@ -657,10 +676,45 @@ footer li {
     }
 
     .prodImg {
-        height: 65vw;
+        height: 70vw;
     }
 
+    .meistä {
+        padding: 6px;
+    }
 
+    .registerForm {
+        padding: 6px;
+    }
+
+    .customersTable {
+        padding: 8px;
+    }
+
+    .customersResponsive {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .customersTableLabel {
+        display: flex;
+    }
+
+    .ordersTable {
+        display: flex;
+    }
+    .ordersTableLabel, .ordersTableContent {
+        display: flex;
+        flex-direction: column;
+    }
+    .ordersTableEmpty {
+        padding: 20px !important;
+    }
+
+    .ordersTableButtons {
+        padding: 1.2px !important;
+        flex-direction: row;
+    }
     /*Footerin tekstit keskelle*/
     .footerNavCol {
         display: flex;
@@ -673,9 +727,26 @@ footer li {
         right: 25px;
     }
 
+    .moveMore {
+        right: 30px;
+    }
+
     .palauteLomakeCont {
         background-repeat: no-repeat;
         background-size: 150%;
     }
 }
 
+@media screen and (max-width: 525px) {
+    .shoppingBagPic {
+        display: none;
+    }
+    #shoppingBagSum[colspan="4"]{
+        display: none;
+    }
+    #shoppingBagSum2 {
+        display: block;
+    }
+}
+
+/*465*/
