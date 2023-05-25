@@ -5,7 +5,9 @@
     --bs-orange: #FE5C22;
     --bs-beige: #EFCAAE;
 }
-
+body{
+    overflow-x: hidden;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     margin-top: 15px;
@@ -250,7 +252,7 @@ h1, h2, h3, h4, h5 {
 .teksti {
     background-color: #efcaae;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1080%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/rect%3e%3cpath d='M 0%2c476 C 288%2c401.2 1152%2c176.8 1440%2c102L1440 560L0 560z' fill='rgba(239%2c 202%2c 174%2c 1)'%3e%3c/path%3e%3cpath d='M 0%2c38 C 288%2c110.4 1152%2c327.6 1440%2c400L1440 560L0 560z' fill='rgba(116%2c 162%2c 178%2c 0.63)'%3e%3c/path%3e%3cpath d='M 0%2c17 C 288%2c115.8 1152%2c412.2 1440%2c511L1440 560L0 560z' fill='rgba(206%2c 226%2c 232%2c 0.72)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1080'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
-    background-repeat: no-repeat;
+    background-repeat: round;
     background-size: cover;
     padding: 30px;
     margin: 0 auto;
@@ -340,6 +342,12 @@ h1, h2, h3, h4, h5 {
 }
 
 /*Etusivu loppuu*/
+
+/*Meistä sivu*/
+
+.meistäPicCol {
+    text-align: center;
+}
 
 /*Viestinlähetyssivu*/
 
@@ -606,8 +614,9 @@ footer li {
     .prodImg {
         height: 30vw;
     }
+
     .prodImgModal {
-        background-size:contain;
+        background-size: contain;
         height: 45vw;
     }
 
@@ -635,15 +644,19 @@ footer li {
         display: flex;
         flex-direction: column;
     }
+
+/*    .kuvaParallax {
+    background-attachment: scroll;
+    }*/
 }
 
 
 @media screen and (max-width: 768px) {
 
-    .body-content {
+/*    .body-content {
         padding-left: 10px;
         padding-right: 10px;
-    }
+    }*/
 
     .navbar-collapse li {
         width: fit-content;
@@ -668,7 +681,6 @@ footer li {
 
     #otsikko {
         font-size: 40px;
-        padding-top: 0px;
     }
 
     .katsoTästä h2 {
@@ -735,6 +747,20 @@ footer li {
     #shoppingBagSum2 {
         display: block;
     }
+    .teksti {
+        height: auto; 
+    }
+    .meistäPic {
+        width: 100%;
+        height: auto;
+    }
 }
 
-/*465*/
+@media screen and (max-width: 490px) {
+    .etusivuOtsikko.p-5 {
+        padding: 1rem !important;
+    }
+    #otsikko {
+        font-size: 35px;
+    }
+}

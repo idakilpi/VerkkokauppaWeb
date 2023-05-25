@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Jetiside verkkokauppa";
 }
 
 @section scripts {
@@ -16,13 +16,13 @@
 <main>
     <div class="homeContainer">
         <div class="row katsoCarousel">
-            @if (@TempData["AlertMessage"] != null)
+            @if (@TempData["AlertMessage"] != null) //näyttää alertin jos on esim lisätty uusi asiakas
             {
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 @TempData["AlertMessage"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            }<div class="p-5 text-center bg-light">
+            }<div class="etusivuOtsikko p-5 text-center bg-light">
                 <h1 id="otsikko">Tervetuloa Jetiside-verkkokauppaan!</h1>
             </div>
 
@@ -74,15 +74,17 @@
                 <button class="katsoTästäBtn underline" style="font-family: 'DM Serif Display', serif;" id="button"><a href="~/tuotteet/index" style="color: var(--bs-petrol); text-decoration: none;">Katso tästä</a></button>
             </div>
         </div>
+        <br />
+        <br />
 
         <div class="teksti">
-            <div class="tekstiCont"><h2 style="font-family: 'DM Serif Display', serif;">Tuotteissamme</h2> käytetään laadukkaita ja kestäviä materiaaleja. Suosimme kotimaista ja Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex doloribus atque nam facere aut facilis sapiente maxime magnam iusto laboriosam velit quam dolor nostrum nisi possimus reiciendis ipsum eius unde, veritatis delectus? Voluptatum beatae esse necessitatibus tempora odit? Autem eum nostrum non vero saepe voluptatum voluptatibus iste asperiores quidem fugit!</div>
+            <div class="tekstiCont"><h2>Tuotteissamme</h2> käytetään laadukkaita ja kestäviä materiaaleja. Suosimme kotimaista ja Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex doloribus atque nam facere aut facilis sapiente maxime magnam iusto laboriosam velit quam dolor nostrum nisi possimus reiciendis ipsum eius unde, veritatis delectus? Voluptatum beatae esse necessitatibus tempora odit? Autem eum nostrum non vero saepe voluptatum voluptatibus iste asperiores quidem fugit!</div>
         </div>
 
         <div class="kuvaParallax"></div>
 
         <div class="asiakasKokemus">
-            <div id="palauteOtsikko"><h5 style="font-family: 'DM Serif Display', serif;">Asiakapalautteet</h5></div>
+            <div id="palauteOtsikko"><h5 style="font-family: 'DM Serif Display', serif;">Asiakaspalautteet</h5></div>
             <div class="row">
                 <div class="col-lg-4">
                     <p class="palauteNimi">Elsa</p>
