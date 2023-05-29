@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/VerkkokauppaWeb/Web.Release.config
+/VerkkokauppaWeb/Web.Debug.config
+/VerkkokauppaWeb/Web.config
