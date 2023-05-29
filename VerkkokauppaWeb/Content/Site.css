@@ -745,7 +745,7 @@ footer li {
         display: none;
     }
     #shoppingBagSum2 {
-        display: block;
+        display: flex;
     }
     .teksti {
         height: auto; 
@@ -762,5 +762,12 @@ footer li {
     }
     #otsikko {
         font-size: 35px;
+    }
+    .shoppingBagLabel, .shoppingBagContent, .shoppingBagEnd {
+        text-align: start;
+        display: flex;
+    }
+    .shoppingBagLabelTh {
+        border: none;
     }
 }
