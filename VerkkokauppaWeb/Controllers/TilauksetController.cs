@@ -40,7 +40,7 @@ namespace VerkkokauppaWeb.Controllers
 
             return View(pagedTilaukset);
         }
-
+        // Tilaukset sivutus ja lista
         public ActionResult Create()
         {
             ViewBag.AsiakasID = new SelectList(db.Asiakkaat, "AsiakasID", "Etunimi");
