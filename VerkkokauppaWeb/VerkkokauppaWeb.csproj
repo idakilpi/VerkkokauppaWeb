@@ -283,7 +283,6 @@
     <Content Include="Views\Tuotteet\Ostoskori.cshtml" />
     <Content Include="Views\Asiakkaat\Create.cshtml" />
     <Content Include="Views\Asiakkaat\Delete.cshtml" />
-    <Content Include="Views\Asiakkaat\Index.cshtml" />
     <Content Include="Views\Tuotteet\_ProductDetails.cshtml" />
     <Content Include="Views\Tilaukset\Create.cshtml" />
     <Content Include="Views\Tilaukset\Delete.cshtml" />
